@@ -44,7 +44,7 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-center items-center h-16">
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
             {navItems.map((item) => (
@@ -63,7 +63,7 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          <div className="md:hidden absolute right-4">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="p-2 text-slate-700 hover:text-indigo-600 transition-colors"
