@@ -1,8 +1,13 @@
 
-import React from 'react';
-import { ExternalLink, Github } from 'lucide-react';
+import React, { useState } from 'react';
+import { ExternalLink, Github, ChevronDown, ChevronUp, Briefcase, GraduationCap, Code, Heart } from 'lucide-react';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
+import 'react-vertical-timeline-component/style.min.css';
 
 const ProjectsSection: React.FC = () => {
+  const [isCVOpen, setIsCVOpen] = useState(false);
+
   const projects = [
     {
       title: "AI Chat Assistant",
@@ -34,6 +39,54 @@ const ProjectsSection: React.FC = () => {
     }
   ];
 
+  const timelineData = [
+    {
+      date: "2023-Present",
+      title: "Senior AI Developer",
+      summary: "Leading AI integration projects and developing conversational interfaces for enterprise clients.",
+      tag: "FTE",
+      icon: <Briefcase />
+    },
+    {
+      date: "2021-2023",
+      title: "Full Stack Developer",
+      summary: "Built scalable web applications using React, Node.js, and cloud infrastructure.",
+      tag: "FTE",
+      icon: <Code />
+    },
+    {
+      date: "2020-2021",
+      title: "Automotive Tech Consultant",
+      summary: "Specialized in IoT solutions for vehicle diagnostics and fleet management systems.",
+      tag: "Part-time",
+      icon: <Briefcase />
+    },
+    {
+      date: "2016-2020",
+      title: "Computer Science Degree",
+      summary: "Bachelor's degree focusing on machine learning, algorithms, and software engineering principles.",
+      tag: "Edu",
+      icon: <GraduationCap />
+    },
+    {
+      date: "2018-2020",
+      title: "Open Source Contributor",
+      summary: "Active contributor to various React and Python libraries, with focus on developer tooling.",
+      tag: "Hobby",
+      icon: <Heart />
+    }
+  ];
+
+  const getTagColor = (tag: string) => {
+    switch (tag) {
+      case 'FTE': return 'bg-green-100 text-green-700';
+      case 'Part-time': return 'bg-blue-100 text-blue-700';
+      case 'Edu': return 'bg-purple-100 text-purple-700';
+      case 'Hobby': return 'bg-orange-100 text-orange-700';
+      default: return 'bg-gray-100 text-gray-700';
+    }
+  };
+
   return (
     <section id="projects" className="min-h-screen py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -61,7 +114,7 @@ const ProjectsSection: React.FC = () => {
         </div>
 
         {/* Project Grid */}
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-8 mb-12">
           {projects.map((project, index) => (
             <div 
               key={index}
@@ -100,6 +153,65 @@ const ProjectsSection: React.FC = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* CV Toggle Button */}
+        <div className="text-center mb-8">
+          <Collapsible open={isCVOpen} onOpenChange={setIsCVOpen}>
+            <CollapsibleTrigger asChild>
+              <button
+                className="inline-flex items-center space-x-2 bg-indigo-600 text-white px-6 py-3 rounded-full font-medium transition-all duration-200 hover:scale-105 hover:bg-indigo-700"
+                aria-expanded={isCVOpen}
+                aria-controls="cv"
+              >
+                <span>{isCVOpen ? "Hide CV" : "See full CV →"}</span>
+                {isCVOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+              </button>
+            </CollapsibleTrigger>
+
+            {/* Collapsible CV Timeline */}
+            <CollapsibleContent className="overflow-hidden transition-all duration-500 ease-in-out">
+              <div id="cv" className="mt-12">
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl font-semibold text-slate-900 mb-2">Career Timeline</h3>
+                  <p className="text-slate-600">My journey through technology and innovation</p>
+                </div>
+
+                <VerticalTimeline lineColor="#CBD5E1">
+                  {timelineData.map((item, index) => (
+                    <VerticalTimelineElement
+                      key={index}
+                      className="vertical-timeline-element--work animate-fade-up"
+                      style={{ animationDelay: `${index * 0.1}s` }}
+                      contentStyle={{ 
+                        background: 'rgba(255, 255, 255, 0.8)', 
+                        backdropFilter: 'blur(16px)',
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        borderRadius: '16px',
+                        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)'
+                      }}
+                      contentArrowStyle={{ borderRight: '7px solid rgba(255, 255, 255, 0.8)' }}
+                      date={item.date}
+                      iconStyle={{ 
+                        background: '#4F46E5', 
+                        color: '#fff',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                      icon={item.icon}
+                    >
+                      <h3 className="text-lg font-semibold text-slate-900 mb-2">{item.title}</h3>
+                      <p className="text-slate-600 mb-3 leading-relaxed">{item.summary}</p>
+                      <span className={`inline-block px-3 py-1 text-xs font-medium rounded-full ${getTagColor(item.tag)}`}>
+                        {item.tag}
+                      </span>
+                    </VerticalTimelineElement>
+                  ))}
+                </VerticalTimeline>
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
         </div>
       </div>
     </section>
