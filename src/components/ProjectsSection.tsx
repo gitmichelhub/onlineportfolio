@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { ExternalLink, Github, ChevronDown, ChevronUp, Briefcase, GraduationCap, Code, Heart } from 'lucide-react';
+import { ExternalLink, Github, ChevronDown, ChevronUp, Briefcase, GraduationCap, Code, Heart, Award, Users, Lightbulb, BookOpen } from 'lucide-react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
@@ -41,11 +41,25 @@ const ProjectsSection: React.FC = () => {
 
   const timelineData = [
     {
-      date: "2023-Present",
+      date: "2024-Present",
+      title: "Lead AI Solutions Architect",
+      summary: "Spearheading enterprise AI transformation initiatives and leading cross-functional teams.",
+      tag: "FTE",
+      icon: <Award />
+    },
+    {
+      date: "2023-2024",
       title: "Senior AI Developer",
       summary: "Leading AI integration projects and developing conversational interfaces for enterprise clients.",
       tag: "FTE",
       icon: <Briefcase />
+    },
+    {
+      date: "2022-2023",
+      title: "AI Research Collaborator",
+      summary: "Collaborated with university researchers on machine learning optimization algorithms.",
+      tag: "Part-time",
+      icon: <Lightbulb />
     },
     {
       date: "2021-2023",
@@ -55,11 +69,53 @@ const ProjectsSection: React.FC = () => {
       icon: <Code />
     },
     {
+      date: "2021",
+      title: "Tech Mentorship Program",
+      summary: "Mentored junior developers through coding bootcamp and career transition programs.",
+      tag: "Hobby",
+      icon: <Users />
+    },
+    {
       date: "2020-2021",
       title: "Automotive Tech Consultant",
       summary: "Specialized in IoT solutions for vehicle diagnostics and fleet management systems.",
       tag: "Part-time",
       icon: <Briefcase />
+    },
+    {
+      date: "2020",
+      title: "Machine Learning Certification",
+      summary: "Completed advanced certification in deep learning and neural network architectures.",
+      tag: "Edu",
+      icon: <Award />
+    },
+    {
+      date: "2019-2020",
+      title: "Hackathon Champion",
+      summary: "Won multiple hackathons focusing on AI-powered automotive safety solutions.",
+      tag: "Hobby",
+      icon: <Award />
+    },
+    {
+      date: "2018-2020",
+      title: "Open Source Contributor",
+      summary: "Active contributor to various React and Python libraries, with focus on developer tooling.",
+      tag: "Hobby",
+      icon: <Heart />
+    },
+    {
+      date: "2018-2019",
+      title: "Technical Writing",
+      summary: "Published technical articles on AI implementation and automotive technology trends.",
+      tag: "Hobby",
+      icon: <BookOpen />
+    },
+    {
+      date: "2017-2018",
+      title: "Software Engineering Intern",
+      summary: "Developed web applications and gained experience in agile development methodologies.",
+      tag: "Part-time",
+      icon: <Code />
     },
     {
       date: "2016-2020",
@@ -69,9 +125,9 @@ const ProjectsSection: React.FC = () => {
       icon: <GraduationCap />
     },
     {
-      date: "2018-2020",
-      title: "Open Source Contributor",
-      summary: "Active contributor to various React and Python libraries, with focus on developer tooling.",
+      date: "2015-2016",
+      title: "First Programming Project",
+      summary: "Built my first web application - a car enthusiast forum that sparked my passion for tech.",
       tag: "Hobby",
       icon: <Heart />
     }
