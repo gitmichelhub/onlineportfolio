@@ -30,7 +30,7 @@ const HeroSection: React.FC = () => {
               Talk to Mike
             </h1>
             <p className="text-xl sm:text-2xl text-slate-600 mb-8 leading-relaxed">
-              Ask me anything about AI, code, or cars.
+              Ask me anything about my experience, my work, or my life.
             </p>
             <div className="hidden lg:block">
               <p className="text-lg text-slate-500 max-w-md">
