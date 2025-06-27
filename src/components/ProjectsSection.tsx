@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { ExternalLink, Github, ChevronDown, ChevronUp, Briefcase, GraduationCap, Code, Heart, Award, Users, Lightbulb, BookOpen } from 'lucide-react';
+import { ExternalLink, Github, ChevronDown, ChevronUp, Briefcase, GraduationCap, Code, Heart, Award, Users, Lightbulb, BookOpen, Waves, Trophy, Zap, Globe } from 'lucide-react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
@@ -48,6 +48,13 @@ const ProjectsSection: React.FC = () => {
       icon: <Award />
     },
     {
+      date: "2024",
+      title: "AWS Solutions Architect Certification",
+      summary: "Achieved professional-level cloud architecture certification focusing on AI and ML services.",
+      tag: "Cert",
+      icon: <Trophy />
+    },
+    {
       date: "2023-2024",
       title: "Senior AI Developer",
       summary: "Leading AI integration projects and developing conversational interfaces for enterprise clients.",
@@ -55,11 +62,25 @@ const ProjectsSection: React.FC = () => {
       icon: <Briefcase />
     },
     {
+      date: "2023",
+      title: "TensorFlow Developer Certification",
+      summary: "Specialized certification in deep learning and neural network implementation with TensorFlow.",
+      tag: "Cert",
+      icon: <Zap />
+    },
+    {
       date: "2022-2023",
       title: "AI Research Collaborator",
       summary: "Collaborated with university researchers on machine learning optimization algorithms.",
       tag: "Part-time",
       icon: <Lightbulb />
+    },
+    {
+      date: "2022",
+      title: "Google Cloud Professional ML Engineer",
+      summary: "Advanced certification in machine learning engineering and MLOps practices on Google Cloud.",
+      tag: "Cert",
+      icon: <Globe />
     },
     {
       date: "2021-2023",
@@ -76,6 +97,13 @@ const ProjectsSection: React.FC = () => {
       icon: <Users />
     },
     {
+      date: "2021",
+      title: "React Advanced Patterns Course",
+      summary: "Completed advanced React certification covering hooks, context, and performance optimization.",
+      tag: "Cert",
+      icon: <BookOpen />
+    },
+    {
       date: "2020-2021",
       title: "Automotive Tech Consultant",
       summary: "Specialized in IoT solutions for vehicle diagnostics and fleet management systems.",
@@ -86,7 +114,7 @@ const ProjectsSection: React.FC = () => {
       date: "2020",
       title: "Machine Learning Certification",
       summary: "Completed advanced certification in deep learning and neural network architectures.",
-      tag: "Edu",
+      tag: "Cert",
       icon: <Award />
     },
     {
@@ -94,7 +122,14 @@ const ProjectsSection: React.FC = () => {
       title: "Hackathon Champion",
       summary: "Won multiple hackathons focusing on AI-powered automotive safety solutions.",
       tag: "Hobby",
-      icon: <Award />
+      icon: <Trophy />
+    },
+    {
+      date: "2019",
+      title: "Docker & Kubernetes Certification",
+      summary: "Professional certification in containerization and orchestration technologies.",
+      tag: "Cert",
+      icon: <Zap />
     },
     {
       date: "2018-2020",
@@ -111,6 +146,13 @@ const ProjectsSection: React.FC = () => {
       icon: <BookOpen />
     },
     {
+      date: "2018",
+      title: "AWS Cloud Practitioner",
+      summary: "Foundational certification in cloud computing concepts and AWS services.",
+      tag: "Cert",
+      icon: <Globe />
+    },
+    {
       date: "2017-2018",
       title: "Software Engineering Intern",
       summary: "Developed web applications and gained experience in agile development methodologies.",
@@ -123,6 +165,20 @@ const ProjectsSection: React.FC = () => {
       summary: "Bachelor's degree focusing on machine learning, algorithms, and software engineering principles.",
       tag: "Edu",
       icon: <GraduationCap />
+    },
+    {
+      date: "2016",
+      title: "Abitur (German High School Diploma)",
+      summary: "Graduated with honors, specializing in mathematics and physics with focus on computer science.",
+      tag: "Edu",
+      icon: <GraduationCap />
+    },
+    {
+      date: "2016",
+      title: "Windsurfing Instructor Certification",
+      summary: "Became certified windsurfing instructor, teaching water sports during summer breaks.",
+      tag: "Hobby",
+      icon: <Waves />
     },
     {
       date: "2015-2016",
@@ -139,6 +195,7 @@ const ProjectsSection: React.FC = () => {
       case 'Part-time': return 'bg-blue-100 text-blue-700';
       case 'Edu': return 'bg-purple-100 text-purple-700';
       case 'Hobby': return 'bg-orange-100 text-orange-700';
+      case 'Cert': return 'bg-yellow-100 text-yellow-700';
       default: return 'bg-gray-100 text-gray-700';
     }
   };
