@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { ExternalLink, Github, ChevronDown, ChevronUp, Briefcase, GraduationCap, Code, Heart, Award, Users, Lightbulb, BookOpen, Waves, Trophy, Zap, Globe } from 'lucide-react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
@@ -7,185 +6,190 @@ import 'react-vertical-timeline-component/style.min.css';
 
 const ProjectsSection: React.FC = () => {
   const [isCVOpen, setIsCVOpen] = useState(false);
+  const [openDetails, setOpenDetails] = useState<number | null>(null);
 
   const projects = [
     {
-      title: "AI Chat Assistant",
+      title: "Conversational AI Portfolio Agent: michel.chat",
       description: "A conversational AI built with React and ElevenLabs integration for natural voice interactions.",
+      detailedDescription: "This AI assistant leverages advanced natural language processing to provide human-like conversations. The integration with ElevenLabs enables realistic voice synthesis, creating an immersive user experience. The system includes features like context awareness, memory of my professional background, and dynamic response generation.\n\nReason for Project:\nI wanted to create a tech demo for the current state of conversational AI. I wanted to see if I could create a simple agent that could have a conversation with me about my professional background and experience. Working with the System Prompt and necessary Context was valuable experience for me to understand the current state of AI Agents. I created the frontend with the Vibe Coding tool Lovable.\n\nTo achieve this I used a detailed description of my CV experience and skill items as well as my blog posts as base for the agent to know about my opinions regarding tech, AI and life in general. Context engineering in this case was to give the agent the necessary information via RAG and tool calls (search). The next feature will be automatic message generation from voice command and sending a calender invite to my personal google calender.",
       technologies: ["React", "TypeScript", "ElevenLabs", "WebSocket"],
-      link: "#",
-      github: "#"
+      link: "https://michel.chat",
+      github: "https://github.com/gitmichelhub/onlineportfolio"
     },
     {
-      title: "Smart Car Dashboard",
-      description: "IoT dashboard for monitoring vehicle telemetry with real-time data visualization.",
-      technologies: ["Next.js", "D3.js", "WebRTC", "MongoDB"],
-      link: "#",
-      github: "#"
+      title: "Interview transcription: Interview2text ",
+      description: "SOTA Speech to Text Transcription Web Service for up to 32 speakers",
+      detailedDescription: "InterviewToText is a specialized web application designed for qualitative researchers, enabling efficient and accurate transcription of audio interviews involving up to 32 speakers. \n\nUsers upload their recordings, and the app automatically handles transcription and formatting using State-of-the-Art AI Models. Key features include detailed word-level timestamps, audio event detection, and integrated speaker diarization. Transcripts are securely stored for their owners and robust data privacy.\n\nReason for Project:\nInterviewToText streamlines the transcription process, saving researchers considerable time and improving accuracy through advanced AI technology. Researchers or students can focus more on analysis rather than tedious manual transcription tasks, boosting productivity and enhancing overall research quality.\n\nTech Stack:\n- Frontend: React, Next.js (hosted on Vercel)\n- Backend: Supabase (authentication, user management, data storage), Resend (secure SMTP login via magic links)\n- AI Services: ElevenLabs Scribe Model (automated transcription, word-level timestamps, audio event detection, speaker diarization)\n- Storage: AWS S3 (secure storage for audio and transcript files)\n\nThis integrated tech stack provides a scalable, secure, and performant transcription solution tailored specifically for qualitative research needs.",
+      technologies: ["Next.js", "ElevenLabs", "AWS", "Supabase"],
+      link: "https://interviewtotext.com", 
+      github: "https://github.com/gitmichelhub/QualityInterview"
     },
     {
-      title: "Code Review Bot",
-      description: "Automated code review system using machine learning to detect patterns and suggest improvements.",
-      technologies: ["Python", "TensorFlow", "GitHub API", "Docker"],
-      link: "#",
-      github: "#"
+      title: "Autonomous-driving prototype chaos to pre-prod v0.9",
+      description: "A top-tier OEM's autonomous-driving division was scaling fast: 25 + teams, 300 + engineers, slipping milestones, and low visibility on blockers.",
+      detailedDescription: "• Scaled SAFe to 25+ cross-functional teams (≈300 people), adding weekly flow-health checks that gave execs 48-h warning on risks.\n• Roadmap & Vision: Co-drafted team Objectives, built a rolling 3-quarter roadmap, and aligned it with external hardware milestones.\n• Backlog Refinement: Partnered with Product Owners to convert vision → features → stories, slicing scope around customer value.\n• Dependency Management in Jira: Implemented new cross-team links & dashboards; first real-time view of critical path.\n• Gen-AI Test-Case Spike: Piloted auto-generation for SiL tests; cut authoring effort 40%.\n• Planning Facilitation: Ran PI planning & iteration reviews; velocity up 18% over three increments.\n• Business Impact: Slippage down 27%; tighter supplier coordination unlocked additional budget for the next release train.",
+      technologies: ["SAFe", "Jira", "Roadmapping", "GenAI"],
+      link: "https://www.mhp.com/de/"
     },
     {
-      title: "Portfolio Generator",
-      description: "Dynamic portfolio website generator with customizable themes and content management.",
-      technologies: ["Vue.js", "Nuxt", "Strapi", "Tailwind"],
-      link: "#",
-      github: "#"
+      title: "SAFe Training Facilitator", 
+      description: "Official SAFe certification trainings for more than 300 participants to scale agile practices.",
+      detailedDescription: "Specializing in Leading SAFe, SAFe Product Owner/Product Management, and SAFe Scrum Master courses. Delivered engaging, two-day training sessions both remotely and on-site, creating an interactive environment that encouraged open dialogue and deep exploration of agile scaling practices and frameworks.\n\nWhy SAFe? Because it's particularly effective for German enterprise customers aiming to significantly increase their product development velocity. While many IT teams have foundational experience with agile methods, scaling these practices in the German market, especially within the automotive industry, presents unique challenges. Strict compliance requirements, detailed processes, and hierarchical structures can impede agile transformation. SAFe provides organizations with the structure to realign and optimize their value streams, fostering an iterative and efficient approach to product development that traditional models struggle to achieve. This is precisely why I started enabling colleagues and professionals to deepen their understanding and practical knowledge of scalable product development.",
+      technologies: ["Agile", "Product", "Enterprise", "Transformation"],
+      link: "https://framework.scaledagile.com"
     }
   ];
 
   const timelineData = [
+    // Professional Experience (reverse chronological order - latest first)
     {
-      date: "2024-Present",
-      title: "Lead AI Solutions Architect",
-      summary: "Spearheading enterprise AI transformation initiatives and leading cross-functional teams.",
-      tag: "FTE",
+      date: "Present",
+      title: "Senior IT Consultant - MHP – A Porsche Company",
+      summary: " Translating customer needs into shippable products. Working closely with customers to define product visions and roadmaps. Implementing agile product management practices and metrics. Deploying production-grade applications",
+      tag: "FTE", 
+      icon: <Briefcase />
+    },
+    
+    {
+      date: "2025",
+      title: "AI-Powered Portfolio Assistant",
+      summary: "Created an intelligent portfolio website with an embedded AI agent that engages visitors in natural conversations about my professional background and experience. It is supposed to be a tech demo for the current state of conversational AI.",
+      tag: "Hobby",
+      icon: <Code />
+    },
+    {
+      date: "2024",
+      title: "AI Transcription Web Service",
+      summary: "Developed a scalable audio transcription service. Integrated ElevenLabs' state-of-the-art speech-to-text AI model for highly accurate interview transcriptions.",
+      tag: "Hobby",
+      icon: <Code />
+    },
+    {
+      date: "2024",
+      title: "Microsoft Azure AI Engineer Associate",
+      summary: "Professional certification in Azure AI services and machine learning solutions.",
+      tag: "Cert",
       icon: <Award />
     },
     {
       date: "2024",
-      title: "AWS Solutions Architect Certification",
-      summary: "Achieved professional-level cloud architecture certification focusing on AI and ML services.",
+      title: "ITIL Foundation",
+      summary: "IT service management framework certification for best practices in IT operations.",
       tag: "Cert",
       icon: <Trophy />
     },
     {
-      date: "2023-2024",
-      title: "Senior AI Developer",
-      summary: "Leading AI integration projects and developing conversational interfaces for enterprise clients.",
+      date: "2024-2025",
+      title: "IT Consultant - MHP – A Porsche Company",
+      summary: "Coaching 3 hardware and software teams and transforming an autonomous driving solution with 300 people to increase engineering velocity. Improving Product Vision and Roadmap. Adjusting and prioritizing requirements. Spot consulting for several RTEs and Agile Release Trains. Facilitation of PI Plannings as a RTE.",
+      tag: "FTE",
+      icon: <Briefcase />
+    },
+    {
+      date: "2022-Present",
+      title: "SAFe Training Facilitator",
+      summary: "Facilitating SAFe trainings as SPC for 300+ participants from several countries with a 4.8/5.0 rating.",
+      tag: "FTE",
+      icon: <Users />
+    },
+    {
+      date: "2023",
+      title: "SAFe Practice Consultant (SPC)",
+      summary: "Advanced certification in Scaled Agile Framework for enterprise transformation.",
+      tag: "Cert",
+      icon: <Users />
+    },
+    {
+      date: "2023",
+      title: "IT Consultant - MHP – A Porsche Company",
+      summary: "Scrum Master and Agile Coach with a monetization Release Train in an IT Enterprise, working closely with internal and external stakeholders. Transformation to an iterative and incremental product development approach. Creating pre-sales and sales material and working on multi million euro proposals.",
       tag: "FTE",
       icon: <Briefcase />
     },
     {
       date: "2023",
-      title: "TensorFlow Developer Certification",
-      summary: "Specialized certification in deep learning and neural network implementation with TensorFlow.",
-      tag: "Cert",
-      icon: <Zap />
-    },
-    {
-      date: "2022-2023",
-      title: "AI Research Collaborator",
-      summary: "Collaborated with university researchers on machine learning optimization algorithms.",
-      tag: "Part-time",
-      icon: <Lightbulb />
-    },
-    {
-      date: "2022",
-      title: "Google Cloud Professional ML Engineer",
-      summary: "Advanced certification in machine learning engineering and MLOps practices on Google Cloud.",
+      title: "AWS Certified Cloud Practitioner",
+      summary: "Foundational certification in AWS cloud computing concepts and services.",
       tag: "Cert",
       icon: <Globe />
     },
     {
-      date: "2021-2023",
-      title: "Full Stack Developer",
-      summary: "Built scalable web applications using React, Node.js, and cloud infrastructure.",
-      tag: "FTE",
-      icon: <Code />
-    },
-    {
-      date: "2021",
-      title: "Tech Mentorship Program",
-      summary: "Mentored junior developers through coding bootcamp and career transition programs.",
-      tag: "Hobby",
-      icon: <Users />
-    },
-    {
-      date: "2021",
-      title: "React Advanced Patterns Course",
-      summary: "Completed advanced React certification covering hooks, context, and performance optimization.",
+      date: "2022",
+      title: "Professional Scrum Master",
+      summary: "Certification in Scrum methodology and agile project management practices.",
       tag: "Cert",
-      icon: <BookOpen />
+      icon: <Zap />
     },
     {
-      date: "2020-2021",
-      title: "Automotive Tech Consultant",
-      summary: "Specialized in IoT solutions for vehicle diagnostics and fleet management systems.",
+      date: "2022",
+      title: "Junior IT Consultant - MHP – A Porsche Company",
+      summary: "Junior consultant as a Scrum Master, supporting a team and multiple roles.",
+      tag: "FTE",
+      icon: <Briefcase />
+    },
+    {
+      date: "2021-2022",
+      title: "Marketing Consulting - Tax Office Dr. Schulte-Ostermann",
+      summary: "Optimized Google My Business and social-media presence to enhance marketing and recruiting.",
       tag: "Part-time",
       icon: <Briefcase />
     },
     {
-      date: "2020",
-      title: "Machine Learning Certification",
-      summary: "Completed advanced certification in deep learning and neural network architectures.",
-      tag: "Cert",
-      icon: <Award />
-    },
-    {
       date: "2019-2020",
-      title: "Hackathon Champion",
-      summary: "Won multiple hackathons focusing on AI-powered automotive safety solutions.",
-      tag: "Hobby",
-      icon: <Trophy />
-    },
-    {
-      date: "2019",
-      title: "Docker & Kubernetes Certification",
-      summary: "Professional certification in containerization and orchestration technologies.",
-      tag: "Cert",
-      icon: <Zap />
-    },
-    {
-      date: "2018-2020",
-      title: "Open Source Contributor",
-      summary: "Active contributor to various React and Python libraries, with focus on developer tooling.",
-      tag: "Hobby",
-      icon: <Heart />
+      title: "Red Bull Consumer Service GmbH",
+      summary: "Campus marketing, sales, and event support.",
+      tag: "Part-time",
+      icon: <Briefcase />
     },
     {
       date: "2018-2019",
-      title: "Technical Writing",
-      summary: "Published technical articles on AI implementation and automotive technology trends.",
-      tag: "Hobby",
-      icon: <BookOpen />
+      title: "Chalmers University of Technology, Gothenburg",
+      summary: "Exchange Semester (Erasmus) focusing on Electric Drives, Intellectual Property, and Project Management.",
+      tag: "Edu",
+      icon: <GraduationCap />
     },
     {
-      date: "2018",
-      title: "AWS Cloud Practitioner",
-      summary: "Foundational certification in cloud computing concepts and AWS services.",
-      tag: "Cert",
-      icon: <Globe />
+      date: "2017-2022",
+      title: "Event Organization & Soft-Skills Training - bonding Student Initiative e.V.",
+      summary: "Organized recruiting events, drove social-media marketing, and delivered workshops on time management and communication.",
+      tag: "Part-time",
+      icon: <Heart />
     },
     {
       date: "2017-2018",
-      title: "Software Engineering Intern",
-      summary: "Developed web applications and gained experience in agile development methodologies.",
+      title: "Teacher Assistant at the Institute of Management & Organization, TU Braunschweig",
+      summary: "Conducted seminars and lectures regarding the first Semester lecture 'Introduction to Management' and supported doctoral research.",
       tag: "Part-time",
-      icon: <Code />
+      icon: <GraduationCap />
     },
     {
-      date: "2016-2020",
-      title: "Computer Science Degree",
-      summary: "Bachelor's degree focusing on machine learning, algorithms, and software engineering principles.",
+      date: "2017-2018",
+      title: "Europcar",
+      summary: "Customer service and vehicle operations.",
+      tag: "Part-time",
+      icon: <Briefcase />
+    },
+    {
+      date: "2016-2021",
+      title: "B.Sc. Electrical Engineering and Business at Technical University of Braunschweig",
+      summary: "Bachelor thesis: 'Relationship between Leaders and Employees in the Context of Flexible Work'",
       tag: "Edu",
       icon: <GraduationCap />
     },
     {
-      date: "2016",
-      title: "Abitur (German High School Diploma)",
-      summary: "Graduated with honors, specializing in mathematics and physics with focus on computer science.",
-      tag: "Edu",
-      icon: <GraduationCap />
-    },
-    {
-      date: "2016",
-      title: "Windsurfing Instructor Certification",
-      summary: "Became certified windsurfing instructor, teaching water sports during summer breaks.",
-      tag: "Hobby",
+      date: "2012-2017",
+      title: "Nordwind Wassersport e.V., Surendorf",
+      summary: "Instructor for beginner and advanced wind-surfing courses.",
+      tag: "Part-time",
       icon: <Waves />
-    },
+    },  
     {
-      date: "2015-2016",
-      title: "First Programming Project",
-      summary: "Built my first web application - a car enthusiast forum that sparked my passion for tech.",
-      tag: "Hobby",
-      icon: <Heart />
+      date: "2009-2016",
+      title: "Gymnasium Isarnwohld, Gettorf",
+      summary: "High-School Diploma (Abitur). Served as Student Council President (2015, 2016).",
+      tag: "Edu",
+      icon: <GraduationCap />
     }
   ];
 
@@ -236,6 +240,27 @@ const ProjectsSection: React.FC = () => {
             >
               <h3 className="text-xl font-semibold text-slate-900 mb-3">{project.title}</h3>
               <p className="text-slate-600 mb-4 leading-relaxed">{project.description}</p>
+              
+              {/* Detailed Description Accordion */}
+              <Collapsible 
+                open={openDetails === index} 
+                onOpenChange={(open) => setOpenDetails(open ? index : null)}
+                className="mb-4"
+              >
+                <CollapsibleTrigger asChild>
+                  <button className="flex items-center space-x-2 text-indigo-600 hover:text-indigo-700 transition-colors text-sm font-medium mb-3">
+                    <span>More details</span>
+                    {openDetails === index ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                  </button>
+                </CollapsibleTrigger>
+                <CollapsibleContent className="overflow-hidden transition-all duration-300 ease-in-out">
+                  <div className="bg-slate-50 rounded-lg p-4 mb-4">
+                    <div className="text-slate-700 leading-relaxed whitespace-pre-line">
+                      {project.detailedDescription}
+                    </div>
+                  </div>
+                </CollapsibleContent>
+              </Collapsible>
               
               <div className="flex flex-wrap gap-2 mb-4">
                 {project.technologies.map((tech, techIndex) => (
