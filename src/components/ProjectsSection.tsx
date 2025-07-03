@@ -274,20 +274,24 @@ const ProjectsSection: React.FC = () => {
               </div>
 
               <div className="flex space-x-4">
-                <a 
-                  href={project.link}
-                  className="flex items-center space-x-2 text-indigo-600 hover:text-indigo-700 transition-colors"
-                >
-                  <ExternalLink size={16} />
-                  <span className="text-sm font-medium">View Live</span>
-                </a>
-                <a 
-                  href={project.github}
-                  className="flex items-center space-x-2 text-slate-600 hover:text-slate-700 transition-colors"
-                >
-                  <Github size={16} />
-                  <span className="text-sm font-medium">Source</span>
-                </a>
+                {project.link && (
+                  <a 
+                    href={project.link}
+                    className="flex items-center space-x-2 text-indigo-600 hover:text-indigo-700 transition-colors"
+                  >
+                    <ExternalLink size={16} />
+                    <span className="text-sm font-medium">View Live</span>
+                  </a>
+                )}
+                {project.github && (
+                  <a 
+                    href={project.github}
+                    className="flex items-center space-x-2 text-slate-600 hover:text-slate-700 transition-colors"
+                  >
+                    <Github size={16} />
+                    <span className="text-sm font-medium">Source</span>
+                  </a>
+                )}
               </div>
             </div>
           ))}
