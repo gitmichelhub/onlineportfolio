@@ -1,10 +1,11 @@
 
 import React from 'react';
 import VoiceOrb from './VoiceOrb';
+import VoiceStatus from './VoiceStatus';
 
 const HeroSection: React.FC = () => {
   const onVoiceStart = () => {
-    console.log('Voice interaction will be connected to ElevenLabs WebSocket');
+    console.log('Voice interaction started with ElevenLabs WebSocket');
   };
 
   return (
@@ -44,6 +45,11 @@ const HeroSection: React.FC = () => {
           <div className="flex justify-center lg:justify-end animate-fade-up" style={{ animationDelay: '0.2s' }}>
             <VoiceOrb size="large" onVoiceStart={onVoiceStart} />
           </div>
+        </div>
+        
+        {/* Voice Status Panel */}
+        <div className="mt-12 animate-fade-up" style={{ animationDelay: '0.4s' }}>
+          <VoiceStatus />
         </div>
       </div>
 
