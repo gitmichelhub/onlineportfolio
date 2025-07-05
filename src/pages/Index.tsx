@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
@@ -6,9 +5,16 @@ import ProjectsSection from '@/components/ProjectsSection';
 import BlogSection from '@/components/BlogSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
+import { getElevenLabsConfig } from '@/config/elevenlabs';
+import { useVoiceAgent } from '@/hooks/use-voice-agent';
 
 const Index = () => {
   const [currentSection, setCurrentSection] = useState('voice');
+  const elevenLabsConfig = getElevenLabsConfig();
+  const { state, startConversation, stopConversation, testConnection, isActive, error } = useVoiceAgent({
+    agentId: elevenLabsConfig.agentId,
+    apiKey: elevenLabsConfig.apiKey,
+  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,8 +39,21 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
-      <Navigation currentSection={currentSection} onSectionChange={setCurrentSection} />
-      <HeroSection />
+      <Navigation 
+        currentSection={currentSection} 
+        onSectionChange={setCurrentSection}
+        voiceStatusState={state}
+        voiceStatusError={error}
+        onVoiceStatusStop={stopConversation}
+      />
+      <HeroSection 
+        state={state}
+        error={error}
+        startConversation={startConversation}
+        stopConversation={stopConversation}
+        testConnection={testConnection}
+        isActive={isActive}
+      />
       <ProjectsSection />
       <BlogSection />
       <ContactSection />

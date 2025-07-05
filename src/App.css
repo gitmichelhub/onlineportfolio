@@ -40,3 +40,16 @@
 .read-the-docs {
   color: #888;
 }
+
+.liquid-glass {
+  animation: liquidMove 10s infinite alternate ease-in-out;
+}
+
+@keyframes liquidMove {
+  0% {
+    backdrop-filter: blur(20px);
+  }
+  100% {
+    backdrop-filter: blur(25px);
+  }
+}

@@ -3,12 +3,15 @@ import { ExternalLink, Github, ChevronDown, ChevronUp, Briefcase, GraduationCap,
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
+import { useLanguage } from "@/hooks/use-language";
 
 const ProjectsSection: React.FC = () => {
+  const { language } = useLanguage();
   const [isCVOpen, setIsCVOpen] = useState(false);
   const [openDetails, setOpenDetails] = useState<number | null>(null);
 
-  const projects = [
+  // ENGLISH DATA
+  const projectsEN = [
     {
       title: "Conversational AI Portfolio Agent: michel.chat",
       description: "A conversational AI built with React and ElevenLabs integration for natural voice interactions.",
@@ -40,8 +43,7 @@ const ProjectsSection: React.FC = () => {
       link: "https://framework.scaledagile.com"
     }
   ];
-
-  const timelineData = [
+  const timelineDataEN = [
     // Professional Experience (reverse chronological order - latest first)
     {
       date: "Present",
@@ -192,8 +194,7 @@ const ProjectsSection: React.FC = () => {
       icon: <GraduationCap />
     }
   ];
-
-  const getTagColor = (tag: string) => {
+  const getTagColorEN = (tag: string) => {
     switch (tag) {
       case 'FTE': return 'bg-green-100 text-green-700';
       case 'Part-time': return 'bg-blue-100 text-blue-700';
@@ -204,13 +205,215 @@ const ProjectsSection: React.FC = () => {
     }
   };
 
+  // GERMAN DATA
+  const projectsDE = [
+    {
+      title: "Conversational-AI-Portfolio-Agent: michel.chat",
+      description: "Eine Conversational-AI, gebaut mit React und ElevenLabs-Integration für natürliche Sprachinteraktionen.",
+      detailedDescription: "Dieser KI-Assistent ermöglicht menschenähnliche Gespräche. Durch die Integration von ElevenLabs wird eine realistische Sprachsynthese erreicht, die ein immersives Nutzererlebnis schafft. Das System bietet Funktionen wie Situationsbewusstsein, Kontext (Erinnerungen) an meinen beruflichen Hintergrund und dynamische Antwortgenerierung.\n\nGrund für das Projekt:\nIch wollte eine Tech-Demo für den aktuellen Stand von Conversational AI erstellen. Ich wollte herausfinden, ob ich einen einfachen Agenten entwickeln kann, der mit mir über meinen beruflichen Hintergrund und meine Expertise sprechen kann. Die Arbeit mit dem System-Prompt und dem notwendigen Kontext war für mich eine wertvolle Erfahrung, um den aktuellen Stand von KI-Agenten zu verstehen. Das Frontend habe ich mit dem Vibe-Coding-Tool Lovable erstellt.\n\n Für den nötigen Kontext habe ich eine detaillierte Beschreibung meines CV, meiner Fähigkeiten sowie meine Blog-Beiträge als Grundlage verwendet, damit der Agent meine Ansichten zu Technik, KI und dem Leben im Allgemeinen kennt. Context Engineering bedeutete hier, dem Agenten die notwendigen Informationen per RAG und Tool-Calls (Suche) bereitzustellen. Als nächstes Feature ist die automatische Nachrichtenerstellung aus Sprachbefehlen vorgesehen, inklusive Versand einer Kalendereinladung an meinen persönlichen Google-Kalender.",
+      technologies: ["React", "TypeScript", "ElevenLabs", "WebSocket"],
+      link: "https://michel.chat",
+      github: "https://github.com/gitmichelhub/onlineportfolio"
+    },
+    {
+      title: "Interviewtranskription: Interview2Text",
+      description: "SOTA Speech-to-Text-Transkriptions-Website für bis zu 32 Sprecher:innen",
+      detailedDescription: "InterviewToText ist eine Website für qualitative Forschende und ermöglicht eine effiziente und präzise Transkription von Audiointerviews mit bis zu 32 Sprecher:innen.\n\nUser laden ihre Aufnahmen hoch und die App übernimmt automatisch Transkription und Formatierung mithilfe modernster KI-Modelle. Zu den Hauptfunktionen gehören detaillierte Zeitstempel auf Wortebene, Erkennung von Audioereignissen und integrierte Sprecher-Erkennung. Transkripte werden sicher gespeichert.\n\nGrund für das Projekt:\nBereits mit dem Release von Whisper-V1 habe ich das Modell lokal laufen lassen, um den Tranksriptionsprozess zu verschnellern. Mittlerweile gibt es aber viel bessere und größere STT Modelle, welche dementsprechend gröere Infrastruktur benötigen. InterviewToText vereinfacht den Transkriptionsprozess, spart Forschenden erheblich Zeit und verbessert die Genauigkeit durch fortschrittliche KI-Technologie. Forschende oder Studierende können sich stärker auf die Analyse konzentrieren, anstatt mühsame manuelle Transkriptionsaufgaben zu erledigen, wodurch die Produktivität steigt und die Forschungsqualität verbessert wird.\n\nTech-Stack:\n- Frontend: React, Next.js (gehostet auf Vercel)\n- Backend: Supabase (Authentifizierung, Benutzerverwaltung, Datenspeicherung), Resend (sicherer SMTP-Login via Magic Links)\n- KI-Services: ElevenLabs Scribe Model (automatisierte Transkription, Wortebene-Zeitstempel, Audioereigniserkennung, Speaker-Diarisation)\n- Storage: AWS S3 (sichere Speicherung von Audio- und Transkriptdateien)\n\nDieser integrierte Tech-Stack bietet eine skalierbare, sichere und performante Transkriptionslösung, die speziell auf die Bedürfnisse der qualitativen Forschung zugeschnitten ist.",
+      technologies: ["Next.js", "ElevenLabs", "AWS", "Supabase"],
+      link: "https://interviewtotext.com",
+      github: "https://github.com/gitmichelhub/QualityInterview"
+    },
+    {
+      title: "Automatisiertes Fahren: Prototyp zu Vorproduktion",
+      description: "Das automatisierte Fahren Programm eines OEM skalierte in kürzester Zeit: 25+ Teams, 300+ Ingenieur:innen, rutschende Meilensteine und geringe Transparenz bei Blockern.",
+      detailedDescription: "• SAFe auf 25+ funktionsübergreifende Teams (≈300 Personen) skaliert und wöchentliche Flow-Health-Checks eingeführt, die dem Management eine 48-h-Vorwarnung vor Risiken gaben.\n• Roadmap & Vision: Teamziele mitentwickelt, rollierende 3-Quartals-Roadmap aufgebaut und mit externen Hardware-Meilensteinen abgeglichen.\n• Backlog-Pflege: Mit Product Ownern Vision → Features → Stories umgesetzt und den Scope konsequent am Kundennutzen ausgerichtet.\n• Abhängigkeitsmanagement in Jira: Neue cross-team Links & Dashboards implementiert; erste Echtzeit-Sicht auf den kritischen Pfad geschaffen.\n• Gen-AI-Testfall-Spike: Auto-Generierung für SiL-Tests pilotiert; Authoring-Aufwand um 40 % reduziert.\n• Planning-Facilitation: PI-Plannings und Iterations-Reviews durchgeführt; Velocity über drei Inkremente um 18 % gesteigert.\n• Business-Impact: Verzögerungen um 27 % reduziert; engere Lieferantenkoordination erschloss zusätzliches Budget für den nächsten Release-Train.",
+      technologies: ["SAFe", "Jira", "Roadmapping", "GenAI"],
+      link: "https://www.mhp.com/de/"
+    },
+    {
+      title: "SAFe-Trainings-Facilitator",
+      description: "Offizielle SAFe-Zertifizierungstrainings für mehr als 300 Teilnehmende, um agile Praktiken zu skalieren.",
+      detailedDescription: "Spezialisiert auf Leading SAFe, SAFe Product Owner/Product Management und SAFe Scrum Master Kurse. Durchführung zweitägiger Trainings sowohl remote als auch vor Ort und Schaffung eines interaktiven Umfelds, das offenen Dialog sowie eine vertiefte Auseinandersetzung mit agilen Skalierungspraktiken und Frameworks förderte.\n\nWarum SAFe? Weil es sich besonders für deutsche Unternehmenskunden eignet, die ihre Produktentwicklungsgeschwindigkeit erheblich steigern wollen. Während viele IT-Teams bereits agile Grundlagen kennen, stellt die Skalierung dieser Praktiken im deutschen Markt, insbesondere in der Automobilindustrie, einzigartige Herausforderungen dar. Strenge Compliance-Anforderungen, detaillierte Prozesse und hierarchische Strukturen können die agile Transformation behindern. SAFe bietet Unternehmen den Rahmen, ihre Wertströme neu auszurichten und einen iterativen sowie effizienten Ansatz für die Produktentwicklung zu fördern, den traditionelle Modelle nur schwer erreichen. Genau deshalb enable ich Kolleg:innen und Fachleute dabei, ihr Verständnis und ihr Praxiswissen in skalierbarer Produktentwicklung zu vertiefen.",
+      technologies: ["Agile", "Product", "Enterprise", "Transformation"],
+      link: "https://framework.scaledagile.com"
+    }
+  ];
+  const timelineDataDE = [
+    {
+      date: "Heute",
+      title: "Senior IT-Berater – MHP – A Porsche Company",
+      summary: "Requirements aufnehmen und in Arbeitsaufträge übersetzen. Enge Zusammenarbeit mit Kunden zur Definition von Produktvisionen und Roadmaps. Einführung agiler Produktmanagementpraktiken und Metriken. Deployment von produktionsreifen Anwendungen.",
+      tag: "FTE",
+      icon: <Briefcase />
+    },
+    {
+      date: "2025",
+      title: "KI-gestützter Portfolio-Assistent",
+      summary: "Portfolio-Website mit eingebettetem KI-Agent, der Besucher in natürlichen Gesprächen über meinen beruflichen Hintergrund und meine Erfahrungen einbindet. Dient als Tech-Demo für den aktuellen Stand von Conversational AI.",
+      tag: "Hobby",
+      icon: <Code />
+    },
+    {
+      date: "2024",
+      title: "KI-Transkriptions-Website",
+      summary: "Skalierbarer Audiotranskriptionsdienst. Integration des SOTA Speech-to-Text-Modells von ElevenLabs für hochpräzise Interviewtranskriptionen, Zeitstempel auf Wortebene und Audioereigniserkennung.",
+      tag: "Hobby",
+      icon: <Code />
+    },
+    {
+      date: "2024",
+      title: "Microsoft Azure AI Engineer Associate",
+      summary: "Berufszertifizierung in Azure-AI-Services und Machine-Learning-Lösungen.",
+      tag: "Zertifikat",
+      icon: <Award />
+    },
+    {
+      date: "2024",
+      title: "ITIL Foundation",
+      summary: "IT-Service-Management-Framework-Zertifizierung für Best Practices im IT-Betrieb.",
+      tag: "Zertifikat",
+      icon: <Trophy />
+    },
+    {
+      date: "2024–2025",
+      title: "IT-Berater – MHP – A Porsche Company",
+      summary: "Coaching von 3 Hardware- und Software-Teams und Transformation eines Programmes (Automatiersiertes Fahren) mit 300 Personen zur Steigerung der Engineering-Velocity. Verbesserung von Produktvision und Roadmap. Anpassen und Priorisieren von Anforderungen. Spot-Consulting für mehrere RTEs und Agile Release Trains. Moderation von PI Plannings als RTE.",
+      tag: "FTE",
+      icon: <Briefcase />
+    },
+    {
+      date: "2022–Heute",
+      title: "SAFe-Trainings-Facilitator",
+      summary: "Durchführung von SAFe-Trainings als SPC für 300+ Teilnehmende aus mehreren Ländern mit einer Bewertung von 4,8/5,0.",
+      tag: "FTE",
+      icon: <Users />
+    },
+    {
+      date: "2023",
+      title: "SAFe Practice Consultant (SPC)",
+      summary: "Fortgeschrittene Zertifizierung im Scaled Agile Framework für Enterprise-Transformation.",
+      tag: "Zertifikat",
+      icon: <Users />
+    },
+    {
+      date: "2023",
+      title: "IT-Berater – MHP – A Porsche Company",
+      summary: "Scrum Master und Agile Coach in einem Monetization Release Train eines IT-Unternehmens, enge Zusammenarbeit mit internen und externen Stakeholdern. Transformation zu einem iterativen und inkrementellen Produktentwicklungsansatz. Erstellung von Pre-Sales- und Sales-Material sowie Mitarbeit an Multi-Millionen-Euro-Angeboten.",
+      tag: "FTE",
+      icon: <Briefcase />
+    },
+    {
+      date: "2023",
+      title: "AWS Certified Cloud Practitioner",
+      summary: "Grundlagenzertifizierung in AWS-Cloud-Computing-Konzepten und -Services.",
+      tag: "Zertifikat",
+      icon: <Globe />
+    },
+    {
+      date: "2022",
+      title: "Professional Scrum Master",
+      summary: "Zertifizierung in Scrum-Methodik und agiler Projektmanagementpraxis.",
+      tag: "Zertifikat",
+      icon: <Zap />
+    },
+    {
+      date: "2022",
+      title: "Junior IT-Berater – MHP – A Porsche Company",
+      summary: "Junior-Berater als Scrum Master, Unterstützung eines Development-Teams und mehrerer Rollen.",
+      tag: "FTE",
+      icon: <Briefcase />
+    },
+    {
+      date: "2021–2022",
+      title: "Marketing-Beratung – Steuerkanzlei Dr. Schulte-Ostermann",
+      summary: "Optimierung von Google-My-Business- und Social-Media-Präsenz zur Verbesserung von Marketing und Recruiting.",
+      tag: "Teilzeit",
+      icon: <Briefcase />
+    },
+    {
+      date: "2019–2020",
+      title: "Red Bull Consumer Service GmbH",
+      summary: "Campus-Marketing, Vertrieb und Event-Support.",
+      tag: "Teilzeit",
+      icon: <Briefcase />
+    },
+    {
+      date: "2018–2019",
+      title: "Chalmers University of Technology, Göteborg",
+      summary: "Auslandssemester (Erasmus) mit Schwerpunkt elektrische Antriebe, Urheberrecht und Projektmanagement.",
+      tag: "Edu",
+      icon: <GraduationCap />
+    },
+    {
+      date: "2017–2022",
+      title: "Eventorganisation & Soft-Skills-Training – bonding-Studenteninitiative e.V.",
+      summary: "Organisation von Recruiting-Events, Social-Media-Marketing und Durchführung von Workshops zu Zeitmanagement und Kommunikation.",
+      tag: "Teilzeit",
+      icon: <Heart />
+    },
+    {
+      date: "2017–2018",
+      title: "HiWi am Institut für Management & Organisation, TU Braunschweig",
+      summary: "Durchführung von Seminaren und Vorlesungen zur Erstsemester-Vorlesung 'Einführung in die Unternehmensführung' und Unterstützung der Doktoranden in ihrer Forschung.",
+      tag: "Teilzeit",
+      icon: <GraduationCap />
+    },
+    {
+      date: "2017–2018",
+      title: "Europcar",
+      summary: "Kundendienst und Fahrzeuglogistik.",
+      tag: "Teilzeit",
+      icon: <Briefcase />
+    },
+    {
+      date: "2016–2021",
+      title: "B.Sc. Elektrotechnik und Wirtschaft an der Technischen Universität Braunschweig",
+      summary: "Bachelorarbeit: 'Beziehung zwischen Führungskräften und Mitarbeitenden im Kontext flexibler Arbeit'",
+      tag: "Edu",
+      icon: <GraduationCap />
+    },
+    {
+      date: "2012–2017",
+      title: "Nordwind Wassersport e.V., Surendorf",
+      summary: "Trainer für Anfänger- und Fortgeschrittenen-Windsurfkurse.",
+      tag: "Teilzeit",
+      icon: <Waves />
+    },
+    {
+      date: "2009–2016",
+      title: "Gymnasium Isarnwohld, Gettorf",
+      summary: "Allgemeine Hochschulreife (Abitur). Schulsprecher (2015, 2016).",
+      tag: "Edu",
+      icon: <GraduationCap />
+    }
+  ];
+  const getTagColorDE = (tag: string) => {
+    switch (tag) {
+      case 'FTE': return 'bg-green-100 text-green-700';
+      case 'Teilzeit': return 'bg-blue-100 text-blue-700';
+      case 'Edu': return 'bg-purple-100 text-purple-700';
+      case 'Hobby': return 'bg-orange-100 text-orange-700';
+      case 'Zertifikat': return 'bg-yellow-100 text-yellow-700';
+      default: return 'bg-gray-100 text-gray-700';
+    }
+  };
+
+  // Select data based on language
+  const projects = language === 'de' ? projectsDE : projectsEN;
+  const timelineData = language === 'de' ? timelineDataDE : timelineDataEN;
+  const getTagColor = language === 'de' ? getTagColorDE : getTagColorEN;
   return (
     <section id="projects" className="min-h-screen py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16 animate-fade-up">
-          <h2 className="text-4xl font-semibold text-slate-900 mb-4">Featured Projects</h2>
+          <h2 className="text-4xl font-semibold text-slate-900 mb-4">
+            {language === 'de' ? 'Ausgewählte Projekte' : 'Featured Projects'}
+          </h2>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-            A showcase of my recent work in AI, web development, and automotive technology.
+            {language === 'de' 
+              ? 'Eine Auswahl meiner aktuellen Projekte in den Bereichen KI, Web- und Produktentwicklung.'
+              : 'A showcase of my recent work in AI, web development, and automotive technology.'
+            }
           </p>
         </div>
 
@@ -219,12 +422,22 @@ const ProjectsSection: React.FC = () => {
           <div className="flex flex-col space-y-4">
             <div className="flex justify-start">
               <div className="bg-slate-100 rounded-2xl px-4 py-2 max-w-xs">
-                <p className="text-sm text-slate-700">Tell me about your projects</p>
+                <p className="text-sm text-slate-700">
+                  {language === 'de' 
+                    ? 'Erzähl mir von deinen Projekten'
+                    : 'Tell me about your projects'
+                  }
+                </p>
               </div>
             </div>
             <div className="flex justify-end">
               <div className="bg-indigo-600 text-white rounded-2xl px-4 py-2 max-w-xs">
-                <p className="text-sm">I'd love to show you my latest work! Check out the projects below.</p>
+                <p className="text-sm">
+                  {language === 'de'
+                    ? 'Ich zeige dir gerne meine neuesten Projekten! Schau sie dir unten an.'
+                    : 'I would love to show you my latest work! Check out the projects below.'
+                  }
+                </p>
               </div>
             </div>
           </div>

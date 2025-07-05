@@ -1,10 +1,48 @@
-
 import React from 'react';
 import VoiceOrb from './VoiceOrb';
+import { useLanguage } from "@/hooks/use-language";
 
-const HeroSection: React.FC = () => {
-  const onVoiceStart = () => {
-    console.log('Voice interaction will be connected to ElevenLabs WebSocket');
+interface HeroSectionProps {
+  state: {
+    isConnected: boolean;
+    isListening: boolean;
+    isSpeaking: boolean;
+    isProcessing: boolean;
+  };
+  error: string | null;
+  startConversation: () => Promise<void>;
+  stopConversation: () => void;
+  testConnection: () => Promise<void>;
+  isActive: boolean;
+}
+
+const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversation, stopConversation, testConnection, isActive }) => {
+  const { language } = useLanguage();
+
+  const handleVoiceToggle = async () => {
+    try {
+      if (isActive) {
+        stopConversation();
+      } else {
+        // Test connection first
+        await testConnection();
+        await startConversation();
+      }
+    } catch (err) {
+      console.error('Voice interaction error:', err);
+    }
+  };
+  const t = {
+    en: {
+      headline: "Talk to my AI",
+      subtitle: "Ask \"me\" anything about my experience, my work, or my life.",
+      info: "Click the voice button to start an interactive conversation. I'm here to help with your questions regardabout technology, product development, and more."
+    },
+    de: {
+      headline: "Sprich mit AI",
+      subtitle: "Frag \"mich\" alles über meine Erfahrung, meine Arbeit oder mein Leben.",
+      info: "Klicke auf den Sprachbutton, um ein interaktives Gespräch zu starten. Ich helfe dir gerne bei Fragen zu Technologie, Produktentwicklung und mehr."
+    }
   };
 
   return (
@@ -27,28 +65,36 @@ const HeroSection: React.FC = () => {
           {/* Left side - Text content */}
           <div className="text-center lg:text-left animate-fade-up">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-slate-900 mb-6 leading-tight">
-              Talk to Mike
+              {t[language].headline}
             </h1>
             <p className="text-xl sm:text-2xl text-slate-600 mb-8 leading-relaxed">
-              Ask me anything about my experience, my work, or my life.
+              {t[language].subtitle}
             </p>
             <div className="hidden lg:block">
               <p className="text-lg text-slate-500 max-w-md">
-                Click the voice button to start an interactive conversation. 
-                I'm here to help with your questions about technology, development, and more.
+                {t[language].info}
               </p>
             </div>
           </div>
 
           {/* Right side - Voice Orb */}
           <div className="flex justify-center lg:justify-end animate-fade-up" style={{ animationDelay: '0.2s' }}>
-            <VoiceOrb size="large" onVoiceStart={onVoiceStart} />
+            <VoiceOrb 
+              size="large" 
+              state={state}
+              onToggle={handleVoiceToggle}
+            />
           </div>
         </div>
       </div>
 
       {/* Mobile Voice Orb */}
-      <VoiceOrb size="small" position="bottom" onVoiceStart={onVoiceStart} />
+      <VoiceOrb 
+        size="small" 
+        position="bottom" 
+        state={state}
+        onToggle={handleVoiceToggle}
+      />
     </section>
   );
 };

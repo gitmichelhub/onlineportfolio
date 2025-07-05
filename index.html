@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -21,7 +20,16 @@
   </head>
 
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <svg style="display:none">
+        <filter id="liquid-glass-filter">
+          <feTurbulence id="turb" baseFrequency="0.015 0.03" numOctaves="2" seed="2">
+            <animate attributeName="baseFrequency" dur="8s" values="0.015 0.03;0.025 0.04;0.015 0.03" repeatCount="indefinite"/>
+          </feTurbulence>
+          <feDisplacementMap in2="turb" in="SourceGraphic" scale="8" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+      </svg>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -1,7 +1,7 @@
-
 import React, { useState } from 'react';
 import { Mail, MessageCircle, Send } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useLanguage } from "@/hooks/use-language";
 
 const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -11,14 +11,63 @@ const ContactSection: React.FC = () => {
     message: ''
   });
   const { toast } = useToast();
+  const { language } = useLanguage();
+  const t = {
+    en: {
+      sectionTitle: "Let's Connect",
+      subtitle: "Have a project in mind or just want to chat? I'd love to hear from you.",
+      getInTouch: "Get in Touch",
+      email: "Email",
+      bestFor: "Best for detailed discussions",
+      voiceChat: "Voice Chat",
+      useVoice: "Use the voice button above",
+      quick: "Quick questions and instant feedback",
+      responseTime: "Response Time:",
+      responseText: "I typically respond within 24 hours. For urgent matters, feel free to use the voice chat feature.",
+      name: "Name",
+      emailLabel: "Email",
+      subject: "Subject",
+      message: "Message",
+      namePlaceholder: "Your name",
+      emailPlaceholder: "your@email.com",
+      subjectPlaceholder: "What's this about?",
+      messagePlaceholder: "Tell me about your project or question...",
+      send: "Send Message",
+      toastTitle: "Message sent!",
+      toastDesc: "Thanks for reaching out. I'll get back to you soon."
+    },
+    de: {
+      sectionTitle: "Kontakt aufnehmen",
+      subtitle: "Hast du ein Projekt im Kopf oder möchtest einfach plaudern? Ich freue mich auf deine Nachricht.",
+      getInTouch: "Kontakt aufnehmen",
+      email: "E-Mail",
+      bestFor: "Am besten für ausführliche Anfragen",
+      voiceChat: "Sprachchat",
+      useVoice: "Nutze den Sprachbutton oben",
+      quick: "Kurze Fragen und sofortiges Feedback",
+      responseTime: "Antwortzeit:",
+      responseText: "In der Regel antworte ich innerhalb von 24 Stunden. Für dringende Anliegen nutze gerne den Sprachchat.",
+      name: "Name",
+      emailLabel: "E-Mail",
+      subject: "Betreff",
+      message: "Nachricht",
+      namePlaceholder: "Dein Name",
+      emailPlaceholder: "deine@email.de",
+      subjectPlaceholder: "Worum geht es?",
+      messagePlaceholder: "Erzähl mir von deinem Projekt oder deiner Frage...",
+      send: "Nachricht senden",
+      toastTitle: "Nachricht gesendet!",
+      toastDesc: "Danke für deine Nachricht. Ich melde mich bald zurück."
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
     // Simulate form submission
     toast({
-      title: "Message sent!",
-      description: "Thanks for reaching out. I'll get back to you soon.",
+      title: t[language].toastTitle,
+      description: t[language].toastDesc,
     });
 
     // Reset form
@@ -36,9 +85,9 @@ const ContactSection: React.FC = () => {
     <section id="contact" className="min-h-screen py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16 animate-fade-up">
-          <h2 className="text-4xl font-semibold text-slate-900 mb-4">Let's Connect</h2>
+          <h2 className="text-4xl font-semibold text-slate-900 mb-4">{t[language].sectionTitle}</h2>
           <p className="text-xl text-slate-600">
-            Have a project in mind or just want to chat? I'd love to hear from you.
+            {t[language].subtitle}
           </p>
         </div>
 
@@ -46,7 +95,7 @@ const ContactSection: React.FC = () => {
           {/* Left side - Contact info */}
           <div className="animate-fade-up">
             <div className="glass rounded-2xl p-8">
-              <h3 className="text-2xl font-semibold text-slate-900 mb-6">Get in Touch</h3>
+              <h3 className="text-2xl font-semibold text-slate-900 mb-6">{t[language].getInTouch}</h3>
               
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
@@ -54,9 +103,9 @@ const ContactSection: React.FC = () => {
                     <Mail className="text-indigo-600" size={20} />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-slate-900 mb-1">Email</h4>
+                    <h4 className="font-semibold text-slate-900 mb-1">{t[language].email}</h4>
                     <p className="text-slate-600">mike@example.com</p>
-                    <p className="text-sm text-slate-500 mt-1">Best for detailed discussions</p>
+                    <p className="text-sm text-slate-500 mt-1">{t[language].bestFor}</p>
                   </div>
                 </div>
 
@@ -65,17 +114,16 @@ const ContactSection: React.FC = () => {
                     <MessageCircle className="text-indigo-600" size={20} />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-slate-900 mb-1">Voice Chat</h4>
-                    <p className="text-slate-600">Use the voice button above</p>
-                    <p className="text-sm text-slate-500 mt-1">Quick questions and instant feedback</p>
+                    <h4 className="font-semibold text-slate-900 mb-1">{t[language].voiceChat}</h4>
+                    <p className="text-slate-600">{t[language].useVoice}</p>
+                    <p className="text-sm text-slate-500 mt-1">{t[language].quick}</p>
                   </div>
                 </div>
               </div>
 
               <div className="mt-8 p-4 bg-indigo-50 rounded-xl">
                 <p className="text-sm text-indigo-700">
-                  <strong>Response Time:</strong> I typically respond within 24 hours. 
-                  For urgent matters, feel free to use the voice chat feature.
+                  <strong>{t[language].responseTime}</strong> {t[language].responseText}
                 </p>
               </div>
             </div>
@@ -88,7 +136,7 @@ const ContactSection: React.FC = () => {
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-2">
-                      Name
+                      {t[language].name}
                     </label>
                     <input
                       type="text"
@@ -98,12 +146,12 @@ const ContactSection: React.FC = () => {
                       onChange={handleChange}
                       required
                       className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors"
-                      placeholder="Your name"
+                      placeholder={t[language].namePlaceholder}
                     />
                   </div>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2">
-                      Email
+                      {t[language].emailLabel}
                     </label>
                     <input
                       type="email"
@@ -113,14 +161,14 @@ const ContactSection: React.FC = () => {
                       onChange={handleChange}
                       required
                       className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors"
-                      placeholder="your@email.com"
+                      placeholder={t[language].emailPlaceholder}
                     />
                   </div>
                 </div>
 
                 <div>
                   <label htmlFor="subject" className="block text-sm font-medium text-slate-700 mb-2">
-                    Subject
+                    {t[language].subject}
                   </label>
                   <input
                     type="text"
@@ -130,13 +178,13 @@ const ContactSection: React.FC = () => {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors"
-                    placeholder="What's this about?"
+                    placeholder={t[language].subjectPlaceholder}
                   />
                 </div>
 
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-slate-700 mb-2">
-                    Message
+                    {t[language].message}
                   </label>
                   <textarea
                     id="message"
@@ -146,7 +194,7 @@ const ContactSection: React.FC = () => {
                     required
                     rows={5}
                     className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors resize-none"
-                    placeholder="Tell me about your project or question..."
+                    placeholder={t[language].messagePlaceholder}
                   />
                 </div>
 
@@ -154,7 +202,7 @@ const ContactSection: React.FC = () => {
                   type="submit"
                   className="w-full bg-indigo-600 text-white py-3 px-6 rounded-xl font-medium hover:bg-indigo-700 transition-colors flex items-center justify-center space-x-2 group"
                 >
-                  <span>Send Message</span>
+                  <span>{t[language].send}</span>
                   <Send size={16} className="transition-transform group-hover:translate-x-1" />
                 </button>
               </div>
