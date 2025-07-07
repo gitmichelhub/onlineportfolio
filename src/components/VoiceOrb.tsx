@@ -98,7 +98,7 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
   const getPositionClasses = () => {
     if (isSticky) {
       if (isMobile) {
-        return 'fixed top-3 left-3 z-50'; // Move to top-left to avoid mobile menu button
+        return 'fixed top-3 left-1/2 transform -translate-x-1/2 z-50'; // Center horizontally, avoid mobile menu button
       }
       return 'fixed top-4 right-4 z-50'; // Desktop sticky position
     }

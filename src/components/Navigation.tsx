@@ -53,49 +53,57 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="flex justify-center items-start h-20 pt-4 relative">
-          {/* Centered nav items, language switcher, and voice status */}
-          <div className="hidden md:flex gap-4">
-            {/* Nav Items Pill */}
-            <div
-              className="glass rounded-full flex items-center px-3 py-2 shadow-md backdrop-blur-md border border-white/30 bg-white/40 liquid-glass"
-              style={{ filter: "url(#liquid-glass-filter)" }}
-            >
-              {navItems.map((item) => (
+        <div className="flex items-start h-20 pt-4 relative">
+          {/* Left spacer (empty for centering) */}
+          <div className="hidden md:flex flex-1" />
+
+          {/* Centered nav items and language switcher */}
+          <div className="hidden md:flex flex-col items-center justify-center flex-none">
+            <div className="flex gap-4 items-center">
+              {/* Nav Items Pill */}
+              <div
+                className="glass rounded-full flex items-center px-3 py-2 shadow-md backdrop-blur-md border border-white/30 bg-white/40 liquid-glass"
+                style={{ filter: "url(#liquid-glass-filter)" }}
+              >
+                {navItems.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => handleNavClick(item.id)}
+                    className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
+                      currentSection === item.id
+                        ? 'bg-white bg-opacity-70 text-indigo-600 shadow'
+                        : 'text-slate-700 hover:text-indigo-600 hover:bg-white hover:bg-opacity-30'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+              {/* Language Pill */}
+              <div
+                className="glass rounded-full flex items-center px-2 py-1 shadow-md backdrop-blur-md border border-white/30 bg-white/40"
+                style={{ minWidth: 90, filter: "url(#liquid-glass-filter)" }}
+              >
                 <button
-                  key={item.id}
-                  onClick={() => handleNavClick(item.id)}
-                  className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
-                    currentSection === item.id
-                      ? 'bg-white bg-opacity-70 text-indigo-600 shadow'
-                      : 'text-slate-700 hover:text-indigo-600 hover:bg-white hover:bg-opacity-30'
-                  }`}
+                  className={`px-3 py-1 rounded-full text-sm font-semibold transition-all duration-200 ${language === 'en' ? 'bg-white bg-opacity-60 text-indigo-600 shadow' : 'text-slate-700 hover:text-indigo-600'}`}
+                  onClick={() => setLanguage('en')}
+                  aria-pressed={language === 'en'}
                 >
-                  {item.label}
+                  EN
                 </button>
-              ))}
+                <button
+                  className={`px-3 py-1 rounded-full text-sm font-semibold transition-all duration-200 ${language === 'de' ? 'bg-white bg-opacity-60 text-indigo-600 shadow' : 'text-slate-700 hover:text-indigo-600'}`}
+                  onClick={() => setLanguage('de')}
+                  aria-pressed={language === 'de'}
+                >
+                  DE
+                </button>
+              </div>
             </div>
-            {/* Language Pill */}
-            <div
-              className="glass rounded-full flex items-center px-2 py-1 shadow-md backdrop-blur-md border border-white/30 bg-white/40"
-              style={{ minWidth: 90, filter: "url(#liquid-glass-filter)" }}
-            >
-              <button
-                className={`px-3 py-1 rounded-full text-sm font-semibold transition-all duration-200 ${language === 'en' ? 'bg-white bg-opacity-60 text-indigo-600 shadow' : 'text-slate-700 hover:text-indigo-600'}`}
-                onClick={() => setLanguage('en')}
-                aria-pressed={language === 'en'}
-              >
-                EN
-              </button>
-              <button
-                className={`px-3 py-1 rounded-full text-sm font-semibold transition-all duration-200 ${language === 'de' ? 'bg-white bg-opacity-60 text-indigo-600 shadow' : 'text-slate-700 hover:text-indigo-600'}`}
-                onClick={() => setLanguage('de')}
-                aria-pressed={language === 'de'}
-              >
-                DE
-              </button>
-            </div>
-            {/* VoiceStatus positioned next to navbar elements */}
+          </div>
+
+          {/* Right: VoiceStatus */}
+          <div className="hidden md:flex flex-1 justify-end items-center">
             <VoiceStatus state={voiceStatusState} error={voiceStatusError} onStop={onVoiceStatusStop} />
           </div>
         </div>
