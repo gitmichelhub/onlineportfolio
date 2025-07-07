@@ -23,7 +23,7 @@ const VoiceStatus: React.FC<VoiceStatusProps> = ({ state, error, onStop }) => {
         icon: <MicOff className="w-4 h-4 text-red-500" />,
         text: error,
         color: 'text-red-600',
-        bgColor: 'bg-red-50',
+        bgColor: 'bg-red-100',
         borderColor: 'border-red-200'
       };
     }
@@ -31,9 +31,9 @@ const VoiceStatus: React.FC<VoiceStatusProps> = ({ state, error, onStop }) => {
     if (isProcessing) {
       return {
         icon: <Loader2 className="w-4 h-4 text-blue-500 animate-spin" />,
-        text: 'Connecting to AI agent...',
+        text: 'Connecting...',
         color: 'text-blue-600',
-        bgColor: 'bg-blue-50',
+        bgColor: 'bg-blue-100',
         borderColor: 'border-blue-200'
       };
     }
@@ -43,7 +43,7 @@ const VoiceStatus: React.FC<VoiceStatusProps> = ({ state, error, onStop }) => {
         icon: <Mic className="w-4 h-4 text-green-500" />,
         text: 'Listening...',
         color: 'text-green-600',
-        bgColor: 'bg-green-50',
+        bgColor: 'bg-green-100',
         borderColor: 'border-green-200'
       };
     }
@@ -51,9 +51,9 @@ const VoiceStatus: React.FC<VoiceStatusProps> = ({ state, error, onStop }) => {
     if (isSpeaking) {
       return {
         icon: <Volume2 className="w-4 h-4 text-purple-500" />,
-        text: 'AI is speaking...',
+        text: 'AI speaking...',
         color: 'text-purple-600',
-        bgColor: 'bg-purple-50',
+        bgColor: 'bg-purple-100',
         borderColor: 'border-purple-200'
       };
     }
@@ -61,18 +61,18 @@ const VoiceStatus: React.FC<VoiceStatusProps> = ({ state, error, onStop }) => {
     if (isConnected) {
       return {
         icon: <Mic className="w-4 h-4 text-indigo-500" />,
-        text: 'Ready to listen',
+        text: 'Ready',
         color: 'text-indigo-600',
-        bgColor: 'bg-indigo-50',
+        bgColor: 'bg-indigo-100',
         borderColor: 'border-indigo-200'
       };
     }
 
     return {
       icon: <MicOff className="w-4 h-4 text-gray-500" />,
-      text: 'Click to start conversation',
+      text: 'Voice AI',
       color: 'text-gray-600',
-      bgColor: 'bg-gray-50',
+      bgColor: 'bg-gray-100',
       borderColor: 'border-gray-200'
     };
   };
@@ -84,16 +84,14 @@ const VoiceStatus: React.FC<VoiceStatusProps> = ({ state, error, onStop }) => {
   return (
     <div
       className={`
-        px-4 py-2 rounded-full border
-        ${statusInfo.bgColor} ${statusInfo.borderColor}
-        flex items-center gap-2 shadow-lg
+        glass rounded-full flex items-center px-3 py-2 shadow-md backdrop-blur-md border border-white/30 bg-white/40
         transition-all duration-300 ease-in-out
         ${isConnected || isActive ? 'opacity-100' : 'opacity-0 pointer-events-none'}
       `}
-      style={{ position: 'relative' }}
+      style={{ filter: "url(#liquid-glass-filter)" }}
     >
       {statusInfo.icon}
-      <span className={`text-sm font-medium ${statusInfo.color}`}>
+      <span className={`text-sm font-medium ${statusInfo.color} ml-2`}>
         {statusInfo.text}
       </span>
       {isActive && onStop && (

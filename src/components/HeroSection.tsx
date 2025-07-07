@@ -36,7 +36,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversati
     en: {
       headline: "Talk to my AI",
       subtitle: "Ask \"me\" anything about my experience, my work, or my life.",
-      info: "Click the voice button to start an interactive conversation. I'm here to help with your questions regardabout technology, product development, and more."
+      info: "Click the voice button to start an interactive conversation. I'm here to help with your questions regarding technology, product development, and more."
     },
     de: {
       headline: "Sprich mit AI",

@@ -18,7 +18,7 @@ interface UseVoiceAgentReturn {
   };
   startConversation: () => Promise<void>;
   stopConversation: () => void;
-  testConnection: () => Promise<boolean>;
+  testConnection: () => Promise<void>;
   isActive: boolean;
   error: string | null;
 }
@@ -92,7 +92,7 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
     if (!options.agentId) {
       throw new Error('Agent ID is required');
     }
-    return true;
+    // Return void instead of boolean to match the expected interface
   }, [options.agentId]);
 
   // Map the ElevenLabs SDK status to our state format

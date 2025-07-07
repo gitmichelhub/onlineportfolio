@@ -54,7 +54,7 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
     <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="flex justify-center items-start h-20 pt-4 relative">
-          {/* Centered nav items and language switcher */}
+          {/* Centered nav items, language switcher, and voice status */}
           <div className="hidden md:flex gap-4">
             {/* Nav Items Pill */}
             <div
@@ -95,9 +95,7 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
                 DE
               </button>
             </div>
-          </div>
-          {/* VoiceStatus absolutely positioned to the right */}
-          <div className="absolute right-0 top-0 h-full flex items-center pr-2 z-10">
+            {/* VoiceStatus positioned next to navbar elements */}
             <VoiceStatus state={voiceStatusState} error={voiceStatusError} onStop={onVoiceStatusStop} />
           </div>
         </div>
