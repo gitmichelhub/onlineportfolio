@@ -14,13 +14,17 @@ interface VoiceOrbProps {
   position?: 'center' | 'bottom';
   state: VoiceAgentState;
   onToggle: () => void;
+  timeRemaining?: number | null;
+  isTimerActive?: boolean;
 }
 
 const VoiceOrb: React.FC<VoiceOrbProps> = ({ 
   size = 'large', 
   position = 'center',
   state,
-  onToggle
+  onToggle,
+  timeRemaining,
+  isTimerActive
 }) => {
   const [isClicked, setIsClicked] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
@@ -133,6 +137,11 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
       baseClasses += ' touch-manipulation'; // Better touch handling
     }
     
+    // Timer warning: custom animation when less than 30 seconds remaining
+    if (isTimerActive && timeRemaining !== null && timeRemaining <= 30) {
+      return `${baseClasses} animate-timer-warning`;
+    }
+    
     if (isProcessing) {
       return `${baseClasses} animate-pulse`;
     } else {
@@ -141,6 +150,11 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
   };
 
   const getGlowColor = () => {
+    // Timer warning: less than 30 seconds remaining
+    if (isTimerActive && timeRemaining !== null && timeRemaining <= 30) {
+      return 'rgba(245, 101, 101, 0.6)'; // Red glow for timer warning
+    }
+    
     if (isProcessing) return 'rgba(59, 130, 246, 0.6)'; // Enhanced blue for processing
     if (isListening) return 'rgba(34, 197, 94, 0.6)'; // Enhanced green for listening
     if (isSpeaking) return 'rgba(168, 85, 247, 0.6)'; // Enhanced purple for speaking
@@ -149,6 +163,11 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
   };
 
   const getIconColor = () => {
+    // Timer warning: less than 30 seconds remaining
+    if (isTimerActive && timeRemaining !== null && timeRemaining <= 30) {
+      return 'text-red-600'; // Red icon for timer warning
+    }
+    
     if (isProcessing) return 'text-blue-600';
     if (isListening) return 'text-green-600';
     if (isSpeaking) return 'text-purple-600';
@@ -157,6 +176,11 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
   };
 
   const getBackgroundGradient = () => {
+    // Timer warning: less than 30 seconds remaining
+    if (isTimerActive && timeRemaining !== null && timeRemaining <= 30) {
+      return 'from-red-500/20 to-orange-600/20'; // Red gradient for timer warning
+    }
+    
     if (isProcessing) return 'from-blue-500/20 to-blue-600/20';
     if (isListening) return 'from-green-500/20 to-emerald-600/20';
     if (isSpeaking) return 'from-purple-500/20 to-violet-600/20';

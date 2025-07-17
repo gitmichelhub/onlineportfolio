@@ -123,6 +123,19 @@
     }
   }
 
+  @keyframes timer-warning {
+    0%, 100% {
+      box-shadow: 0 0 40px rgba(245, 101, 101, 0.6);
+    }
+    50% {
+      box-shadow: 0 0 60px rgba(245, 101, 101, 0.8);
+    }
+  }
+
+  .animate-timer-warning {
+    animation: timer-warning 1s ease-in-out infinite;
+  }
+
   .animate-pulse-glow {
     animation: pulse-glow 2s ease-in-out infinite;
   }

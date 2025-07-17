@@ -10,8 +10,8 @@ import { useVoiceAgent } from '@/hooks/use-voice-agent';
 
 const Index = () => {
   const [currentSection, setCurrentSection] = useState('voice');
-  const { state, startConversation, stopConversation, testConnection, isActive, error } = useVoiceAgent({
-    agentId: ELEVENLABS_CONFIG.CONVERSATION_CONFIG.agent.prompt.prompt,
+  const { state, startConversation, stopConversation, forceStopConversation, testConnection, isActive, error, timeRemaining, isTimerActive } = useVoiceAgent({
+    agentId: 'agent_01jynqjwg7f77aendk120trhj5',
     apiKey: getElevenLabsApiKey(),
   });
 
@@ -44,14 +44,20 @@ const Index = () => {
         voiceStatusState={state}
         voiceStatusError={error}
         onVoiceStatusStop={stopConversation}
+        onVoiceStatusForceStop={forceStopConversation}
+        timeRemaining={timeRemaining}
+        isTimerActive={isTimerActive}
       />
       <HeroSection 
         state={state}
         error={error}
         startConversation={startConversation}
         stopConversation={stopConversation}
+        forceStopConversation={forceStopConversation}
         testConnection={testConnection}
         isActive={isActive}
+        timeRemaining={timeRemaining}
+        isTimerActive={isTimerActive}
       />
       <ProjectsSection />
       <BlogSection isVoiceActive={isActive} />

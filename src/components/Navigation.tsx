@@ -14,9 +14,12 @@ interface NavigationProps {
   };
   voiceStatusError: string | null;
   onVoiceStatusStop: () => void;
+  onVoiceStatusForceStop?: () => Promise<void>;
+  timeRemaining?: number | null;
+  isTimerActive?: boolean;
 }
 
-const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange, voiceStatusState, voiceStatusError, onVoiceStatusStop }) => {
+const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange, voiceStatusState, voiceStatusError, onVoiceStatusStop, onVoiceStatusForceStop, timeRemaining, isTimerActive }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { language, setLanguage } = useLanguage();
@@ -47,6 +50,17 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleVoiceStop = async () => {
+    try {
+      onVoiceStatusStop();
+    } catch (err) {
+      console.error('Normal stop failed, trying force stop:', err);
+      if (onVoiceStatusForceStop) {
+        await onVoiceStatusForceStop();
+      }
     }
   };
 
@@ -81,18 +95,18 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
               </div>
               {/* Language Pill */}
               <div
-                className="glass rounded-full flex items-center px-2 py-1 shadow-md backdrop-blur-md border border-white/30 bg-white/40"
-                style={{ minWidth: 90, filter: "url(#liquid-glass-filter)" }}
+                className="glass rounded-full flex items-center px-3 py-2 shadow-md backdrop-blur-md border border-white/30 bg-white/40 liquid-glass"
+                style={{ filter: "url(#liquid-glass-filter)" }}
               >
                 <button
-                  className={`px-3 py-1 rounded-full text-sm font-semibold transition-all duration-200 ${language === 'en' ? 'bg-white bg-opacity-60 text-indigo-600 shadow' : 'text-slate-700 hover:text-indigo-600'}`}
+                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${language === 'en' ? 'bg-white bg-opacity-60 text-indigo-600 shadow' : 'text-slate-700 hover:text-indigo-600'}`}
                   onClick={() => setLanguage('en')}
                   aria-pressed={language === 'en'}
                 >
                   EN
                 </button>
                 <button
-                  className={`px-3 py-1 rounded-full text-sm font-semibold transition-all duration-200 ${language === 'de' ? 'bg-white bg-opacity-60 text-indigo-600 shadow' : 'text-slate-700 hover:text-indigo-600'}`}
+                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${language === 'de' ? 'bg-white bg-opacity-60 text-indigo-600 shadow' : 'text-slate-700 hover:text-indigo-600'}`}
                   onClick={() => setLanguage('de')}
                   aria-pressed={language === 'de'}
                 >
@@ -104,7 +118,13 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
 
           {/* Right: VoiceStatus */}
           <div className="hidden md:flex flex-1 justify-end items-center">
-            <VoiceStatus state={voiceStatusState} error={voiceStatusError} onStop={onVoiceStatusStop} />
+            <VoiceStatus 
+              state={voiceStatusState} 
+              error={voiceStatusError} 
+              onStop={handleVoiceStop}
+              timeRemaining={timeRemaining}
+              isTimerActive={isTimerActive}
+            />
           </div>
         </div>
         {/* Mobile Navigation Pills and VoiceStatus (stacked) */}
@@ -130,27 +150,33 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
                 ))}
               </div>
             </div>
-            <div className="flex items-center gap-2 w-full max-w-xs">
+            <div className="flex items-center gap-3 w-full max-w-xs">
               <div
-                className="glass rounded-full flex items-center px-2 py-1 shadow-md backdrop-blur-md border border-white/30 bg-white/40 w-full"
-                style={{ minWidth: 90, filter: "url(#liquid-glass-filter)" }}
+                className="glass rounded-full flex items-center px-3 py-2 shadow-md backdrop-blur-md border border-white/30 bg-white/40 flex-1 liquid-glass"
+                style={{ filter: "url(#liquid-glass-filter)" }}
               >
                 <button
-                  className={`px-3 py-1 rounded-full text-sm font-semibold transition-all duration-200 ${language === 'en' ? 'bg-white bg-opacity-60 text-indigo-600 shadow' : 'text-slate-700 hover:text-indigo-600'}`}
+                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${language === 'en' ? 'bg-white bg-opacity-60 text-indigo-600 shadow' : 'text-slate-700 hover:text-indigo-600'}`}
                   onClick={() => setLanguage('en')}
                   aria-pressed={language === 'en'}
                 >
                   EN
                 </button>
                 <button
-                  className={`px-3 py-1 rounded-full text-sm font-semibold transition-all duration-200 ${language === 'de' ? 'bg-white bg-opacity-60 text-indigo-600 shadow' : 'text-slate-700 hover:text-indigo-600'}`}
+                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${language === 'de' ? 'bg-white bg-opacity-60 text-indigo-600 shadow' : 'text-slate-700 hover:text-indigo-600'}`}
                   onClick={() => setLanguage('de')}
                   aria-pressed={language === 'de'}
                 >
                   DE
                 </button>
               </div>
-              <VoiceStatus state={voiceStatusState} error={voiceStatusError} onStop={onVoiceStatusStop} />
+              <VoiceStatus 
+                state={voiceStatusState} 
+                error={voiceStatusError} 
+                onStop={handleVoiceStop}
+                timeRemaining={timeRemaining}
+                isTimerActive={isTimerActive}
+              />
             </div>
           </div>
         )}
@@ -158,7 +184,7 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
         <div className="md:hidden absolute right-4 top-2">
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 text-slate-700 hover:text-indigo-600 transition-colors"
+            className="p-3 text-slate-700 hover:text-indigo-600 transition-colors touch-manipulation rounded-full hover:bg-white/20"
             aria-label="Toggle mobile menu"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}

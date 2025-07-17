@@ -12,17 +12,26 @@ interface HeroSectionProps {
   error: string | null;
   startConversation: () => Promise<void>;
   stopConversation: () => void;
+  forceStopConversation: () => Promise<void>;
   testConnection: () => Promise<void>;
   isActive: boolean;
+  timeRemaining?: number | null;
+  isTimerActive?: boolean;
 }
 
-const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversation, stopConversation, testConnection, isActive }) => {
+const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversation, stopConversation, forceStopConversation, testConnection, isActive, timeRemaining, isTimerActive }) => {
   const { language } = useLanguage();
 
   const handleVoiceToggle = async () => {
     try {
       if (isActive) {
-        stopConversation();
+        // Try normal stop first, then force stop if needed
+        try {
+          stopConversation();
+        } catch (err) {
+          console.error('Normal stop failed, trying force stop:', err);
+          await forceStopConversation();
+        }
       } else {
         // Test connection first
         await testConnection();
@@ -83,6 +92,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversati
               size="large" 
               state={state}
               onToggle={handleVoiceToggle}
+              timeRemaining={timeRemaining}
+              isTimerActive={isTimerActive}
             />
           </div>
         </div>
@@ -94,6 +105,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversati
         position="bottom" 
         state={state}
         onToggle={handleVoiceToggle}
+        timeRemaining={timeRemaining}
+        isTimerActive={isTimerActive}
       />
     </section>
   );
