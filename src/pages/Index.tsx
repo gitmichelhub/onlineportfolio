@@ -54,7 +54,7 @@ const Index = () => {
         isActive={isActive}
       />
       <ProjectsSection />
-      <BlogSection />
+      <BlogSection isVoiceActive={isActive} />
       <ContactSection />
       <Footer />
     </div>

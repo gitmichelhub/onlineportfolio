@@ -1,8 +1,13 @@
 import React from 'react';
-import { Calendar, ArrowRight } from 'lucide-react';
+import { Calendar, ArrowRight, ExternalLink } from 'lucide-react';
 import { useLanguage } from "@/hooks/use-language";
+import { Link } from 'react-router-dom';
 
-const BlogSection: React.FC = () => {
+interface BlogSectionProps {
+  isVoiceActive?: boolean;
+}
+
+const BlogSection: React.FC<BlogSectionProps> = ({ isVoiceActive = false }) => {
   const { language } = useLanguage();
   const t = {
     en: {
@@ -15,28 +20,32 @@ const BlogSection: React.FC = () => {
           excerpt: "Exploring how conversational AI is reshaping user interactions and what developers need to know about implementing voice-first experiences.",
           date: "Dec 15, 2024",
           readTime: "5 min read",
-          category: "AI"
+          category: "AI",
+          slug: "ai-voice-interfaces"
         },
         {
-          title: "Building Scalable React Applications",
-          excerpt: "Best practices for structuring large React applications with TypeScript, including state management and component architecture patterns.",
-          date: "Dec 10, 2024",
-          readTime: "8 min read",
-          category: "Development"
-        },
-        {
-          title: "Connected Cars and IoT Integration",
-          excerpt: "How modern vehicles are becoming smart devices and the exciting possibilities this creates for developers and users alike.",
-          date: "Dec 5, 2024",
+          title: "Vibe Coding: Riding the Autonomy Slider From Keystrokes to Agents",
+          excerpt: "Exploring the evolution of AI-assisted development and the autonomy slider concept that's reshaping how we write code.",
+          date: "Jul 15, 2025",
           readTime: "6 min read",
-          category: "Automotive"
+          category: "Development",
+          slug: "scalable-react-applications"
+        },
+        {
+          title: "Flow & Focus: How Coastal Origins and Team Dynamics Shape My Consulting Path",
+          excerpt: "How coastal upbringing, collaborative energy, and disciplined routines create the foundation for professional success and personal well-being.",
+          date: "Jul 17, 2025",
+          readTime: "2 min read",
+          category: "Leadership",
+          slug: "connected-cars-iot"
         },
         {
           title: "Design Systems in the Age of AI",
           excerpt: "Creating consistent, accessible design systems that can adapt to AI-generated content and dynamic user interfaces.",
           date: "Nov 28, 2024",
           readTime: "7 min read",
-          category: "Design"
+          category: "Design",
+          slug: "design-systems-ai"
         }
       ]
     },
@@ -50,28 +59,32 @@ const BlogSection: React.FC = () => {
           excerpt: "Wie Conversational AI die Nutzerinteraktion verändert und was Entwickler über Voice-First-Erlebnisse wissen sollten.",
           date: "15. Dez 2024",
           readTime: "5 Min. Lesezeit",
-          category: "KI"
+          category: "KI",
+          slug: "ai-voice-interfaces"
         },
         {
-          title: "Skalierbare React-Anwendungen bauen",
-          excerpt: "Best Practices für den Aufbau großer React-Anwendungen mit TypeScript, inklusive State-Management und Komponentenarchitektur.",
-          date: "10. Dez 2024",
-          readTime: "8 Min. Lesezeit",
-          category: "Entwicklung"
-        },
-        {
-          title: "Vernetzte Autos und IoT-Integration",
-          excerpt: "Wie moderne Fahrzeuge zu smarten Geräten werden und welche Möglichkeiten sich daraus für Entwickler und Nutzer ergeben.",
-          date: "5. Dez 2024",
+          title: "Vibe Coding: Auf dem Autonomy Slider von Tastatureingaben zu Agenten",
+          excerpt: "Die Evolution KI-gestützter Entwicklung und das Autonomy Slider Konzept, das die Art, wie wir Code schreiben, verändert.",
+          date: "15. Jul 2025",
           readTime: "6 Min. Lesezeit",
-          category: "Automotive"
+          category: "Entwicklung",
+          slug: "scalable-react-applications"
+        },
+        {
+          title: "Zwischen Küste und Kollaboration: Wie Meer und Teamgeist meinen beruflichen Weg prägen",
+          excerpt: "Wie eine Küstenkindheit, kollaborative Energie und disziplinierte Routinen die Grundlage für beruflichen Erfolg und persönliches Wohlbefinden schaffen.",
+          date: "17. Jul 2025",
+          readTime: "2 Min. Lesezeit",
+          category: "Leadership",
+          slug: "connected-cars-iot"
         },
         {
           title: "Designsysteme im KI-Zeitalter",
           excerpt: "Konsistente, zugängliche Designsysteme, die sich an KI-generierte Inhalte und dynamische Benutzeroberflächen anpassen können.",
           date: "28. Nov 2024",
           readTime: "7 Min. Lesezeit",
-          category: "Design"
+          category: "Design",
+          slug: "design-systems-ai"
         }
       ]
     }
@@ -118,10 +131,26 @@ const BlogSection: React.FC = () => {
                 </p>
 
                 <div className="flex items-center justify-between pt-4">
-                  <button className="flex items-center space-x-2 text-indigo-600 hover:text-indigo-700 transition-colors font-medium">
-                    <span>{t[language].readMore}</span>
-                    <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-                  </button>
+                  {isVoiceActive ? (
+                    <a 
+                      href={`/blog/${post.slug}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center space-x-2 text-indigo-600 hover:text-indigo-700 transition-colors font-medium"
+                      title="Opens in new tab (voice assistant active)"
+                    >
+                      <span>{t[language].readMore}</span>
+                      <ExternalLink size={16} className="transition-transform group-hover:translate-x-1" />
+                    </a>
+                  ) : (
+                    <Link 
+                      to={`/blog/${post.slug}`}
+                      className="flex items-center space-x-2 text-indigo-600 hover:text-indigo-700 transition-colors font-medium"
+                    >
+                      <span>{t[language].readMore}</span>
+                      <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                    </Link>
+                  )}
                 </div>
               </div>
             </article>

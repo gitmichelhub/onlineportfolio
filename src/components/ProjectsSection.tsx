@@ -218,7 +218,7 @@ const ProjectsSection: React.FC = () => {
     {
       title: "Interviewtranskription: Interview2Text",
       description: "SOTA Speech-to-Text-Transkriptions-Website für bis zu 32 Sprecher:innen",
-      detailedDescription: "InterviewToText ist eine Website für qualitative Forschende und ermöglicht eine effiziente und präzise Transkription von Audiointerviews mit bis zu 32 Sprecher:innen.\n\nUser laden ihre Aufnahmen hoch und die App übernimmt automatisch Transkription und Formatierung mithilfe modernster KI-Modelle. Zu den Hauptfunktionen gehören detaillierte Zeitstempel auf Wortebene, Erkennung von Audioereignissen und integrierte Sprecher-Erkennung. Transkripte werden sicher gespeichert.\n\nGrund für das Projekt:\nBereits mit dem Release von Whisper-V1 habe ich das Modell lokal laufen lassen, um den Tranksriptionsprozess zu verschnellern. Mittlerweile gibt es aber viel bessere und größere STT Modelle, welche dementsprechend gröere Infrastruktur benötigen. InterviewToText vereinfacht den Transkriptionsprozess, spart Forschenden erheblich Zeit und verbessert die Genauigkeit durch fortschrittliche KI-Technologie. Forschende oder Studierende können sich stärker auf die Analyse konzentrieren, anstatt mühsame manuelle Transkriptionsaufgaben zu erledigen, wodurch die Produktivität steigt und die Forschungsqualität verbessert wird.\n\nTech-Stack:\n- Frontend: React, Next.js (gehostet auf Vercel)\n- Backend: Supabase (Authentifizierung, Benutzerverwaltung, Datenspeicherung), Resend (sicherer SMTP-Login via Magic Links)\n- KI-Services: ElevenLabs Scribe Model (automatisierte Transkription, Wortebene-Zeitstempel, Audioereigniserkennung, Speaker-Diarisation)\n- Storage: AWS S3 (sichere Speicherung von Audio- und Transkriptdateien)\n\nDieser integrierte Tech-Stack bietet eine skalierbare, sichere und performante Transkriptionslösung, die speziell auf die Bedürfnisse der qualitativen Forschung zugeschnitten ist.",
+      detailedDescription: "InterviewToText ist eine Website für qualitative Forschende und ermöglicht eine effiziente und präzise Transkription von Audiointerviews mit bis zu 32 Sprecher:innen.\n\nUser laden ihre Aufnahmen hoch und die App übernimmt automatisch Transkription und Formatierung mithilfe modernster KI-Modelle. Zu den Hauptfunktionen gehören detaillierte Zeitstempel auf Wortebene, Erkennung von Audioereignissen und integrierte Sprecher-Erkennung. Transkripte werden sicher gespeichert.\n\nGrund für das Projekt:\nBereits mit dem Release von Whisper-V1 habe ich das Modell lokal laufen lassen, um den Tranksriptionsprozess zu verschnellern. Mittlerweile gibt es aber viel bessere und größere STT Modelle, welche dementsprechend größsere Infrastruktur benötigen. InterviewToText vereinfacht den Transkriptionsprozess, spart erheblich Zeit und verbessert die Genauigkeit durch State of the art  KI-Technologie. Forschende oder Studierende können sich stärker auf die Analyse konzentrieren, anstatt mühsame manuelle Transkriptionsaufgaben zu erledigen, wodurch die Produktivität steigt und die Forschungsqualität verbessert wird.\n\nTech-Stack:\n- Frontend: React, Next.js (gehostet auf Vercel)\n- Backend: Supabase (Authentifizierung, Benutzerverwaltung, Datenspeicherung), Resend (sicherer SMTP-Login via Magic Links)\n- KI-Services: ElevenLabs Scribe Model (automatisierte Transkription, Wortebene-Zeitstempel, Audioereigniserkennung, Speaker-Diarisation)\n- Storage: AWS S3 (sichere Speicherung von Audio- und Transkriptdateien)\n\nDieser integrierte Tech-Stack bietet eine skalierbare, sichere und performante Transkriptionslösung, die speziell auf die Bedürfnisse der qualitativen Forschung zugeschnitten ist.",
       technologies: ["Next.js", "ElevenLabs", "AWS", "Supabase"],
       link: "https://interviewtotext.com",
       github: "https://github.com/gitmichelhub/QualityInterview"
@@ -241,7 +241,7 @@ const ProjectsSection: React.FC = () => {
   const timelineDataDE = [
     {
       date: "Heute",
-      title: "Senior IT-Berater – MHP – A Porsche Company",
+      title: "Senior Consultant – MHP – A Porsche Company",
       summary: "Requirements aufnehmen und in Arbeitsaufträge übersetzen. Enge Zusammenarbeit mit Kunden zur Definition von Produktvisionen und Roadmaps. Einführung agiler Produktmanagementpraktiken und Metriken. Deployment von produktionsreifen Anwendungen.",
       tag: "FTE",
       icon: <Briefcase />
@@ -519,7 +519,7 @@ const ProjectsSection: React.FC = () => {
                 aria-expanded={isCVOpen}
                 aria-controls="cv"
               >
-                <span>{isCVOpen ? "Hide CV" : "See full CV →"}</span>
+                <span>{isCVOpen ? (language === 'de' ? "CV ausblenden" : "Hide CV") : (language === 'de' ? "Vollständigen CV anzeigen →" : "See full CV →")}</span>
                 {isCVOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
               </button>
             </CollapsibleTrigger>
@@ -528,8 +528,8 @@ const ProjectsSection: React.FC = () => {
             <CollapsibleContent className="overflow-hidden transition-all duration-500 ease-in-out">
               <div id="cv" className="mt-12">
                 <div className="text-center mb-8">
-                  <h3 className="text-2xl font-semibold text-slate-900 mb-2">Career Timeline</h3>
-                  <p className="text-slate-600">My journey through technology and innovation</p>
+                  <h3 className="text-2xl font-semibold text-slate-900 mb-2">{language === 'de' ? "Karriereverlauf" : "Career Timeline"}</h3>
+                  <p className="text-slate-600">{language === 'de' ? "Meine Reise durch Technologie und Innovation" : "My journey through technology and innovation"}</p>
                 </div>
 
                 <VerticalTimeline lineColor="#CBD5E1">

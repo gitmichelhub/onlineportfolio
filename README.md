@@ -1,7 +1,7 @@
 
 **Use your preferred IDE**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+If you want to work locally using your own IDE, you can clone this repo and push changes. 
 
 The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
@@ -77,12 +77,26 @@ This project includes a conversational AI voice agent powered by ElevenLabs usin
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/9af24451-7d07-4878-af6b-9883bb8867dc) and click on Share -> Publish.
+You can deploy this project on Vercel in a few simple steps:
 
-## Can I connect a custom domain to my Lovable project?
+1. Create a Vercel account at [vercel.com](https://vercel.com)
+2. Install Vercel CLI: `npm i -g vercel`
+3. From your project directory, run: `vercel`
+4. Follow the prompts to link your GitHub repo
+5. Vercel will automatically build and deploy your site
+
+Alternatively, you can deploy through the Vercel web interface:
+
+1. Go to [vercel.com/new](https://vercel.com/new)
+2. Import your GitHub repository
+3. Configure your project settings
+4. Click "Deploy"
+
+Vercel will automatically detect it's a Vite project and configure the build settings appropriately.
+
+## Can I connect a custom domain to this project?
 
 Yes, you can!
 
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)

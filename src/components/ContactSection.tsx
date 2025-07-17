@@ -15,7 +15,7 @@ const ContactSection: React.FC = () => {
   const t = {
     en: {
       sectionTitle: "Let's Connect",
-      subtitle: "Have a project in mind or just want to chat? I'd love to hear from you.",
+      subtitle: "Have a project in mind or just want to chat (this time as a human)? I'd love to hear from you.",
       getInTouch: "Get in Touch",
       email: "Email",
       bestFor: "Best for detailed discussions",
@@ -38,7 +38,7 @@ const ContactSection: React.FC = () => {
     },
     de: {
       sectionTitle: "Kontakt aufnehmen",
-      subtitle: "Hast du ein Projekt im Kopf oder möchtest einfach plaudern? Ich freue mich auf deine Nachricht.",
+      subtitle: "Hast du ein Projekt im Kopf oder möchtest einfach plaudern (dieses Mal als Mensch)? Ich freue mich auf deine Nachricht.",
       getInTouch: "Kontakt aufnehmen",
       email: "E-Mail",
       bestFor: "Am besten für ausführliche Anfragen",
