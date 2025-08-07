@@ -101,7 +101,7 @@ const VoiceStatus: React.FC<VoiceStatusProps> = ({
       className={`
         glass rounded-full flex items-center px-3 py-2 shadow-md backdrop-blur-md border border-white/30 bg-white/40
         transition-all duration-300 ease-in-out touch-manipulation
-        ${isConnected || isActive ? 'opacity-100' : 'opacity-0 pointer-events-none'}
+        ${isActive ? 'opacity-100' : 'opacity-0 pointer-events-none'}
       `}
       style={{ filter: "url(#liquid-glass-filter)" }}
     >

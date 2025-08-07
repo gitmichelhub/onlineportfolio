@@ -9,7 +9,6 @@ import Imprint from "./pages/Imprint";
 import BlogPost1 from "./pages/BlogPost1";
 import BlogPost2 from "./pages/BlogPost2";
 import BlogPost3 from "./pages/BlogPost3";
-import BlogPost4 from "./pages/BlogPost4";
 import { LanguageProvider } from "@/hooks/use-language";
 
 const queryClient = new QueryClient();
@@ -27,7 +26,6 @@ const App = () => (
             <Route path="/blog/ai-voice-interfaces" element={<BlogPost1 />} />
             <Route path="/blog/scalable-react-applications" element={<BlogPost2 />} />
             <Route path="/blog/connected-cars-iot" element={<BlogPost3 />} />
-            <Route path="/blog/design-systems-ai" element={<BlogPost4 />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -38,14 +38,6 @@ const BlogSection: React.FC<BlogSectionProps> = ({ isVoiceActive = false }) => {
           readTime: "2 min read",
           category: "Leadership",
           slug: "connected-cars-iot"
-        },
-        {
-          title: "Design Systems in the Age of AI",
-          excerpt: "Creating consistent, accessible design systems that can adapt to AI-generated content and dynamic user interfaces.",
-          date: "Nov 28, 2024",
-          readTime: "7 min read",
-          category: "Design",
-          slug: "design-systems-ai"
         }
       ]
     },
@@ -77,14 +69,6 @@ const BlogSection: React.FC<BlogSectionProps> = ({ isVoiceActive = false }) => {
           readTime: "2 Min. Lesezeit",
           category: "Leadership",
           slug: "connected-cars-iot"
-        },
-        {
-          title: "Designsysteme im KI-Zeitalter",
-          excerpt: "Konsistente, zugängliche Designsysteme, die sich an KI-generierte Inhalte und dynamische Benutzeroberflächen anpassen können.",
-          date: "28. Nov 2024",
-          readTime: "7 Min. Lesezeit",
-          category: "Design",
-          slug: "design-systems-ai"
         }
       ]
     }

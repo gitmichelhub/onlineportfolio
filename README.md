@@ -50,18 +50,14 @@ This project is built with:
 
 This project includes a conversational AI voice agent powered by ElevenLabs using the official React SDK. To enable voice interactions:
 
-1. **For Public Agents (Recommended)**:
-   - No API key required
-   - The project is configured to use agent ID: `agent_01jynqjwg7f77aendk120trhj5`
-   - You can change this in `src/config/elevenlabs.ts`
-
-2. **For Private Agents**:
+1. **Setup Requirements**:
    - Visit [ElevenLabs](https://elevenlabs.io/) and create an account
    - Navigate to your profile settings to get your API key
-   - Create a `.env` file in the root directory
+   - Create a `.env.local` file in the root directory
    - Add your API key: `VITE_ELEVENLABS_API_KEY=your_api_key_here`
+   - Configure your agent ID in `src/pages/Index.tsx`
 
-3. **Usage**:
+2. **Usage**:
    - Click the voice orb button to start/stop conversations
    - The orb will change color based on the current state:
      - Blue: Processing
@@ -69,7 +65,7 @@ This project includes a conversational AI voice agent powered by ElevenLabs usin
      - Purple: Speaking
      - Default: Ready
 
-4. **Technology**:
+3. **Technology**:
    - Uses the official `@elevenlabs/react` SDK
    - Handles microphone access automatically
    - Real-time WebSocket communication

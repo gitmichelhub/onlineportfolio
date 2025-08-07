@@ -5,7 +5,7 @@ import ProjectsSection from '@/components/ProjectsSection';
 import BlogSection from '@/components/BlogSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
-import { ELEVENLABS_CONFIG, getElevenLabsApiKey, getElevenLabsVoiceId } from '@/config/elevenlabs';
+import { getElevenLabsApiKey } from '@/config/elevenlabs';
 import { useVoiceAgent } from '@/hooks/use-voice-agent';
 
 const Index = () => {

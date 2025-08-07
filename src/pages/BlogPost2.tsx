@@ -45,15 +45,15 @@ const BlogPost2: React.FC = () => {
             <tbody>
               <tr>
                 <td class="border-b py-2 pr-4 font-semibold">Cursor</td>
-                <td class="border-b py-2 pr-4">Pro devs</td>
-                <td class="border-b py-2 pr-4">3<sup>+</sup></td>
+                <td class="border-b py-2 pr-4">Devs</td>
+                <td class="border-b py-2 pr-4">4<sup>+</sup></td>
                 <td class="border-b py-2">Inline suggestions, multi-file refactors <em>and</em> <strong>background agents</strong> that run tests and propose PRs across the repo.</td>
               </tr>
               <tr>
                 <td class="border-b py-2 pr-4 font-semibold">Lovable</td>
                 <td class="border-b py-2 pr-4">Makers / PMs</td>
                 <td class="border-b py-2 pr-4">4</td>
-                <td class="border-b py-2">"Build me a Shopify clone" → runnable repo in minutes.</td>
+                <td class="border-b py-2">"Build a Shopify clone" → runnable repo in minutes. Lovable is also the fastest growing startup in history.</td>
               </tr>
               <tr>
                 <td class="border-b py-2 pr-4 font-semibold">GitHub Copilot</td>
@@ -65,7 +65,7 @@ const BlogPost2: React.FC = () => {
                 <td class="py-2 pr-4 font-semibold">AWS Kiro (Preview)</td>
                 <td class="py-2 pr-4">Enterprise IDE</td>
                 <td class="py-2 pr-4">4 – 5</td>
-                <td class="py-2">Spec-driven agent that plans, tests, and self-verifies across giant monorepos.</td>
+                <td class="py-2">Spec-driven agent that plans, tests, and self-verifies across giant monorepos (no experience yet).</td>
               </tr>
             </tbody>
           </table>
@@ -74,11 +74,11 @@ const BlogPost2: React.FC = () => {
         <h2 class="text-2xl font-semibold text-slate-800 mb-4 mt-8">4. Anatomy of the Autonomy Slider</h2>
         <ol class="list-decimal list-inside mb-6 text-lg leading-relaxed space-y-2">
           <li><strong>Off</strong>—No AI involved.</li>
-          <li><strong>Hints</strong>—Inline autocomplete only.</li>
-          <li><strong>Macro</strong>—On-demand multi-file edits.</li>
-          <li><strong>Guarded agent</strong>—Proposed diffs, human approval.</li>
-          <li><strong>Trusted agent</strong>—Applies patch, sends summary.</li>
-          <li><strong>Fully autonomous</strong>—Continuous plan → code → test → deploy loop.</li>
+          <li><strong>Hints</strong>—Inline autocomplete only (Cursor Tab).</li>
+          <li><strong>Macro</strong>—On-demand multi-file edits (Curser command + K).</li>
+          <li><strong>Guarded agent</strong>—Proposed diffs, human approval (Cursor command + L).</li>
+          <li><strong>Trusted agent</strong>—Applies patch, sends summary (Cursor command + I).</li>
+          <li><strong>(Future)Fully autonomous</strong>—Continuous plan → code → test → deploy loop.</li>
         </ol>
 
         <h2 class="text-2xl font-semibold text-slate-800 mb-4 mt-8">5. Common Pitfalls & Mitigations</h2>
@@ -124,18 +124,18 @@ const BlogPost2: React.FC = () => {
           <li><strong>Spec-driven everything</strong> → Tools like AWS Kiro start from a business spec, not a code file.</li>
         </ul>
 
-        <h2 class="text-2xl font-semibold text-slate-800 mb-4 mt-8">7. Should You Ride the Vibes?</h2>
+        <h2 class="text-2xl font-semibold text-slate-800 mb-4 mt-8">7. Am I a Vibe Coder? Yes, and no</h2>
         <p class="mb-6 text-lg leading-relaxed">
-          <strong>Side projects</strong> → absolutely. It's the fastest way to learn what the new tools can (and cannot) do.
+          <strong>Side projects</strong> → Absolutely. Fastest way to learn the boundaries of the new tools.
         </p>
         <p class="mb-6 text-lg leading-relaxed">
-          <strong>Client work</strong> → start at slider 2, layer on unit tests, and move up only when the risk budget allows.
+          <strong>Client work</strong> → Start at level 2, add unit tests and only increase autonomy when the risk allows. Due to compliance and security concerns, agents are not yet viable in client projects (and German corporations in general).
         </p>
         <p class="mb-6 text-lg leading-relaxed">
-          <strong>Enterprise</strong> → prototype with Kiro-style agents in a sandbox before touching prod.
+          <strong>Enterprise</strong> → We experiment with different approaches, but for the same reasons as in client projects, more autonomy is still far away.
         </p>
         <p class="mb-6 text-lg leading-relaxed">
-          I've found the sweet spot at <strong>level 3</strong>: let the agent propose a patch, skim the diff, run tests, merge. That keeps me in the strategic head-space while shaving hours off routine refactors.
+          My sweet spot (in my private projects) is at <strong>level 3</strong>: The agent proposes a patch, I skim the diff, run tests and merge. This keeps me in flow while saving hours on routine refactorings.
         </p>
 
         <h2 class="text-2xl font-semibold text-slate-800 mb-4 mt-8">8. Further Reading</h2>
@@ -147,15 +147,15 @@ const BlogPost2: React.FC = () => {
       `
     },
     de: {
-      title: "Vibe Coding: Auf dem Autonomy Slider von Tastatureingaben zu Agenten",
-      subtitle: "Die Evolution KI-gestützter Entwicklung und das Autonomy Slider Konzept, das die Art, wie wir Code schreiben, verändert.",
+      title: "Vibe Coding: Auf dem Autonomy Slider",
+      subtitle: "Die Evolution KI-gestützter Entwicklung und das Autonomy Slider Konzept, das mein Verhältnis zu Code verändert.",
       date: "15. Jul 2025",
       readTime: "6 Min. Lesezeit",
       category: "Entwicklung",
       back: "Zurück zum Blog",
       content: `
         <p class="mb-6 text-lg leading-relaxed">
-          <em>„Ich habe diese ganze Menü‑App an einem Nachmittag im Vibe‑Coding‑Stil programmiert."</em> Als ich diesen Tweet von Andrej Karpathy im Februar sah, wusste ich noch nicht, dass eine ganze AI Bewegung danach benannt werden würde. Entwickler:innen auf der ganzen Welt begannen, ihre nächtlichen Copilot‑Sessions als <strong>Vibing</strong> zu bezeichnen – sie lassen ein LLM die meisten Lücken füllen, während sie nur noch die Richtung vorgeben. Wenige Monate später konkretisierte Karpathy das Konzept in seiner <strong>Software 3.0</strong>‑Keynote auf der YC AI Startup School und stellte das UX‑Muster des <strong>Autonomie‑Schiebereglers</strong> vor.
+          <em>„I just vibe-coded this whole menu app in an afternoon."</em> Als ich diesen Tweet von Andrej Karpathy im Februar sah, wusste ich noch nicht, dass eine ganze AI Bewegung danach benannt werden würde. Entwickler:innen auf der ganzen Welt begannen, ihre nächtlichen Copilot‑Sessions als <strong>Vibing</strong> zu bezeichnen – sie lassen ein LLM die meisten Lücken füllen, während sie nur noch die Richtung vorgeben. Wenige Monate später konkretisierte Karpathy das Konzept in seiner <strong>Software 3.0</strong>‑Keynote auf der YC AI Startup School und stellte das UX‑Muster des <strong>Autonomie‑Schiebereglers</strong> vor.
         </p>
 
         <h2 class="text-2xl font-semibold text-slate-800 mb-4 mt-8">1. Woher wir kommen</h2>
@@ -170,7 +170,7 @@ const BlogPost2: React.FC = () => {
           <li><strong>Skalierbarer Umfang</strong> – Brauchst du ein Refactoring? Schiebe die Autonomie von „nur Autocomplete" auf „schreibe mir dieses komplette Paket um".</li>
         </ul>
 
-        <h2 class="text-2xl font-semibold text-slate-800 mb-4 mt-8">3. Werkzeuge, die den Trend befeuern</h2>
+        <h2 class="text-2xl font-semibold text-slate-800 mb-4 mt-8">3. Tools und IDEs</h2>
         <div class="overflow-x-auto mb-6">
           <table class="table-auto border-collapse w-full text-left">
             <thead>
@@ -184,40 +184,40 @@ const BlogPost2: React.FC = () => {
             <tbody>
               <tr>
                 <td class="border-b py-2 pr-4 font-semibold">Cursor</td>
-                <td class="border-b py-2 pr-4">Pro‑Devs</td>
-                <td class="border-b py-2 pr-4">3<sup>+</sup></td>
+                <td class="border-b py-2 pr-4">Devs</td>
+                <td class="border-b py-2 pr-4">4<sup>+</sup></td>
                 <td class="border-b py-2">Inline‑Vorschläge, Refactorings über mehrere Dateien und <strong>Hintergrund‑Agenten</strong>, die Tests ausführen und Pull‑Requests im gesamten Repository vorschlagen. Ein integrierter Autonomie‑Schieberegler mit mehreren Ebenen erlaubt das Umschalten zwischen schnellen Hinweisen und vollständigen Projekt‑Rewrites.</td>
               </tr>
               <tr>
                 <td class="border-b py-2 pr-4 font-semibold">Lovable</td>
                 <td class="border-b py-2 pr-4">Maker / PMs</td>
                 <td class="border-b py-2 pr-4">4</td>
-                <td class="border-b py-2">„Erstelle mir einen Shopify‑Klon" → lauffähiges Repo in wenigen Minuten.</td>
+                <td class="border-b py-2">„Erstelle einen Shopify‑Klon" → lauffähiges Repo in wenigen Minuten. Lovable ist außerdem das am schnellst wachsende Startup in der Geschichte.</td>
               </tr>
               <tr>
                 <td class="border-b py-2 pr-4 font-semibold">GitHub Copilot</td>
                 <td class="border-b py-2 pr-4">Alltägliches Coding</td>
                 <td class="border-b py-2 pr-4">2</td>
-                <td class="border-b py-2">Konstantes Rinnsal an Inline‑Vorschlägen hält den Flow am Laufen.</td>
+                <td class="border-b py-2">GitHub intern und von Microsoft geflegt und geupdated -> Enterprise-Ready.</td>
               </tr>
               <tr>
                 <td class="py-2 pr-4 font-semibold">AWS Kiro (Vorschau)</td>
                 <td class="py-2 pr-4">Enterprise‑IDE</td>
                 <td class="py-2 pr-4">4 – 5</td>
-                <td class="py-2">Spezifikationsgetriebener Agent, der plant, testet und sich selbst verifiziert in riesigen Monorepos.</td>
+                <td class="py-2">Spezifikationsgetriebener Agent, der plant, testet und sich selbst verifiziert in (angeblich) riesigen Monorepos.</td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <h2 class="text-2xl font-semibold text-slate-800 mb-4 mt-8">4. Anatomie des Autonomie‑Schiebereglers</h2>
+        <h2 class="text-2xl font-semibold text-slate-800 mb-4 mt-8">4. Autonomie‑Slider (nach Karpathy)</h2>
         <ol class="list-decimal list-inside mb-6 text-lg leading-relaxed space-y-2">
           <li><strong>Aus</strong> – Keine KI beteiligt.</li>
-          <li><strong>Hinweise</strong> – Nur Inline‑Autocomplete.</li>
-          <li><strong>Makro</strong> – Auf Abruf mehrere Dateien ändern.</li>
-          <li><strong>Bewachter Agent</strong> – Schlägt Diffs vor, Mensch bestätigt.</li>
-          <li><strong>Vertrauenswürdiger Agent</strong> – Wendet Patch an, schickt Zusammenfassung.</li>
-          <li><strong>Vollständig autonom</strong> – Kontinuierliche Schleife: planen → coden → testen → deployen.</li>
+          <li><strong>Hinweise</strong> – Nur Inline-Autocomplete (Cursor Tab).</li>
+          <li><strong>Makro</strong> – Auf Abruf Änderungen über mehrere Dateien (Cursor CMD + K).</li>
+          <li><strong>Bewachter Agent</strong> – Schlägt Diffs vor, Mensch bestätigt (Cursor CMD + L).</li>
+          <li><strong>Vertrauenswürdiger Agent</strong> – Wendet Patch an, sendet Zusammenfassung (Cursor CMD + I).</li>
+          <li><strong>(Zukunft) Vollständig autonom</strong> – Kontinuierliche Schleife: planen → coden → testen → deployen.</li>
         </ol>
 
         <h2 class="text-2xl font-semibold text-slate-800 mb-4 mt-8">5. Häufige Stolperfallen & Gegenmaßnahmen</h2>
@@ -263,15 +263,15 @@ const BlogPost2: React.FC = () => {
           <li><strong>Spezifikationsgetriebene Entwicklung</strong> → Tools wie AWS Kiro starten beim Business‑Spec, nicht bei der Code‑Datei.</li>
         </ul>
 
-        <h2 class="text-2xl font-semibold text-slate-800 mb-4 mt-8">7. Solltest du den Vibes folgen?</h2>
+        <h2 class="text-2xl font-semibold text-slate-800 mb-4 mt-8">7. Bin ich ein Vibe Coder? Ja, und nein</h2>
         <p class="mb-6 text-lg leading-relaxed"><strong>Nebenprojekte</strong> → Unbedingt. Schnellster Weg, die Grenzen der neuen Tools kennenzulernen.</p>
-        <p class="mb-6 text-lg leading-relaxed"><strong>Kundenprojekte</strong> → Starte auf Stufe 2, ergänze Unit‑Tests und steigere die Autonomie nur, wenn es das Risiko erlaubt.</p>
-        <p class="mb-6 text-lg leading-relaxed"><strong>Unternehmen</strong> → Erst in einer Sandbox mit Kiro‑ähnlichen Agenten prototypisieren, bevor es Richtung Produktion geht.</p>
+        <p class="mb-6 text-lg leading-relaxed"><strong>Kundenprojekte</strong> → Starte auf Stufe 2, ergänze Unit‑Tests und steigere die Autonomie nur, wenn es das Risiko erlaubt. Auf Grund von Compliance und Sicherheitsbedenken sind Agents in Kundenprojekten (und deutschen Konzernen allgemein) noch nicht vertretbar.</p>
+        <p class="mb-6 text-lg leading-relaxed"><strong>Unternehmen</strong> → Wir probieren verschiedene Dinge aus, aber aus denselben Gründen wie in Kundenprojekten ist mehr autonomie noch weit entfernt.</p>
         <p class="mb-6 text-lg leading-relaxed">
-          Mein Sweet Spot liegt bei <strong>Level 3</strong>: Der Agent schlägt einen Patch vor, ich überfliege den Diff, führe Tests aus und merge. So bleibe ich im strategischen Kopfmodus und spare Stunden bei Routine‑Refactorings.
+          Mein Sweet Spot liegt (in meinen privaten Projekten) bei <strong>Level 3</strong>: Der Agent schlägt einen Patch vor, ich überfliege den Diff, führe Tests aus und merge. So bleibe ich im Flow und spare Stunden bei Routine‑Refactorings.
         </p>
 
-        <h2 class="text-2xl font-semibold text-slate-800 mb-4 mt-8">8. Weiterführende Links</h2>
+        <h2 class="text-2xl font-semibold text-slate-800 mb-4 mt-8">Interessante Links</h2>
         <ul class="list-disc list-inside mb-6 text-lg leading-relaxed space-y-2">
           <li><a href="https://www.youtube.com/watch?v=TODO" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-700 underline">Karpathy – »Software 3.0«‑Keynote (17. Juni 2025)</a></li>
           <li><a href="https://www.latent.space/p/agents?utm_source=publication-search" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-700 underline">Latent Space – Agents</a></li>

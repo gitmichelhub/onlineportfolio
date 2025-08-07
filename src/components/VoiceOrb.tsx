@@ -119,7 +119,7 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
   const isListening = state.isListening;
   const isSpeaking = state.isSpeaking;
   const isConnected = state.isConnected;
-  const isActive = isConnected || isListening || isSpeaking;
+  const isActive = isListening || isSpeaking || isProcessing;
 
   // Dynamic styling based on state
   const getButtonClasses = () => {

@@ -90,41 +90,6 @@ function getEnvVar(key: string): string | undefined {
   }
 }
 
-// WebSocket URL builder
-export const buildWebSocketUrl = (sessionId?: string): string => {
-  const baseUrl = ELEVENLABS_CONFIG.WS_URL;
-  const apiKey = getElevenLabsApiKey();
-  
-  if (!apiKey) {
-    console.warn('⚠️ No API key available, using mock WebSocket');
-    return `${baseUrl}?session_id=${sessionId || 'mock-session'}`;
-  }
-  
-  const params = new URLSearchParams({
-    'api_key': apiKey,
-    ...(sessionId && { 'session_id': sessionId })
-  });
-  
-  return `${baseUrl}?${params.toString()}`;
-};
-
-// Conversation initialization payload
-export const createConversationPayload = (overrides: Partial<typeof ELEVENLABS_CONFIG.CONVERSATION_CONFIG> = {}) => {
-  const config = { ...ELEVENLABS_CONFIG.CONVERSATION_CONFIG, ...overrides };
-  
-  // Use environment voice ID if available
-  const voiceId = getElevenLabsVoiceId();
-  if (voiceId && voiceId !== 'your-voice-id-here') {
-    (config as any).voice_id = voiceId;
-  }
-  
-  return {
-    type: 'conversation_initiation',
-    conversation_config: config,
-    timestamp: Date.now()
-  };
-};
-
 // Audio format utilities
 export const AUDIO_FORMATS = {
   PCM_16000: 'pcm_16000',
