@@ -90,7 +90,7 @@ const ProjectsSection: React.FC = () => {
     },
     {
       date: "2022-Present",
-      title: "SAFe Training Facilitator",
+      title: "SAFe Trainer",
       summary: "Facilitating SAFe trainings as SPC for 300+ participants from several countries with a 4.8/5.0 rating.",
       tag: "FTE",
       icon: <Users />
@@ -231,7 +231,7 @@ const ProjectsSection: React.FC = () => {
       link: "https://www.mhp.com/de/"
     },
     {
-      title: "SAFe-Trainings-Facilitator",
+      title: "SAFe Trainer",
       description: "Offizielle SAFe-Zertifizierungstrainings für mehr als 300 Teilnehmende, um agile Praktiken zu skalieren.",
       detailedDescription: "Spezialisiert auf Leading SAFe, SAFe Product Owner/Product Management und SAFe Scrum Master Kurse. Durchführung zweitägiger Trainings sowohl remote als auch vor Ort und Schaffung eines interaktiven Umfelds, das offenen Dialog sowie eine vertiefte Auseinandersetzung mit agilen Skalierungspraktiken und Frameworks förderte.\n\nWarum SAFe? Weil es sich besonders für deutsche Unternehmenskunden eignet, die ihre Produktentwicklungsgeschwindigkeit erheblich steigern wollen. Während viele IT-Teams bereits agile Grundlagen kennen, stellt die Skalierung dieser Praktiken im deutschen Markt, insbesondere in der Automobilindustrie, einzigartige Herausforderungen dar. Strenge Compliance-Anforderungen, detaillierte Prozesse und hierarchische Strukturen können die agile Transformation behindern. SAFe bietet Unternehmen den Rahmen, ihre Wertströme neu auszurichten und einen iterativen sowie effizienten Ansatz für die Produktentwicklung zu fördern, den traditionelle Modelle nur schwer erreichen. Genau deshalb enable ich Kolleg:innen und Fachleute dabei, ihr Verständnis und ihr Praxiswissen in skalierbarer Produktentwicklung zu vertiefen.",
       technologies: ["Agile", "Product", "Enterprise", "Transformation"],
