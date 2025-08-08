@@ -5,14 +5,15 @@ import ProjectsSection from '@/components/ProjectsSection';
 import BlogSection from '@/components/BlogSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
-import { getElevenLabsApiKey } from '@/config/elevenlabs';
+import { getElevenLabsAgentId } from '@/config/elevenlabs';
 import { useVoiceAgent } from '@/hooks/use-voice-agent';
+import { useLanguage } from '@/hooks/use-language';
 
 const Index = () => {
+  const { language } = useLanguage();
   const [currentSection, setCurrentSection] = useState('voice');
   const { state, startConversation, stopConversation, forceStopConversation, testConnection, isActive, error, timeRemaining, isTimerActive } = useVoiceAgent({
-    agentId: 'agent_01jynqjwg7f77aendk120trhj5',
-    apiKey: getElevenLabsApiKey(),
+    agentId: getElevenLabsAgentId(language),
   });
 
   useEffect(() => {

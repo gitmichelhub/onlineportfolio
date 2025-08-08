@@ -3,7 +3,6 @@ import { useConversation } from '@elevenlabs/react';
 
 interface UseVoiceAgentOptions {
   agentId: string;
-  apiKey?: string;
 }
 
 interface UseVoiceAgentReturn {
@@ -37,14 +36,12 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
   // Debug: Log when useConversation is called
   useEffect(() => {
     console.log('[VoiceAgent] useVoiceAgent hook called');
-    console.log('[VoiceAgent] agentId:', options.agentId, 'apiKey:', options.apiKey);
+    console.log('[VoiceAgent] agentId:', options.agentId);
     console.log('[VoiceAgent] useConversation hook called');
-  }, [options.agentId, options.apiKey]);
+  }, [options.agentId]);
 
   const conversation = useConversation({
     // For public agents, we don't need an API key
-    apiKey: options.apiKey || undefined,
-    // Add agent configuration for public agents
     agentId: options.agentId,
     onConnect: () => {
       console.log('[VoiceAgent] Connected to ElevenLabs agent');
@@ -196,7 +193,6 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
   const startConversation = useCallback(async () => {
     console.log('[VoiceAgent] startConversation called');
     console.log('[VoiceAgent] agentId:', options.agentId);
-    console.log('[VoiceAgent] apiKey available:', !!options.apiKey);
     console.log('[VoiceAgent] conversation status before start:', conversation.status);
     
     try {
@@ -226,7 +222,7 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
       setTimeRemaining(null);
       setIsTimerActive(false);
     }
-  }, [conversation, options.agentId, options.apiKey]);
+  }, [conversation, options.agentId]);
 
   const stopConversation = useCallback(async () => {
     console.log('[VoiceAgent] stopConversation called');

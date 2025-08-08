@@ -60,23 +60,25 @@ export const ELEVENLABS_CONFIG = {
   },
 } as const;
 
-// Environment variable getters
-export const getElevenLabsApiKey = (): string => {
-  const apiKey = getEnvVar('VITE_ELEVENLABS_API_KEY');
-  if (!apiKey) {
-    console.warn('⚠️ VITE_ELEVENLABS_API_KEY not found in environment variables');
-    return '';
+// Function to get the appropriate agent ID based on language
+export const getElevenLabsAgentId = (language: 'en' | 'de'): string => {
+  if (language === 'de') {
+    const germanAgentId = getEnvVar('VITE_ELEVENLABS_GERMAN_AGENT_ID');
+    if (!germanAgentId) {
+      console.warn('⚠️ VITE_ELEVENLABS_GERMAN_AGENT_ID not found in environment variables');
+      // Fallback to English agent if German agent is not configured
+      return getEnvVar('VITE_ELEVENLABS_ENGLISH_AGENT_ID') || 'agent_01jynqjwg7f77aendk120trhj5';
+    }
+    return germanAgentId;
+  } else {
+    // Default to English agent
+    const englishAgentId = getEnvVar('VITE_ELEVENLABS_ENGLISH_AGENT_ID');
+    if (!englishAgentId) {
+      console.warn('⚠️ VITE_ELEVENLABS_ENGLISH_AGENT_ID not found in environment variables');
+      return 'agent_01jynqjwg7f77aendk120trhj5';
+    }
+    return englishAgentId;
   }
-  return apiKey;
-};
-
-export const getElevenLabsVoiceId = (): string => {
-  const voiceId = getEnvVar('VITE_ELEVENLABS_VOICE_ID');
-  if (!voiceId) {
-    console.warn('⚠️ VITE_ELEVENLABS_VOICE_ID not found in environment variables');
-    return ELEVENLABS_CONFIG.CONVERSATION_CONFIG.voice_id;
-  }
-  return voiceId;
 };
 
 // Utility function to safely check environment variables

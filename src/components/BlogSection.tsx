@@ -12,7 +12,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({ isVoiceActive = false }) => {
   const t = {
     en: {
       sectionTitle: "Latest Thoughts",
-      subtitle: "Insights on technology, development, and the future of digital experiences.",
+      subtitle: "Insights on my life, technology, development, and the future of digital experiences.",
       readMore: "Read more",
       posts: [
         {
@@ -42,8 +42,8 @@ const BlogSection: React.FC<BlogSectionProps> = ({ isVoiceActive = false }) => {
       ]
     },
     de: {
-      sectionTitle: "Neueste Gedanken",
-      subtitle: "Einblicke in Technologie, Entwicklung und die Zukunft digitaler Erlebnisse.",
+      sectionTitle: "Aktuelle Gedanken",
+      subtitle: "Einblicke in mein Leben,Technologie, Entwicklung und die Zukunft digitaler Erlebnisse.",
       readMore: "Mehr lesen",
       posts: [
         {
