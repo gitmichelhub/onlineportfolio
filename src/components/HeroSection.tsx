@@ -86,7 +86,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversati
             </div>
           </div>
 
-          {/* Right side - Voice Orb */}
+          {/* Right side - Voice Orb (centered for all screen sizes) */}
           <div className="flex justify-center lg:justify-end animate-fade-up" style={{ animationDelay: '0.2s' }}>
             <VoiceOrb 
               size="large" 
@@ -98,16 +98,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversati
           </div>
         </div>
       </div>
-
-      {/* Mobile Voice Orb */}
-      <VoiceOrb 
-        size="small" 
-        position="bottom" 
-        state={state}
-        onToggle={handleVoiceToggle}
-        timeRemaining={timeRemaining}
-        isTimerActive={isTimerActive}
-      />
     </section>
   );
 };

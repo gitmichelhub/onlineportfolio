@@ -42,14 +42,174 @@
 }
 
 .liquid-glass {
-  animation: liquidMove 10s infinite alternate ease-in-out;
+  animation: liquidMove 8s infinite alternate ease-in-out;
+  position: relative;
+}
+
+.liquid-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border-radius: inherit;
+  pointer-events: none;
 }
 
 @keyframes liquidMove {
   0% {
     backdrop-filter: blur(20px);
+    transform: translateY(0px);
+  }
+  50% {
+    backdrop-filter: blur(25px);
+    transform: translateY(-2px);
   }
   100% {
-    backdrop-filter: blur(25px);
+    backdrop-filter: blur(30px);
+    transform: translateY(0px);
   }
+}
+
+/* Enhanced glass morphism effects */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.glass:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.45);
+}
+
+/* Mobile menu glass morphism */
+.mobile-glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Navigation cleanup and voice orb visibility */
+nav {
+  background: transparent !important;
+  backdrop-filter: none !important;
+}
+
+nav.fixed {
+  z-index: 50;
+}
+
+/* Voice orb visibility and positioning - highest priority */
+.voice-orb-container {
+  z-index: 9999 !important;
+  position: relative;
+}
+
+.voice-orb-sticky {
+  z-index: 9999 !important;
+  position: fixed;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Ensure voice orb is always visible and above all content */
+.voice-orb-container button,
+.voice-orb-sticky button {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  z-index: 9999 !important;
+}
+
+/* Force voice orb to stay above all sections */
+[class*="fixed"][class*="top-4"] {
+  z-index: 9999 !important;
+}
+
+/* Ensure sections don't overlap the voice orb */
+section {
+  z-index: 1;
+}
+
+/* Responsive improvements */
+@media (max-width: 1023px) {
+  #root {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  #root {
+    padding: 0.5rem;
+  }
+}
+
+/* Ensure proper touch targets on mobile */
+@media (max-width: 1023px) {
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Improve mobile menu animations */
+.mobile-menu-enter {
+  opacity: 0;
+  transform: translateY(-10px) scale(0.95);
+}
+
+.mobile-menu-enter-active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: opacity 300ms ease-out, transform 300ms ease-out;
+}
+
+.mobile-menu-exit {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.mobile-menu-exit-active {
+  opacity: 0;
+  transform: translateY(-10px) scale(0.95);
+  transition: opacity 300ms ease-in, transform 300ms ease-in;
+}
+
+/* Enhanced glass button effects */
+.glass-button {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.glass-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.glass-button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Floating animation for glass elements */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.float-animation {
+  animation: float 6s ease-in-out infinite;
 }

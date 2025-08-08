@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Mic, MicOff } from 'lucide-react';
 
 interface VoiceAgentState {
@@ -32,7 +33,7 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
 
   // Calculate navbar height (approximately 80px based on h-20)
   const NAVBAR_HEIGHT = 80;
-  const STICKY_THRESHOLD = 100; // When to start the sticky behavior
+  const STICKY_THRESHOLD = 100; // When to start the sticky behavior (after hero section)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,7 +47,7 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
     };
 
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768); // md breakpoint
+      setIsMobile(window.innerWidth < 1024); // lg breakpoint to match navigation
     };
 
     // Initial check
@@ -71,7 +72,7 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
   const getOrbSize = () => {
     if (isSticky) {
       if (isMobile) {
-        return 'w-12 h-12'; // 48px when sticky on mobile
+        return 'w-10 h-10'; // 40px when sticky on mobile
       }
       return 'w-10 h-10'; // 40px when sticky on desktop
     }
@@ -86,7 +87,7 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
   const getIconSize = () => {
     if (isSticky) {
       if (isMobile) {
-        return 24; // Larger icon when sticky on mobile for better touch target
+        return 20; // Smaller icon when sticky on mobile
       }
       return 20; // Smaller icon when sticky on desktop
     }
@@ -102,16 +103,13 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
   const getPositionClasses = () => {
     if (isSticky) {
       if (isMobile) {
-        return 'fixed top-3 left-1/2 transform -translate-x-1/2 z-50'; // Center horizontally, avoid mobile menu button
+        return 'fixed top-4 left-4 z-[9999]'; // Much higher z-index to stay above all content
       }
-      return 'fixed top-4 right-4 z-50'; // Desktop sticky position
+      return 'fixed top-4 right-4 z-[9999]'; // Much higher z-index to stay above all content
     }
     
-    if (position === 'bottom') {
-      return 'fixed bottom-6 left-1/2 transform -translate-x-1/2 z-40 md:hidden'; // Adjusted bottom position
-    }
-    
-    return ''; // Original position
+    // When not sticky, return empty string to stay in normal flow (centered in hero section)
+    return '';
   };
 
   // Determine button state and styling
@@ -200,9 +198,9 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
   const getStatusIndicatorSize = () => {
     if (isSticky) {
       if (isMobile) {
-        return '-top-0.5 -right-0.5 w-3 h-3'; // Same size as desktop sticky
+        return '-top-0.5 -right-0.5 w-2 h-2'; // Smaller on mobile when sticky
       }
-      return '-top-0.5 -right-0.5 w-3 h-3';
+      return '-top-0.5 -right-0.5 w-2 h-2'; // Smaller when sticky
     }
     
     if (isMobile) {
@@ -212,7 +210,7 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
     return '-top-1 -right-1 w-4 h-4';
   };
 
-  return (
+  const voiceOrbElement = (
     <div className={getPositionClasses()}>
       <button
         onClick={handleClick}
@@ -252,6 +250,14 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
       </button>
     </div>
   );
+
+  // Use portal for sticky voice orb to render it outside the normal DOM hierarchy
+  if (isSticky) {
+    return createPortal(voiceOrbElement, document.body);
+  }
+
+  // Return normal voice orb for non-sticky state
+  return voiceOrbElement;
 };
 
 export default VoiceOrb;
