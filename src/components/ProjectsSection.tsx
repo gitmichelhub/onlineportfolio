@@ -52,6 +52,13 @@ const ProjectsSection: React.FC = () => {
       tag: "FTE", 
       icon: <Briefcase />
     },
+    {
+      date: "2025",
+      title: "Agentic Coding Hackathon",
+      summary: "Organisation and facilitation of an internal hackathon with the help of Agentic-Coding-Tools like Cursor, Lovable and GitHub Copilot to develop useful applications. Participants were not developers, but experts from Business Development, Product Management, Enterprise Architecture and IT.",
+      tag: "FTE",
+      icon: <Code />
+    },
     
     {
       date: "2025",
@@ -248,6 +255,13 @@ const ProjectsSection: React.FC = () => {
     },
     {
       date: "2025",
+      title: "Agentic Coding Hackathon",
+      summary: "Organisation und Durchführung eines Internen Hackathons mit Hilfe von Agentic-Coding-Tools wie Cursor, Lovable und GitHub Copilot, um nützliche Anwendungen zu entwickeln. Teilnehmer:innen waren keine Entwickler:innen, sondern Fachleute aus dem Business Development, Product Management, Enterprise Architecture und IT.",
+      tag: "FTE",
+      icon: <Code />
+    },
+    {
+      date: "2025",
       title: "KI-gestützter Portfolio-Assistent",
       summary: "Portfolio-Website mit eingebettetem KI-Agent, der Besucher in natürlichen Gesprächen über meinen beruflichen Hintergrund und meine Erfahrungen einbindet. Dient als Tech-Demo für den aktuellen Stand von Conversational AI.",
       tag: "Hobby",
@@ -415,32 +429,6 @@ const ProjectsSection: React.FC = () => {
               : 'A showcase of my recent work in AI, web development, and automotive technology.'
             }
           </p>
-        </div>
-
-        {/* Simple Chat Component */}
-        <div className="glass rounded-2xl p-6 mb-12 max-w-2xl mx-auto animate-fade-up" style={{ animationDelay: '0.1s' }}>
-          <div className="flex flex-col space-y-4">
-            <div className="flex justify-start">
-              <div className="bg-glass-cream rounded-2xl px-4 py-2 max-w-xs border border-glass-cream">
-                <p className="text-sm text-glass-dark/80">
-                  {language === 'de' 
-                    ? 'Erzähl mir von deinen Projekten'
-                    : 'Tell me about your projects'
-                  }
-                </p>
-              </div>
-            </div>
-            <div className="flex justify-end">
-              <div className="bg-glass-copper text-white rounded-2xl px-4 py-2 max-w-xs">
-                <p className="text-sm font-medium">
-                  {language === 'de'
-                    ? 'Ich zeige dir gerne meine neuesten Projekten! Schau sie dir unten an.'
-                    : 'I would love to show you my latest work! Check out the projects below.'
-                  }
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* Project Grid */}

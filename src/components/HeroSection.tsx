@@ -48,7 +48,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversati
       info: "Click the voice button to start an interactive conversation. I'm here to help with your questions regarding technology, product development, and more."
     },
     de: {
-      headline: "Sprich mit AI",
+      headline: "Sprich mit meiner AI",
       subtitle: "Frag \"mich\" alles über meine Erfahrung, meine Arbeit oder mein Leben.",
       info: "Klicke auf den Sprachbutton, um ein interaktives Gespräch zu starten. Ich helfe dir gerne bei Fragen zu Technologie, Produktentwicklung und mehr."
     }
