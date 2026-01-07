@@ -25,17 +25,10 @@ const ContactSection: React.FC = () => {
 
   const email = 'michel.tech.user@gmail.com';
 
-  const handleEmailClick = () => {
-    const subject = encodeURIComponent('Portfolio Contact');
-    const body = encodeURIComponent('Hi Michel,\n\nI\'d like to discuss a project with you...');
-    
-    try {
-      window.open(`mailto:${email}?subject=${subject}&body=${body}`);
-    } catch (error) {
-      // Fallback: copy email to clipboard
-      copyEmailToClipboard();
-    }
-  };
+  // Generate mailto URL
+  const subject = encodeURIComponent('Portfolio Contact');
+  const body = encodeURIComponent('Hi Michel,\n\nI\'d like to discuss a project with you...');
+  const mailtoUrl = `mailto:${email}?subject=${subject}&body=${body}`;
 
   const copyEmailToClipboard = async () => {
     try {
@@ -74,14 +67,14 @@ const ContactSection: React.FC = () => {
                 </div>
                 
                 <div className="space-y-4">
-                  <button
-                    onClick={handleEmailClick}
+                  <a
+                    href={mailtoUrl}
                     className="w-full bg-glass-copper text-white py-4 px-8 rounded-xl font-medium hover:bg-glass-amber transition-all duration-300 flex items-center justify-center space-x-3 group transform hover:scale-105 shadow-lg hover:shadow-xl"
                   >
                     <Mail size={20} className="transition-transform group-hover:scale-110" />
                     <span className="text-lg">{t[language].emailButton}</span>
                     <Send size={16} className="transition-transform group-hover:translate-x-1" />
-                  </button>
+                  </a>
                   
                   <button
                     onClick={copyEmailToClipboard}
