@@ -15,11 +15,11 @@ interface NavigationProps {
   voiceStatusError: string | null;
   onVoiceStatusStop: () => void;
   onVoiceStatusForceStop?: () => Promise<void>;
-  timeRemaining?: number | null;
+  callDuration?: number | null;
   isTimerActive?: boolean;
 }
 
-const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange, voiceStatusState, voiceStatusError, onVoiceStatusStop, onVoiceStatusForceStop, timeRemaining, isTimerActive }) => {
+const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange, voiceStatusState, voiceStatusError, onVoiceStatusStop, onVoiceStatusForceStop, callDuration, isTimerActive }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { language, setLanguage } = useLanguage();
@@ -134,7 +134,7 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
                 state={voiceStatusState} 
                 error={voiceStatusError} 
                 onStop={handleVoiceStop}
-                timeRemaining={timeRemaining}
+                callDuration={callDuration}
                 isTimerActive={isTimerActive}
               />
             </div>
@@ -219,7 +219,7 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
                   state={voiceStatusState} 
                   error={voiceStatusError} 
                   onStop={handleVoiceStop}
-                  timeRemaining={timeRemaining}
+                  callDuration={callDuration}
                   isTimerActive={isTimerActive}
                 />
               </div>

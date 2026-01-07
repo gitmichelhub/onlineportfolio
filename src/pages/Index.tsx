@@ -12,7 +12,7 @@ import { useLanguage } from '@/hooks/use-language';
 const Index = () => {
   const { language } = useLanguage();
   const [currentSection, setCurrentSection] = useState('voice');
-  const { state, startConversation, stopConversation, forceStopConversation, testConnection, isActive, error, timeRemaining, isTimerActive } = useVoiceAgent({
+  const { state, startConversation, stopConversation, forceStopConversation, testConnection, isActive, error, callDuration, isTimerActive } = useVoiceAgent({
     agentId: getElevenLabsAgentId(language),
   });
 
@@ -46,7 +46,7 @@ const Index = () => {
         voiceStatusError={error}
         onVoiceStatusStop={stopConversation}
         onVoiceStatusForceStop={forceStopConversation}
-        timeRemaining={timeRemaining}
+        callDuration={callDuration}
         isTimerActive={isTimerActive}
       />
       <HeroSection 
@@ -57,7 +57,7 @@ const Index = () => {
         forceStopConversation={forceStopConversation}
         testConnection={testConnection}
         isActive={isActive}
-        timeRemaining={timeRemaining}
+        callDuration={callDuration}
         isTimerActive={isTimerActive}
       />
       <ProjectsSection />

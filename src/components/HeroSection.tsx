@@ -15,11 +15,11 @@ interface HeroSectionProps {
   forceStopConversation: () => Promise<void>;
   testConnection: () => Promise<void>;
   isActive: boolean;
-  timeRemaining?: number | null;
+  callDuration?: number | null;
   isTimerActive?: boolean;
 }
 
-const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversation, stopConversation, forceStopConversation, testConnection, isActive, timeRemaining, isTimerActive }) => {
+const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversation, stopConversation, forceStopConversation, testConnection, isActive, callDuration, isTimerActive }) => {
   const { language } = useLanguage();
 
   const handleVoiceToggle = async () => {
@@ -95,8 +95,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversati
               size="large" 
               state={state}
               onToggle={handleVoiceToggle}
-              timeRemaining={timeRemaining}
-              isTimerActive={isTimerActive}
             />
           </div>
         </div>

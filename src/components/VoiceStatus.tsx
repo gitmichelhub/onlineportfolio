@@ -10,11 +10,11 @@ interface VoiceStatusProps {
   };
   error: string | null;
   onStop?: () => void;
-  timeRemaining?: number | null;
+  callDuration?: number | null;
   isTimerActive?: boolean;
 }
 
-const VoiceStatus: React.FC<VoiceStatusProps> = ({ state, error, onStop, timeRemaining, isTimerActive }) => {
+const VoiceStatus: React.FC<VoiceStatusProps> = ({ state, error, onStop, callDuration, isTimerActive }) => {
   const isActive = state.isConnected || state.isListening || state.isSpeaking || state.isProcessing;
 
   // Don't render anything if not active
@@ -85,14 +85,8 @@ const VoiceStatus: React.FC<VoiceStatusProps> = ({ state, error, onStop, timeRem
 
   const status = getStatusInfo();
 
-  // Timer warning styles (when < 30 seconds remaining)
-  const isTimerWarning = isTimerActive && timeRemaining !== null && timeRemaining <= 30;
-  const timerWarningStyles = isTimerWarning 
-    ? 'animate-pulse border-red-300 bg-red-50/50' 
-    : '';
-
   return (
-    <div className={`glass rounded-full px-4 py-2 flex items-center space-x-3 ${timerWarningStyles}`}>
+    <div className="glass rounded-full px-4 py-2 flex items-center space-x-3">
       {/* Status indicator */}
       <div className={`flex items-center space-x-2 px-2 py-1 rounded-full ${status.bgColor} border ${status.borderColor}`}>
         {status.icon}
@@ -101,16 +95,12 @@ const VoiceStatus: React.FC<VoiceStatusProps> = ({ state, error, onStop, timeRem
         </span>
       </div>
 
-      {/* Timer display */}
-      {isTimerActive && timeRemaining !== null && (
-        <div className={`flex items-center space-x-1 px-2 py-1 rounded-full ${
-          isTimerWarning 
-            ? 'bg-red-100 border border-red-200' 
-            : 'bg-glass-cream border border-glass-cream'
-        }`}>
-          <Clock size={14} className={isTimerWarning ? 'text-red-500' : 'text-glass-muted'} />
-          <span className={`text-xs font-mono ${isTimerWarning ? 'text-red-500 font-bold' : 'text-glass-muted'}`}>
-            {formatTime(timeRemaining)}
+      {/* Duration display */}
+      {isTimerActive && callDuration !== null && (
+        <div className="flex items-center space-x-1 px-2 py-1 rounded-full bg-glass-cream border border-glass-cream">
+          <Clock size={14} className="text-glass-muted" />
+          <span className="text-xs font-mono text-glass-muted">
+            {formatTime(callDuration)}
           </span>
         </div>
       )}

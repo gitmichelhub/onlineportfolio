@@ -1,40 +1,33 @@
-import React from 'react';
-import { Mail, Send, Copy } from 'lucide-react';
+import React, { useState } from 'react';
+import { Copy, Check, Mail } from 'lucide-react';
 import { useLanguage } from "@/hooks/use-language";
 
 const ContactSection: React.FC = () => {
   const { language } = useLanguage();
+  const [copied, setCopied] = useState(false);
+
   const t = {
     en: {
       sectionTitle: "Let's Connect",
       subtitle: "Have a project in mind or just want to chat (this time as a human)? I'd love to hear from you.",
-      emailButton: "Send me an email",
-      emailButtonDesc: "Click to open your email client",
-      emailCopied: "Email copied to clipboard!",
-      copyEmail: "Copy email address"
+      copyEmail: "Copy email address",
+      emailCopied: "Copied!"
     },
     de: {
       sectionTitle: "Kontakt aufnehmen",
       subtitle: "Hast du ein Projekt im Kopf oder möchtest einfach plaudern (dieses Mal als Mensch)? Ich freue mich auf deine Nachricht.",
-      emailButton: "Schick mir eine E-Mail",
-      emailButtonDesc: "Klicke um deinen E-Mail-Client zu öffnen",
-      emailCopied: "E-Mail-Adresse kopiert!",
-      copyEmail: "E-Mail-Adresse kopieren"
+      copyEmail: "E-Mail-Adresse kopieren",
+      emailCopied: "Kopiert!"
     }
   };
 
   const email = 'michel.tech.user@gmail.com';
 
-  // Generate mailto URL
-  const subject = encodeURIComponent('Portfolio Contact');
-  const body = encodeURIComponent('Hi Michel,\n\nI\'d like to discuss a project with you...');
-  const mailtoUrl = `mailto:${email}?subject=${subject}&body=${body}`;
-
   const copyEmailToClipboard = async () => {
     try {
       await navigator.clipboard.writeText(email);
-      // Show a simple alert since we don't have toast available
-      alert(t[language].emailCopied);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
     } catch (error) {
       // Fallback for older browsers
       const textArea = document.createElement('textarea');
@@ -43,7 +36,8 @@ const ContactSection: React.FC = () => {
       textArea.select();
       document.execCommand('copy');
       document.body.removeChild(textArea);
-      alert(t[language].emailCopied);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
     }
   };
 
@@ -61,31 +55,39 @@ const ContactSection: React.FC = () => {
           <div className="animate-fade-up" style={{ animationDelay: '0.2s' }}>
             <div className="glass rounded-2xl p-8">
               <div className="text-center">
+                {/* Email icon */}
                 <div className="mb-6">
-                  <h3 className="text-2xl font-semibold text-glass-dark mb-2 font-playfair">{t[language].emailButton}</h3>
-                  <p className="text-glass-muted">{t[language].emailButtonDesc}</p>
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-glass-copper/10 flex items-center justify-center">
+                    <Mail size={28} className="text-glass-copper" />
+                  </div>
+                  <p className="text-glass-dark font-medium text-lg mb-1">{email}</p>
+                  <p className="text-glass-muted text-sm">{t[language].subtitle.split('?')[0]}?</p>
                 </div>
                 
-                <div className="space-y-4">
-                  <a
-                    href={mailtoUrl}
-                    className="w-full bg-glass-copper text-white py-4 px-8 rounded-xl font-medium hover:bg-glass-amber transition-all duration-300 flex items-center justify-center space-x-3 group transform hover:scale-105 shadow-lg hover:shadow-xl"
-                  >
-                    <Mail size={20} className="transition-transform group-hover:scale-110" />
-                    <span className="text-lg">{t[language].emailButton}</span>
-                    <Send size={16} className="transition-transform group-hover:translate-x-1" />
-                  </a>
-                  
-                  <button
-                    onClick={copyEmailToClipboard}
-                    className="w-full bg-glass-cream text-glass-dark py-3 px-6 rounded-xl font-medium hover:bg-glass-cream/80 transition-all duration-300 flex items-center justify-center space-x-2 group border border-glass-copper/20 hover:border-glass-copper/40"
-                  >
-                    <Copy size={16} />
-                    <span>{t[language].copyEmail}</span>
-                  </button>
-                </div>
-                
-                <p className="text-sm text-glass-muted mt-4">{email}</p>
+                {/* Copy button with inline feedback */}
+                <button
+                  onClick={copyEmailToClipboard}
+                  className={`
+                    relative w-full py-4 px-8 rounded-xl font-medium transition-all duration-300 
+                    flex items-center justify-center space-x-3 group transform hover:scale-105
+                    ${copied 
+                      ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/25' 
+                      : 'bg-glass-copper text-white hover:bg-glass-amber shadow-lg hover:shadow-xl'
+                    }
+                  `}
+                >
+                  {copied ? (
+                    <>
+                      <Check size={20} className="animate-bounce" />
+                      <span className="text-lg">{t[language].emailCopied}</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy size={20} className="transition-transform group-hover:scale-110" />
+                      <span className="text-lg">{t[language].copyEmail}</span>
+                    </>
+                  )}
+                </button>
               </div>
             </div>
           </div>
