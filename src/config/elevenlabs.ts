@@ -66,10 +66,14 @@ export const getElevenLabsAgentId = (language: 'en' | 'de'): string => {
     const germanAgentId = getEnvVar('VITE_ELEVENLABS_GERMAN_AGENT_ID');
     if (!germanAgentId) {
       console.error('❌ VITE_ELEVENLABS_GERMAN_AGENT_ID not found in environment variables');
+      console.error('   Falling back to English agent ID...');
       // Fallback to English agent if German agent is not configured
       const englishAgentId = getEnvVar('VITE_ELEVENLABS_ENGLISH_AGENT_ID');
       if (!englishAgentId) {
-        throw new Error('ElevenLabs agent IDs are not configured. Please set VITE_ELEVENLABS_ENGLISH_AGENT_ID and/or VITE_ELEVENLABS_GERMAN_AGENT_ID in your .env.local file.');
+        console.error('❌ VITE_ELEVENLABS_ENGLISH_AGENT_ID not found in environment variables');
+        console.error('   Voice agent will not work. Please set VITE_ELEVENLABS_ENGLISH_AGENT_ID and/or VITE_ELEVENLABS_GERMAN_AGENT_ID in your .env.local file.');
+        // Return empty string to fail gracefully - voice agent will handle connection error
+        return '';
       }
       return englishAgentId;
     }
@@ -79,7 +83,9 @@ export const getElevenLabsAgentId = (language: 'en' | 'de'): string => {
     const englishAgentId = getEnvVar('VITE_ELEVENLABS_ENGLISH_AGENT_ID');
     if (!englishAgentId) {
       console.error('❌ VITE_ELEVENLABS_ENGLISH_AGENT_ID not found in environment variables');
-      throw new Error('ElevenLabs English agent ID is not configured. Please set VITE_ELEVENLABS_ENGLISH_AGENT_ID in your .env.local file.');
+      console.error('   Voice agent will not work. Please set VITE_ELEVENLABS_ENGLISH_AGENT_ID in your .env.local file.');
+      // Return empty string to fail gracefully - voice agent will handle connection error
+      return '';
     }
     return englishAgentId;
   }
