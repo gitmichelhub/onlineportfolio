@@ -1,142 +1,132 @@
 import React from 'react';
-import { Mic, MicOff, Volume2, Loader2, Square, Clock } from 'lucide-react';
-
-interface VoiceAgentState {
-  isConnected: boolean;
-  isListening: boolean;
-  isSpeaking: boolean;
-  isProcessing: boolean;
-}
+import { Mic, Volume2, Loader2, Wifi, WifiOff, AlertCircle, Clock, X } from 'lucide-react';
 
 interface VoiceStatusProps {
-  state: VoiceAgentState;
+  state: {
+    isConnected: boolean;
+    isListening: boolean;
+    isSpeaking: boolean;
+    isProcessing: boolean;
+  };
   error: string | null;
   onStop?: () => void;
   timeRemaining?: number | null;
   isTimerActive?: boolean;
 }
 
-const VoiceStatus: React.FC<VoiceStatusProps> = ({ 
-  state, 
-  error, 
-  onStop, 
-  timeRemaining, 
-  isTimerActive 
-}) => {
-  const { isConnected, isListening, isSpeaking, isProcessing } = state;
+const VoiceStatus: React.FC<VoiceStatusProps> = ({ state, error, onStop, timeRemaining, isTimerActive }) => {
+  const isActive = state.isConnected || state.isListening || state.isSpeaking || state.isProcessing;
 
-  // Format time remaining as MM:SS
-  const formatTime = (seconds: number): string => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+  // Don't render anything if not active
+  if (!isActive && !error) {
+    return null;
+  }
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
   const getStatusInfo = () => {
     if (error) {
       return {
-        icon: <MicOff className="w-4 h-4 text-red-400" />,
-        text: error,
-        color: 'text-red-300',
-        bgColor: 'bg-red-500/20',
-        borderColor: 'border-red-400/30'
+        icon: <AlertCircle size={16} className="text-red-500" />,
+        text: 'Error',
+        color: 'text-red-500',
+        bgColor: 'bg-red-100',
+        borderColor: 'border-red-200'
       };
     }
-
-    if (isProcessing) {
+    if (state.isProcessing) {
       return {
-        icon: <Loader2 className="w-4 h-4 text-blue-400 animate-spin" />,
-        text: 'Connecting...',
-        color: 'text-blue-300',
-        bgColor: 'bg-blue-500/20',
-        borderColor: 'border-blue-400/30'
+        icon: <Loader2 size={16} className="text-glass-teal animate-spin" />,
+        text: 'Processing',
+        color: 'text-glass-teal',
+        bgColor: 'bg-teal-100',
+        borderColor: 'border-teal-200'
       };
     }
-
-    if (isListening) {
+    if (state.isSpeaking) {
       return {
-        icon: <Mic className="w-4 h-4 text-green-400" />,
-        text: 'Listening...',
-        color: 'text-green-300',
-        bgColor: 'bg-green-500/20',
-        borderColor: 'border-green-400/30'
+        icon: <Volume2 size={16} className="text-glass-copper" />,
+        text: 'Speaking',
+        color: 'text-glass-copper',
+        bgColor: 'bg-amber-100',
+        borderColor: 'border-amber-200'
       };
     }
-
-    if (isSpeaking) {
+    if (state.isListening) {
       return {
-        icon: <Volume2 className="w-4 h-4 text-purple-400" />,
-        text: 'AI speaking...',
-        color: 'text-purple-300',
-        bgColor: 'bg-purple-500/20',
-        borderColor: 'border-purple-400/30'
+        icon: <Mic size={16} className="text-emerald-500" />,
+        text: 'Listening',
+        color: 'text-emerald-500',
+        bgColor: 'bg-emerald-100',
+        borderColor: 'border-emerald-200'
       };
     }
-
-    if (isConnected) {
+    if (state.isConnected) {
       return {
-        icon: <Mic className="w-4 h-4 text-white" />,
-        text: 'Ready',
-        color: 'text-white',
-        bgColor: 'bg-white/20',
-        borderColor: 'border-white/30'
+        icon: <Wifi size={16} className="text-glass-copper" />,
+        text: 'Connected',
+        color: 'text-glass-copper',
+        bgColor: 'bg-amber-100',
+        borderColor: 'border-amber-200'
       };
     }
-
     return {
-      icon: <MicOff className="w-4 h-4 text-white/60" />,
-      text: 'Voice AI',
-      color: 'text-white/80',
-      bgColor: 'bg-white/10',
-      borderColor: 'border-white/20'
+      icon: <WifiOff size={16} className="text-glass-muted" />,
+      text: 'Disconnected',
+      color: 'text-glass-muted',
+      bgColor: 'bg-gray-100',
+      borderColor: 'border-gray-200'
     };
   };
 
-  const statusInfo = getStatusInfo();
+  const status = getStatusInfo();
 
-  const isActive = isListening || isSpeaking || isProcessing;
-
-  // Only render if the agent is active (listening, speaking, or processing)
-  if (!isActive && !error) {
-    return null;
-  }
+  // Timer warning styles (when < 30 seconds remaining)
+  const isTimerWarning = isTimerActive && timeRemaining !== null && timeRemaining <= 30;
+  const timerWarningStyles = isTimerWarning 
+    ? 'animate-pulse border-red-300 bg-red-50/50' 
+    : '';
 
   return (
-    <div
-      className={`
-        glass rounded-full flex items-center px-3 py-2 shadow-lg backdrop-blur-xl border border-white/20 bg-white/10
-        transition-all duration-300 ease-in-out touch-manipulation liquid-glass
-        ${isActive ? 'opacity-100 scale-105' : 'opacity-80 scale-100'}
-      `}
-      style={{ filter: "url(#liquid-glass-filter)" }}
-    >
-      {statusInfo.icon}
-      <span className={`text-sm font-medium ${statusInfo.color} ml-2`}>
-        {statusInfo.text}
-      </span>
-      
+    <div className={`glass rounded-full px-4 py-2 flex items-center space-x-3 ${timerWarningStyles}`}>
+      {/* Status indicator */}
+      <div className={`flex items-center space-x-2 px-2 py-1 rounded-full ${status.bgColor} border ${status.borderColor}`}>
+        {status.icon}
+        <span className={`text-xs font-medium ${status.color}`}>
+          {status.text}
+        </span>
+      </div>
+
       {/* Timer display */}
-      {isTimerActive && timeRemaining !== null && timeRemaining > 0 && (
-        <div className="flex items-center ml-3 px-2 py-1 bg-orange-500/20 rounded-full border border-orange-400/30 backdrop-blur-sm">
-          <Clock className="w-3 h-3 text-orange-300 mr-1" />
-          <span className="text-xs font-mono font-medium text-orange-200">
+      {isTimerActive && timeRemaining !== null && (
+        <div className={`flex items-center space-x-1 px-2 py-1 rounded-full ${
+          isTimerWarning 
+            ? 'bg-red-100 border border-red-200' 
+            : 'bg-glass-cream border border-glass-cream'
+        }`}>
+          <Clock size={14} className={isTimerWarning ? 'text-red-500' : 'text-glass-muted'} />
+          <span className={`text-xs font-mono ${isTimerWarning ? 'text-red-500 font-bold' : 'text-glass-muted'}`}>
             {formatTime(timeRemaining)}
           </span>
         </div>
       )}
-      
-      {isActive && onStop && (
+
+      {/* Stop button */}
+      {onStop && isActive && (
         <button
           onClick={onStop}
-          className="ml-2 p-1 md:p-1 p-2 rounded-full bg-red-500/20 hover:bg-red-500/30 transition-all duration-200 touch-manipulation backdrop-blur-sm border border-red-400/30"
-          title="Stop conversation"
-          aria-label="Stop conversation"
+          className="p-1.5 rounded-full bg-glass-cream hover:bg-red-100 text-glass-muted hover:text-red-500 transition-all duration-200 border border-glass-cream hover:border-red-200"
+          title="Stop voice chat"
         >
-          <Square className="w-4 h-4 md:w-4 md:h-4 w-5 h-5 text-red-300" />
+          <X size={14} />
         </button>
       )}
     </div>
   );
 };
 
-export default VoiceStatus; 
+export default VoiceStatus;

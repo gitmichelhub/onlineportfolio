@@ -196,12 +196,12 @@ const ProjectsSection: React.FC = () => {
   ];
   const getTagColorEN = (tag: string) => {
     switch (tag) {
-      case 'FTE': return 'bg-green-100 text-green-700';
-      case 'Part-time': return 'bg-blue-100 text-blue-700';
-      case 'Edu': return 'bg-purple-100 text-purple-700';
-      case 'Hobby': return 'bg-orange-100 text-orange-700';
-      case 'Cert': return 'bg-yellow-100 text-yellow-700';
-      default: return 'bg-gray-100 text-gray-700';
+      case 'FTE': return 'bg-emerald-100 text-emerald-700 border border-emerald-200';
+      case 'Part-time': return 'bg-teal-100 text-teal-700 border border-teal-200';
+      case 'Edu': return 'bg-amber-100 text-amber-700 border border-amber-200';
+      case 'Hobby': return 'bg-orange-100 text-orange-700 border border-orange-200';
+      case 'Cert': return 'bg-cyan-100 text-cyan-700 border border-cyan-200';
+      default: return 'bg-gray-100 text-gray-700 border border-gray-200';
     }
   };
 
@@ -389,12 +389,12 @@ const ProjectsSection: React.FC = () => {
   ];
   const getTagColorDE = (tag: string) => {
     switch (tag) {
-      case 'FTE': return 'bg-green-100 text-green-700';
-      case 'Teilzeit': return 'bg-blue-100 text-blue-700';
-      case 'Edu': return 'bg-purple-100 text-purple-700';
-      case 'Hobby': return 'bg-orange-100 text-orange-700';
-      case 'Zertifikat': return 'bg-yellow-100 text-yellow-700';
-      default: return 'bg-gray-100 text-gray-700';
+      case 'FTE': return 'bg-emerald-100 text-emerald-700 border border-emerald-200';
+      case 'Teilzeit': return 'bg-teal-100 text-teal-700 border border-teal-200';
+      case 'Edu': return 'bg-amber-100 text-amber-700 border border-amber-200';
+      case 'Hobby': return 'bg-orange-100 text-orange-700 border border-orange-200';
+      case 'Zertifikat': return 'bg-cyan-100 text-cyan-700 border border-cyan-200';
+      default: return 'bg-gray-100 text-gray-700 border border-gray-200';
     }
   };
 
@@ -403,13 +403,13 @@ const ProjectsSection: React.FC = () => {
   const timelineData = language === 'de' ? timelineDataDE : timelineDataEN;
   const getTagColor = language === 'de' ? getTagColorDE : getTagColorEN;
   return (
-    <section id="projects" className="min-h-screen py-20 bg-white">
+    <section id="projects" className="min-h-screen py-20 bg-white/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16 animate-fade-up">
-          <h2 className="text-4xl font-semibold text-slate-900 mb-4">
+          <h2 className="text-4xl font-semibold text-glass-dark mb-4 font-playfair">
             {language === 'de' ? 'Ausgewählte Projekte' : 'Featured Projects'}
           </h2>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+          <p className="text-xl text-glass-muted max-w-2xl mx-auto">
             {language === 'de' 
               ? 'Eine Auswahl meiner aktuellen Projekte in den Bereichen KI, Web- und Produktentwicklung.'
               : 'A showcase of my recent work in AI, web development, and automotive technology.'
@@ -421,8 +421,8 @@ const ProjectsSection: React.FC = () => {
         <div className="glass rounded-2xl p-6 mb-12 max-w-2xl mx-auto animate-fade-up" style={{ animationDelay: '0.1s' }}>
           <div className="flex flex-col space-y-4">
             <div className="flex justify-start">
-              <div className="bg-slate-100 rounded-2xl px-4 py-2 max-w-xs">
-                <p className="text-sm text-slate-700">
+              <div className="bg-glass-cream rounded-2xl px-4 py-2 max-w-xs border border-glass-cream">
+                <p className="text-sm text-glass-dark/80">
                   {language === 'de' 
                     ? 'Erzähl mir von deinen Projekten'
                     : 'Tell me about your projects'
@@ -431,8 +431,8 @@ const ProjectsSection: React.FC = () => {
               </div>
             </div>
             <div className="flex justify-end">
-              <div className="bg-indigo-600 text-white rounded-2xl px-4 py-2 max-w-xs">
-                <p className="text-sm">
+              <div className="bg-glass-copper text-white rounded-2xl px-4 py-2 max-w-xs">
+                <p className="text-sm font-medium">
                   {language === 'de'
                     ? 'Ich zeige dir gerne meine neuesten Projekten! Schau sie dir unten an.'
                     : 'I would love to show you my latest work! Check out the projects below.'
@@ -451,8 +451,8 @@ const ProjectsSection: React.FC = () => {
               className="glass rounded-2xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-xl animate-fade-up group"
               style={{ animationDelay: `${0.2 + index * 0.1}s` }}
             >
-              <h3 className="text-xl font-semibold text-slate-900 mb-3">{project.title}</h3>
-              <p className="text-slate-600 mb-4 leading-relaxed">{project.description}</p>
+              <h3 className="text-xl font-semibold text-glass-dark mb-3 font-playfair">{project.title}</h3>
+              <p className="text-glass-muted mb-4 leading-relaxed">{project.description}</p>
               
               {/* Detailed Description Accordion */}
               <Collapsible 
@@ -461,14 +461,14 @@ const ProjectsSection: React.FC = () => {
                 className="mb-4"
               >
                 <CollapsibleTrigger asChild>
-                  <button className="flex items-center space-x-2 text-indigo-600 hover:text-indigo-700 transition-colors text-sm font-medium mb-3">
+                  <button className="flex items-center space-x-2 text-glass-copper hover:text-glass-amber transition-colors text-sm font-medium mb-3">
                     <span>More details</span>
                     {openDetails === index ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                   </button>
                 </CollapsibleTrigger>
                 <CollapsibleContent className="overflow-hidden transition-all duration-300 ease-in-out">
-                  <div className="bg-slate-50 rounded-lg p-4 mb-4">
-                    <div className="text-slate-700 leading-relaxed whitespace-pre-line">
+                  <div className="bg-glass-cream/50 rounded-lg p-4 mb-4 border border-glass-cream">
+                    <div className="text-glass-dark/70 leading-relaxed whitespace-pre-line">
                       {project.detailedDescription}
                     </div>
                   </div>
@@ -479,7 +479,7 @@ const ProjectsSection: React.FC = () => {
                 {project.technologies.map((tech, techIndex) => (
                   <span 
                     key={techIndex}
-                    className="px-3 py-1 bg-indigo-50 text-indigo-700 text-sm rounded-full"
+                    className="px-3 py-1 bg-glass-copper/10 text-glass-copper text-sm rounded-full border border-glass-copper/20"
                   >
                     {tech}
                   </span>
@@ -490,7 +490,7 @@ const ProjectsSection: React.FC = () => {
                 {project.link && (
                   <a 
                     href={project.link}
-                    className="flex items-center space-x-2 text-indigo-600 hover:text-indigo-700 transition-colors"
+                    className="flex items-center space-x-2 text-glass-copper hover:text-glass-amber transition-colors"
                   >
                     <ExternalLink size={16} />
                     <span className="text-sm font-medium">View Live</span>
@@ -499,7 +499,7 @@ const ProjectsSection: React.FC = () => {
                 {project.github && (
                   <a 
                     href={project.github}
-                    className="flex items-center space-x-2 text-slate-600 hover:text-slate-700 transition-colors"
+                    className="flex items-center space-x-2 text-glass-muted hover:text-glass-dark transition-colors"
                   >
                     <Github size={16} />
                     <span className="text-sm font-medium">Source</span>
@@ -515,7 +515,7 @@ const ProjectsSection: React.FC = () => {
           <Collapsible open={isCVOpen} onOpenChange={setIsCVOpen}>
             <CollapsibleTrigger asChild>
               <button
-                className="inline-flex items-center space-x-2 bg-indigo-600 text-white px-6 py-3 rounded-full font-medium transition-all duration-200 hover:scale-105 hover:bg-indigo-700"
+                className="inline-flex items-center space-x-2 bg-glass-copper text-white px-6 py-3 rounded-full font-medium transition-all duration-200 hover:scale-105 hover:bg-glass-amber hover:shadow-lg"
                 aria-expanded={isCVOpen}
                 aria-controls="cv"
               >
@@ -528,27 +528,27 @@ const ProjectsSection: React.FC = () => {
             <CollapsibleContent className="overflow-hidden transition-all duration-500 ease-in-out">
               <div id="cv" className="mt-12">
                 <div className="text-center mb-8">
-                  <h3 className="text-2xl font-semibold text-slate-900 mb-2">{language === 'de' ? "Karriereverlauf" : "Career Timeline"}</h3>
-                  <p className="text-slate-600">{language === 'de' ? "Meine Reise durch Technologie und Innovation" : "My journey through technology and innovation"}</p>
+                  <h3 className="text-2xl font-semibold text-glass-dark mb-2 font-playfair">{language === 'de' ? "Karriereverlauf" : "Career Timeline"}</h3>
+                  <p className="text-glass-muted">{language === 'de' ? "Meine Reise durch Technologie und Innovation" : "My journey through technology and innovation"}</p>
                 </div>
 
-                <VerticalTimeline lineColor="#CBD5E1">
+                <VerticalTimeline lineColor="rgba(185, 120, 70, 0.2)">
                   {timelineData.map((item, index) => (
                     <VerticalTimelineElement
                       key={index}
                       className="vertical-timeline-element--work animate-fade-up"
                       style={{ animationDelay: `${index * 0.1}s` }}
                       contentStyle={{ 
-                        background: 'rgba(255, 255, 255, 0.8)', 
-                        backdropFilter: 'blur(16px)',
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        background: 'rgba(255, 255, 255, 0.7)', 
+                        backdropFilter: 'blur(20px)',
+                        border: '1px solid rgba(255, 255, 255, 0.8)',
                         borderRadius: '16px',
-                        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)'
+                        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.06)'
                       }}
-                      contentArrowStyle={{ borderRight: '7px solid rgba(255, 255, 255, 0.8)' }}
+                      contentArrowStyle={{ borderRight: '7px solid rgba(255, 255, 255, 0.7)' }}
                       date={item.date}
                       iconStyle={{ 
-                        background: '#4F46E5', 
+                        background: '#B97846', 
                         color: '#fff',
                         display: 'flex',
                         alignItems: 'center',
@@ -556,8 +556,8 @@ const ProjectsSection: React.FC = () => {
                       }}
                       icon={item.icon}
                     >
-                      <h3 className="text-lg font-semibold text-slate-900 mb-2">{item.title}</h3>
-                      <p className="text-slate-600 mb-3 leading-relaxed">{item.summary}</p>
+                      <h3 className="text-lg font-semibold text-glass-dark mb-2 font-playfair">{item.title}</h3>
+                      <p className="text-glass-muted mb-3 leading-relaxed">{item.summary}</p>
                       <span className={`inline-block px-3 py-1 text-xs font-medium rounded-full ${getTagColor(item.tag)}`}>
                         {item.tag}
                       </span>

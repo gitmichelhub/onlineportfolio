@@ -16,11 +16,11 @@ const Footer: React.FC = () => {
   };
   return (
     <footer className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-30 w-[90%] max-w-4xl">
-      <div className="glass rounded-2xl px-6 py-3 opacity-75">
-        <div className="flex items-center justify-center space-x-2 text-sm text-slate-600">
+      <div className="glass rounded-2xl px-6 py-3 opacity-90">
+        <div className="flex items-center justify-center space-x-2 text-sm text-glass-muted">
           <span>{t[language].built}</span>
-          <span>•</span>
-          <Link to="/imprint" className="hover:text-slate-800 transition-colors">
+          <span className="text-glass-copper/50">•</span>
+          <Link to="/imprint" className="hover:text-glass-copper transition-colors">
             {t[language].imprint}
           </Link>
         </div>

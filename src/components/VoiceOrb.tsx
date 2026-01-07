@@ -12,7 +12,6 @@ interface VoiceAgentState {
 
 interface VoiceOrbProps {
   size?: 'large' | 'small';
-  position?: 'center' | 'bottom';
   state: VoiceAgentState;
   onToggle: () => void;
   timeRemaining?: number | null;
@@ -21,7 +20,6 @@ interface VoiceOrbProps {
 
 const VoiceOrb: React.FC<VoiceOrbProps> = ({ 
   size = 'large', 
-  position = 'center',
   state,
   onToggle,
   timeRemaining,
@@ -31,8 +29,6 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
   const [isSticky, setIsSticky] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Calculate navbar height (approximately 80px based on h-20)
-  const NAVBAR_HEIGHT = 80;
   const STICKY_THRESHOLD = 100; // When to start the sticky behavior (after hero section)
 
   useEffect(() => {
@@ -123,11 +119,11 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
   const getButtonClasses = () => {
     let baseClasses = `${getOrbSize()} rounded-full glass flex items-center justify-center transition-all duration-300 ease-out group relative overflow-hidden`;
     
-    // Enhanced glass effect when active, matching navbar styling
+    // Enhanced glass effect when active
     if (isActive) {
-      baseClasses += ' glass backdrop-blur-md border border-white/30 bg-white/40 shadow-lg shadow-indigo-500/20';
+      baseClasses += ' backdrop-blur-xl border border-white/80 bg-white/70 shadow-lg';
     } else {
-      baseClasses += ' glass backdrop-blur-md border border-white/30 bg-white/40 hover:scale-105 hover:shadow-xl hover:shadow-indigo-500/30 active:scale-95';
+      baseClasses += ' backdrop-blur-xl border border-white/80 bg-white/60 hover:scale-105 hover:shadow-xl hover:bg-white/75 active:scale-95';
     }
     
     // Mobile-specific touch improvements
@@ -150,48 +146,48 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
   const getGlowColor = () => {
     // Timer warning: less than 30 seconds remaining
     if (isTimerActive && timeRemaining !== null && timeRemaining <= 30) {
-      return 'rgba(245, 101, 101, 0.6)'; // Red glow for timer warning
+      return 'rgba(239, 68, 68, 0.4)'; // Red glow for timer warning
     }
     
-    if (isProcessing) return 'rgba(59, 130, 246, 0.6)'; // Enhanced blue for processing
-    if (isListening) return 'rgba(34, 197, 94, 0.6)'; // Enhanced green for listening
-    if (isSpeaking) return 'rgba(168, 85, 247, 0.6)'; // Enhanced purple for speaking
-    if (isConnected) return 'rgba(79, 70, 229, 0.5)'; // Enhanced indigo for connected
-    return 'rgba(79, 70, 229, 0.3)'; // Default indigo
+    if (isProcessing) return 'rgba(20, 184, 166, 0.4)'; // Teal for processing
+    if (isListening) return 'rgba(34, 197, 94, 0.4)'; // Green for listening
+    if (isSpeaking) return 'rgba(185, 120, 70, 0.4)'; // Copper for speaking
+    if (isConnected) return 'rgba(185, 120, 70, 0.3)'; // Copper for connected
+    return 'rgba(185, 120, 70, 0.2)'; // Default copper
   };
 
   const getIconColor = () => {
     // Timer warning: less than 30 seconds remaining
     if (isTimerActive && timeRemaining !== null && timeRemaining <= 30) {
-      return 'text-red-600'; // Red icon for timer warning
+      return 'text-red-500'; // Red icon for timer warning
     }
     
-    if (isProcessing) return 'text-blue-600';
-    if (isListening) return 'text-green-600';
-    if (isSpeaking) return 'text-purple-600';
-    if (isConnected) return 'text-indigo-600';
-    return 'text-indigo-600';
+    if (isProcessing) return 'text-glass-teal';
+    if (isListening) return 'text-emerald-500';
+    if (isSpeaking) return 'text-glass-copper';
+    if (isConnected) return 'text-glass-copper';
+    return 'text-glass-copper';
   };
 
   const getBackgroundGradient = () => {
     // Timer warning: less than 30 seconds remaining
     if (isTimerActive && timeRemaining !== null && timeRemaining <= 30) {
-      return 'from-red-500/20 to-orange-600/20'; // Red gradient for timer warning
+      return 'from-red-500/15 to-orange-500/15'; // Red gradient for timer warning
     }
     
-    if (isProcessing) return 'from-blue-500/20 to-blue-600/20';
-    if (isListening) return 'from-green-500/20 to-emerald-600/20';
-    if (isSpeaking) return 'from-purple-500/20 to-violet-600/20';
-    if (isConnected) return 'from-indigo-500/20 to-purple-600/20';
-    return 'from-indigo-500/20 to-purple-600/20';
+    if (isProcessing) return 'from-glass-teal/15 to-emerald-400/15';
+    if (isListening) return 'from-emerald-400/15 to-green-400/15';
+    if (isSpeaking) return 'from-glass-copper/15 to-glass-amber/15';
+    if (isConnected) return 'from-glass-copper/15 to-glass-amber/15';
+    return 'from-glass-copper/10 to-glass-amber/10';
   };
 
   // Adjust glow intensity for mobile
   const getGlowIntensity = () => {
     if (isMobile) {
-      return '0 0 30px'; // Reduced glow on mobile for better performance
+      return '0 0 25px'; // Reduced glow on mobile for better performance
     }
-    return '0 0 40px';
+    return '0 0 35px';
   };
 
   // Adjust status indicator size for mobile
@@ -217,22 +213,22 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
         disabled={isProcessing}
         className={getButtonClasses()}
         style={{
-          boxShadow: `${getGlowIntensity()} ${getGlowColor()}, 0 8px 32px rgba(0, 0, 0, 0.1)`,
+          boxShadow: `${getGlowIntensity()} ${getGlowColor()}, 0 8px 32px rgba(0, 0, 0, 0.08)`,
         }}
         role="button"
         aria-label={isActive ? "Stop voice chat" : "Start voice chat"}
       >
         {/* Enhanced background gradient */}
-        <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${getBackgroundGradient()} opacity-30`} />
+        <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${getBackgroundGradient()} opacity-50`} />
         
         {/* Ripple effect */}
         {isClicked && (
-          <div className="absolute inset-0 rounded-full border-2 border-indigo-500 animate-ripple" />
+          <div className="absolute inset-0 rounded-full border-2 border-glass-copper/50 animate-ripple" />
         )}
         
         {/* Enhanced status indicator - responsive sizing */}
         {isActive && (
-          <div className={`absolute ${getStatusIndicatorSize()} bg-green-500 rounded-full animate-pulse shadow-lg shadow-green-500/50`} />
+          <div className={`absolute ${getStatusIndicatorSize()} bg-emerald-400 rounded-full animate-pulse shadow-lg shadow-emerald-400/50`} />
         )}
         
         {/* Mic icon with enhanced styling */}

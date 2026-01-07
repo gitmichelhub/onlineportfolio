@@ -76,11 +76,11 @@ const BlogSection: React.FC<BlogSectionProps> = ({ isVoiceActive = false }) => {
   const posts = t[language].posts;
 
   return (
-    <section id="blog" className="min-h-screen py-20 bg-gradient-to-br from-slate-50 to-blue-50">
+    <section id="blog" className="min-h-screen py-20 bg-gradient-to-br from-glass-light via-white to-glass-cream">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16 animate-fade-up">
-          <h2 className="text-4xl font-semibold text-slate-900 mb-4">{t[language].sectionTitle}</h2>
-          <p className="text-xl text-slate-600">
+          <h2 className="text-4xl font-semibold text-glass-dark mb-4 font-playfair">{t[language].sectionTitle}</h2>
+          <p className="text-xl text-glass-muted">
             {t[language].subtitle}
           </p>
         </div>
@@ -94,10 +94,10 @@ const BlogSection: React.FC<BlogSectionProps> = ({ isVoiceActive = false }) => {
             >
               <div className="flex flex-col space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="px-3 py-1 bg-indigo-100 text-indigo-700 text-sm rounded-full font-medium">
+                  <span className="px-3 py-1 bg-glass-copper/10 text-glass-copper text-sm rounded-full font-medium border border-glass-copper/20">
                     {post.category}
                   </span>
-                  <div className="flex items-center space-x-4 text-sm text-slate-500">
+                  <div className="flex items-center space-x-4 text-sm text-glass-muted">
                     <div className="flex items-center space-x-1">
                       <Calendar size={14} />
                       <span>{post.date}</span>
@@ -106,11 +106,11 @@ const BlogSection: React.FC<BlogSectionProps> = ({ isVoiceActive = false }) => {
                   </div>
                 </div>
 
-                <h3 className="text-2xl font-semibold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                <h3 className="text-2xl font-semibold text-glass-dark group-hover:text-glass-copper transition-colors font-playfair">
                   {post.title}
                 </h3>
 
-                <p className="text-slate-600 leading-relaxed">
+                <p className="text-glass-muted leading-relaxed">
                   {post.excerpt}
                 </p>
 
@@ -120,7 +120,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({ isVoiceActive = false }) => {
                       href={`/blog/${post.slug}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center space-x-2 text-indigo-600 hover:text-indigo-700 transition-colors font-medium"
+                      className="flex items-center space-x-2 text-glass-copper hover:text-glass-amber transition-colors font-medium"
                       title="Opens in new tab (voice assistant active)"
                     >
                       <span>{t[language].readMore}</span>
@@ -129,7 +129,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({ isVoiceActive = false }) => {
                   ) : (
                     <Link 
                       to={`/blog/${post.slug}`}
-                      className="flex items-center space-x-2 text-indigo-600 hover:text-indigo-700 transition-colors font-medium"
+                      className="flex items-center space-x-2 text-glass-copper hover:text-glass-amber transition-colors font-medium"
                     >
                       <span>{t[language].readMore}</span>
                       <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />

@@ -64,23 +64,26 @@ const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversati
              style={{ animationDelay: '2s', transform: 'rotate(-20deg)' }} />
         <div className="floating-shape absolute top-1/2 left-10 w-32 h-32 rounded-full animate-float" 
              style={{ animationDelay: '4s', transform: 'rotate(15deg)' }} />
+        {/* Subtle light beams */}
+        <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-glass-copper/10 via-glass-copper/5 to-transparent" />
+        <div className="absolute top-0 right-1/3 w-px h-full bg-gradient-to-b from-glass-teal/10 via-transparent to-glass-teal/5" />
       </div>
 
-      {/* White glass overlay */}
-      <div className="absolute inset-0 bg-white/30 backdrop-blur-sm" />
+      {/* Soft light overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-transparent to-white/20" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left side - Text content */}
           <div className="text-center lg:text-left animate-fade-up">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-slate-900 mb-6 leading-tight">
-              {t[language].headline}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-glass-dark mb-6 leading-tight font-playfair">
+              <span className="text-gradient-warm">{t[language].headline}</span>
             </h1>
-            <p className="text-xl sm:text-2xl text-slate-600 mb-8 leading-relaxed">
+            <p className="text-xl sm:text-2xl text-glass-dark/60 mb-8 leading-relaxed">
               {t[language].subtitle}
             </p>
             <div className="hidden lg:block">
-              <p className="text-lg text-slate-500 max-w-md">
+              <p className="text-lg text-glass-muted max-w-md">
                 {t[language].info}
               </p>
             </div>

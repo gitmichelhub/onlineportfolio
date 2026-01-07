@@ -40,12 +40,12 @@ const Imprint: React.FC = () => {
   const t = content[language];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-20 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-glass-light via-white to-glass-cream py-20 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Back Button */}
         <Link 
           to="/" 
-          className="inline-flex items-center space-x-2 text-slate-600 hover:text-slate-800 transition-colors mb-8"
+          className="inline-flex items-center space-x-2 text-glass-muted hover:text-glass-copper transition-colors mb-8"
         >
           <ArrowLeft size={20} />
           <span>{t.back}</span>
@@ -53,23 +53,23 @@ const Imprint: React.FC = () => {
 
         {/* Main Content */}
         <div className="glass rounded-2xl p-8">
-          <h1 className="text-4xl font-bold text-slate-800 mb-8">{t.title}</h1>
+          <h1 className="text-4xl font-bold text-glass-dark mb-8 font-playfair">{t.title}</h1>
           
           <div className="space-y-8">
             {/* Contact Information */}
             <section>
-              <h2 className="text-2xl font-semibold text-slate-700 mb-4">{t.contact}</h2>
-              <div className="space-y-2 text-slate-600">
-                <p><strong>{t.name}:</strong> Michel Werner</p>
-                <p><strong>{t.address}:</strong> Gliesmaroder Straße 30, Braunschweig</p>
-                <p><strong>{t.email}:</strong> michel.tech.user@gmail.com</p>
+              <h2 className="text-2xl font-semibold text-glass-dark mb-4 font-playfair">{t.contact}</h2>
+              <div className="space-y-2 text-glass-muted">
+                <p><strong className="text-glass-dark">{t.name}:</strong> Michel Werner</p>
+                <p><strong className="text-glass-dark">{t.address}:</strong> Gliesmaroder Straße 30, Braunschweig</p>
+                <p><strong className="text-glass-dark">{t.email}:</strong> <a href="mailto:michel.tech.user@gmail.com" className="text-glass-copper hover:text-glass-amber transition-colors">michel.tech.user@gmail.com</a></p>
               </div>
             </section>
 
             {/* Responsibility */}
             <section>
-              <h2 className="text-2xl font-semibold text-slate-700 mb-4">{t.responsibility}</h2>
-              <p className="text-slate-600">
+              <h2 className="text-2xl font-semibold text-glass-dark mb-4 font-playfair">{t.responsibility}</h2>
+              <p className="text-glass-muted">
                 Michel Werner<br />
                 Gliesmaroder Straße 30, Braunschweig
               </p>
@@ -77,14 +77,14 @@ const Imprint: React.FC = () => {
 
             {/* Disclaimer */}
             <section>
-              <h2 className="text-2xl font-semibold text-slate-700 mb-4">{t.disclaimer}</h2>
-              <p className="text-slate-600 leading-relaxed">{t.disclaimerText}</p>
+              <h2 className="text-2xl font-semibold text-glass-dark mb-4 font-playfair">{t.disclaimer}</h2>
+              <p className="text-glass-muted leading-relaxed">{t.disclaimerText}</p>
             </section>
 
             {/* Copyright */}
             <section>
-              <h2 className="text-2xl font-semibold text-slate-700 mb-4">{t.copyright}</h2>
-              <p className="text-slate-600 leading-relaxed">{t.copyrightText}</p>
+              <h2 className="text-2xl font-semibold text-glass-dark mb-4 font-playfair">{t.copyright}</h2>
+              <p className="text-glass-muted leading-relaxed">{t.copyrightText}</p>
             </section>
           </div>
         </div>
@@ -93,4 +93,4 @@ const Imprint: React.FC = () => {
   );
 };
 
-export default Imprint; 
+export default Imprint;
