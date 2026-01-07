@@ -65,17 +65,21 @@ export const getElevenLabsAgentId = (language: 'en' | 'de'): string => {
   if (language === 'de') {
     const germanAgentId = getEnvVar('VITE_ELEVENLABS_GERMAN_AGENT_ID');
     if (!germanAgentId) {
-      console.warn('⚠️ VITE_ELEVENLABS_GERMAN_AGENT_ID not found in environment variables');
+      console.error('❌ VITE_ELEVENLABS_GERMAN_AGENT_ID not found in environment variables');
       // Fallback to English agent if German agent is not configured
-      return getEnvVar('VITE_ELEVENLABS_ENGLISH_AGENT_ID') || 'agent_01jynqjwg7f77aendk120trhj5';
+      const englishAgentId = getEnvVar('VITE_ELEVENLABS_ENGLISH_AGENT_ID');
+      if (!englishAgentId) {
+        throw new Error('ElevenLabs agent IDs are not configured. Please set VITE_ELEVENLABS_ENGLISH_AGENT_ID and/or VITE_ELEVENLABS_GERMAN_AGENT_ID in your .env.local file.');
+      }
+      return englishAgentId;
     }
     return germanAgentId;
   } else {
     // Default to English agent
     const englishAgentId = getEnvVar('VITE_ELEVENLABS_ENGLISH_AGENT_ID');
     if (!englishAgentId) {
-      console.warn('⚠️ VITE_ELEVENLABS_ENGLISH_AGENT_ID not found in environment variables');
-      return 'agent_01jynqjwg7f77aendk120trhj5';
+      console.error('❌ VITE_ELEVENLABS_ENGLISH_AGENT_ID not found in environment variables');
+      throw new Error('ElevenLabs English agent ID is not configured. Please set VITE_ELEVENLABS_ENGLISH_AGENT_ID in your .env.local file.');
     }
     return englishAgentId;
   }
