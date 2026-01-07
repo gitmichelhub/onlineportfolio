@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import VoiceOrb from './VoiceOrb';
+import VoiceConsentDialog from './VoiceConsentDialog';
 import { useLanguage } from "@/hooks/use-language";
 
 interface HeroSectionProps {
@@ -21,6 +22,8 @@ interface HeroSectionProps {
 
 const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversation, stopConversation, forceStopConversation, testConnection, isActive, callDuration, isTimerActive }) => {
   const { language } = useLanguage();
+  const [showConsentDialog, setShowConsentDialog] = useState(false);
+  const [hasConsented, setHasConsented] = useState(false);
 
   const handleVoiceToggle = async () => {
     try {
@@ -33,12 +36,27 @@ const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversati
           await forceStopConversation();
         }
       } else {
+        // Show consent dialog if user hasn't consented yet
+        if (!hasConsented) {
+          setShowConsentDialog(true);
+          return;
+        }
         // Test connection first
         await testConnection();
         await startConversation();
       }
     } catch (err) {
       console.error('Voice interaction error:', err);
+    }
+  };
+
+  const handleConsentAgree = async () => {
+    setHasConsented(true);
+    try {
+      await testConnection();
+      await startConversation();
+    } catch (err) {
+      console.error('Voice interaction error after consent:', err);
     }
   };
   const t = {
@@ -99,6 +117,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversati
           </div>
         </div>
       </div>
+
+      {/* Voice Consent Dialog */}
+      <VoiceConsentDialog
+        open={showConsentDialog}
+        onOpenChange={setShowConsentDialog}
+        onAgree={handleConsentAgree}
+      />
     </section>
   );
 };
