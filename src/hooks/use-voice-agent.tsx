@@ -27,8 +27,6 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
   const [isProcessing, setIsProcessing] = useState(false);
   const [callDuration, setCallDuration] = useState<number | null>(null);
   const [isTimerActive, setIsTimerActive] = useState(false);
-  const [isUserSpeaking, setIsUserSpeaking] = useState(false);
-  const [isAgentSpeaking, setIsAgentSpeaking] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Debug: Log when useConversation is called
@@ -38,12 +36,10 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
   }, [options.agentId]);
 
   const conversation = useConversation({
-    agentId: options.agentId,
     onConnect: () => {
       console.log('[VoiceAgent] Connected to ElevenLabs agent');
       setError(null);
       setIsProcessing(false);
-      setIsAgentSpeaking(false);
       // Start the duration counter from 0
       setCallDuration(0);
       setIsTimerActive(true);
@@ -52,55 +48,20 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
       console.log('[VoiceAgent] Disconnected from ElevenLabs agent');
       setError(null);
       setIsProcessing(false);
-      setIsUserSpeaking(false);
-      setIsAgentSpeaking(false);
       // Stop the timer when disconnected
       setIsTimerActive(false);
       setCallDuration(null);
     },
-    onMessage: (message) => {
-      console.log('[VoiceAgent] Agent message received:', message);
+    onMessage: (props) => {
+      console.log('[VoiceAgent] Message received:', props);
     },
-    onError: (error) => {
-      console.error('[VoiceAgent] ElevenLabs conversation error:', error);
-      setError(typeof error === 'string' ? error : 'Connection error');
+    onError: (message, context) => {
+      console.error('[VoiceAgent] ElevenLabs conversation error:', message, context);
+      setError(message || 'Connection error');
       setIsProcessing(false);
-      setIsUserSpeaking(false);
-      setIsAgentSpeaking(false);
       setIsTimerActive(false);
       setCallDuration(null);
       conversation.endSession().catch(console.error);
-    },
-    onAudioStart: () => {
-      console.log('[VoiceAgent] Audio started');
-    },
-    onAudioEnd: () => {
-      console.log('[VoiceAgent] Audio ended');
-      setIsAgentSpeaking(false);
-    },
-    onUserStartSpeaking: () => {
-      console.log('[VoiceAgent] User started speaking');
-      setIsUserSpeaking(true);
-    },
-    onUserStopSpeaking: () => {
-      console.log('[VoiceAgent] User stopped speaking');
-      setIsUserSpeaking(false);
-    },
-    onAgentStartSpeaking: () => {
-      console.log('[VoiceAgent] Agent started speaking');
-      setIsAgentSpeaking(true);
-    },
-    onAgentStopSpeaking: () => {
-      console.log('[VoiceAgent] Agent stopped speaking');
-      setIsAgentSpeaking(false);
-    },
-    audioConfig: {
-      inputDeviceId: undefined,
-      outputDeviceId: undefined,
-      sampleRate: 8000,
-      echoCancellation: true,
-      noiseSuppression: true,
-      autoGainControl: true,
     },
   });
 
@@ -130,24 +91,27 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
         console.log('[VoiceAgent] Ending session on component unmount');
         conversation.endSession().catch(console.error);
       }
-      setIsUserSpeaking(false);
-      setIsAgentSpeaking(false);
     };
-  }, []);
+  }, [conversation]);
 
   const startConversation = useCallback(async () => {
     console.log('[VoiceAgent] startConversation called');
     
     try {
+      if (!options.agentId) {
+        throw new Error('Agent ID is required');
+      }
+
       setError(null);
       setIsProcessing(true);
-      setIsUserSpeaking(false);
-      setIsAgentSpeaking(false);
       setCallDuration(null);
       setIsTimerActive(false);
 
+      await navigator.mediaDevices.getUserMedia({ audio: true });
+
       const sessionId = await conversation.startSession({
         agentId: options.agentId,
+        connectionType: 'webrtc',
       });
       console.log('[VoiceAgent] Conversation session started with ID:', sessionId);
     } catch (err) {
@@ -155,8 +119,6 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
       console.error('[VoiceAgent] Failed to start conversation:', err);
       setError(errorMessage);
       setIsProcessing(false);
-      setIsUserSpeaking(false);
-      setIsAgentSpeaking(false);
       setCallDuration(null);
       setIsTimerActive(false);
     }
@@ -169,8 +131,6 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
       setCallDuration(null);
       setError(null);
       setIsProcessing(false);
-      setIsUserSpeaking(false);
-      setIsAgentSpeaking(false);
       
       await conversation.endSession();
       console.log('[VoiceAgent] Conversation stopped successfully');
@@ -180,8 +140,6 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
       setIsProcessing(false);
       setIsTimerActive(false);
       setCallDuration(null);
-      setIsUserSpeaking(false);
-      setIsAgentSpeaking(false);
     }
   }, [conversation]);
 
@@ -192,8 +150,6 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
     setIsProcessing(false);
     setIsTimerActive(false);
     setCallDuration(null);
-    setIsUserSpeaking(false);
-    setIsAgentSpeaking(false);
     
     if (timerRef.current) {
       clearInterval(timerRef.current);
@@ -224,16 +180,14 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
 
   const state = {
     isConnected: conversation.status === 'connected',
-    isListening: conversation.status === 'connected' && !isAgentSpeaking && !isUserSpeaking,
-    isSpeaking: isAgentSpeaking,
+    isListening: conversation.status === 'connected' && !conversation.isSpeaking,
+    isSpeaking: conversation.isSpeaking,
     isProcessing,
   };
 
   // Cleanup effect that monitors connection status
   useEffect(() => {
     if (conversation.status !== 'connected') {
-      setIsAgentSpeaking(false);
-      setIsUserSpeaking(false);
       setIsProcessing(false);
       setIsTimerActive(false);
       setCallDuration(null);

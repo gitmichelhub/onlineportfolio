@@ -60,32 +60,26 @@ export const ELEVENLABS_CONFIG = {
   },
 } as const;
 
+const DEFAULT_AGENT_IDS = {
+  en: 'agent_3501k22cm910e4y8raq2cs3xx0nr', // Portfolio_test_2
+  de: 'agent_5901k24kk6mrfg3btpgnmpxabv95', // Portfolio_test_1_DE
+} as const;
+
 // Function to get the appropriate agent ID based on language
 export const getElevenLabsAgentId = (language: 'en' | 'de'): string => {
   if (language === 'de') {
     const germanAgentId = getEnvVar('VITE_ELEVENLABS_GERMAN_AGENT_ID');
     if (!germanAgentId) {
-      console.error('❌ VITE_ELEVENLABS_GERMAN_AGENT_ID not found in environment variables');
-      console.error('   Falling back to English agent ID...');
-      // Fallback to English agent if German agent is not configured
-      const englishAgentId = getEnvVar('VITE_ELEVENLABS_ENGLISH_AGENT_ID');
-      if (!englishAgentId) {
-        console.error('❌ VITE_ELEVENLABS_ENGLISH_AGENT_ID not found in environment variables');
-        console.error('   Voice agent will not work. Please set VITE_ELEVENLABS_ENGLISH_AGENT_ID and/or VITE_ELEVENLABS_GERMAN_AGENT_ID in your .env.local file.');
-        // Return empty string to fail gracefully - voice agent will handle connection error
-        return '';
-      }
-      return englishAgentId;
+      console.warn('VITE_ELEVENLABS_GERMAN_AGENT_ID not found. Using default Portfolio_test_1_DE agent.');
+      return DEFAULT_AGENT_IDS.de;
     }
     return germanAgentId;
   } else {
     // Default to English agent
     const englishAgentId = getEnvVar('VITE_ELEVENLABS_ENGLISH_AGENT_ID');
     if (!englishAgentId) {
-      console.error('❌ VITE_ELEVENLABS_ENGLISH_AGENT_ID not found in environment variables');
-      console.error('   Voice agent will not work. Please set VITE_ELEVENLABS_ENGLISH_AGENT_ID in your .env.local file.');
-      // Return empty string to fail gracefully - voice agent will handle connection error
-      return '';
+      console.warn('VITE_ELEVENLABS_ENGLISH_AGENT_ID not found. Using default Portfolio_test_2 agent.');
+      return DEFAULT_AGENT_IDS.en;
     }
     return englishAgentId;
   }

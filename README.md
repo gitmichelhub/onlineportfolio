@@ -52,10 +52,11 @@ This project includes a conversational AI voice agent powered by ElevenLabs usin
 
 1. **Setup Requirements**:
    - Visit [ElevenLabs](https://elevenlabs.io/) and create an account
-   - Navigate to your profile settings to get your API key
    - Create a `.env.local` file in the root directory
-   - Add your API key: `VITE_ELEVENLABS_API_KEY=your_api_key_here`
-   - Configure your agent ID in `src/pages/Index.tsx`
+   - Set the two agent IDs:
+     - `VITE_ELEVENLABS_ENGLISH_AGENT_ID=agent_3501k22cm910e4y8raq2cs3xx0nr` (`Portfolio_test_2`)
+     - `VITE_ELEVENLABS_GERMAN_AGENT_ID=agent_5901k24kk6mrfg3btpgnmpxabv95` (`Portfolio_test_1_DE`)
+   - Language routing is handled in `src/config/elevenlabs.ts`
 
 2. **Usage**:
    - Click the voice orb button to start/stop conversations
@@ -67,8 +68,8 @@ This project includes a conversational AI voice agent powered by ElevenLabs usin
 
 3. **Technology**:
    - Uses the official `@elevenlabs/react` SDK
-   - Handles microphone access automatically
-   - Real-time WebSocket communication
+   - Requests microphone access before starting a session
+   - Starts sessions with WebRTC (`connectionType: "webrtc"`)
    - Automatic audio streaming and playback
 
 ## How can I deploy this project?
@@ -95,4 +96,3 @@ Vercel will automatically detect it's a Vite project and configure the build set
 Yes, you can!
 
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
