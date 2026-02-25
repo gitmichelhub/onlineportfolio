@@ -13,7 +13,7 @@ interface NavigationProps {
     isProcessing: boolean;
   };
   voiceStatusError: string | null;
-  onVoiceStatusStop: () => void;
+  onVoiceStatusStop: () => Promise<void>;
   onVoiceStatusForceStop?: () => Promise<void>;
   callDuration?: number | null;
   isTimerActive?: boolean;
@@ -66,7 +66,7 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
 
   const handleVoiceStop = async () => {
     try {
-      onVoiceStatusStop();
+      await onVoiceStatusStop();
     } catch (err) {
       console.error('Normal stop failed, trying force stop:', err);
       if (onVoiceStatusForceStop) {

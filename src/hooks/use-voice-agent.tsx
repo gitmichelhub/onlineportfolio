@@ -13,7 +13,7 @@ interface UseVoiceAgentReturn {
     isProcessing: boolean;
   };
   startConversation: () => Promise<void>;
-  stopConversation: () => void;
+  stopConversation: () => Promise<void>;
   forceStopConversation: () => Promise<void>;
   testConnection: () => Promise<void>;
   isActive: boolean;
@@ -28,6 +28,8 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
   const [callDuration, setCallDuration] = useState<number | null>(null);
   const [isTimerActive, setIsTimerActive] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const isStartingRef = useRef(false);
+  const lastAgentIdRef = useRef<string | null>(null);
 
   // Debug: Log when useConversation is called
   useEffect(() => {
@@ -61,7 +63,6 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
       setIsProcessing(false);
       setIsTimerActive(false);
       setCallDuration(null);
-      conversation.endSession().catch(console.error);
     },
   });
 
@@ -94,20 +95,52 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
     };
   }, [conversation]);
 
+  // Ensure we cleanly reset a running session when the selected agent changes (e.g., DE -> EN).
+  useEffect(() => {
+    const previousAgentId = lastAgentIdRef.current;
+    lastAgentIdRef.current = options.agentId;
+
+    if (!previousAgentId || previousAgentId === options.agentId) {
+      return;
+    }
+
+    setError(null);
+    setIsProcessing(false);
+    setIsTimerActive(false);
+    setCallDuration(null);
+
+    if (conversation.status === 'connected' || conversation.status === 'connecting') {
+      conversation.endSession().catch((err) => {
+        console.error('[VoiceAgent] Failed to end session after agent switch:', err);
+      });
+    }
+  }, [options.agentId, conversation]);
+
   const startConversation = useCallback(async () => {
     console.log('[VoiceAgent] startConversation called');
     
     try {
+      if (isStartingRef.current) {
+        return;
+      }
+
       if (!options.agentId) {
         throw new Error('Agent ID is required');
       }
 
+      isStartingRef.current = true;
       setError(null);
       setIsProcessing(true);
       setCallDuration(null);
       setIsTimerActive(false);
 
-      await navigator.mediaDevices.getUserMedia({ audio: true });
+      if (conversation.status === 'connected' || conversation.status === 'connecting') {
+        await conversation.endSession();
+      }
+
+      // Permission preflight only. Close this stream immediately to avoid keeping a stale capture open.
+      const permissionStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      permissionStream.getTracks().forEach((track) => track.stop());
 
       const sessionId = await conversation.startSession({
         agentId: options.agentId,
@@ -121,6 +154,8 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
       setIsProcessing(false);
       setCallDuration(null);
       setIsTimerActive(false);
+    } finally {
+      isStartingRef.current = false;
     }
   }, [conversation, options.agentId]);
 

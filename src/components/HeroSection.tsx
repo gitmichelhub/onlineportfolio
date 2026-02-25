@@ -12,7 +12,7 @@ interface HeroSectionProps {
   };
   error: string | null;
   startConversation: () => Promise<void>;
-  stopConversation: () => void;
+  stopConversation: () => Promise<void>;
   forceStopConversation: () => Promise<void>;
   testConnection: () => Promise<void>;
   isActive: boolean;
@@ -30,7 +30,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversati
       if (isActive) {
         // Try normal stop first, then force stop if needed
         try {
-          stopConversation();
+          await stopConversation();
         } catch (err) {
           console.error('Normal stop failed, trying force stop:', err);
           await forceStopConversation();
