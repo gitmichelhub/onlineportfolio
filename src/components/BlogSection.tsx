@@ -17,9 +17,9 @@ const BlogSection: React.FC<BlogSectionProps> = ({ isVoiceActive = false }) => {
     <section id="blog" className="min-h-screen py-20 bg-gradient-to-br from-glass-light via-white to-glass-cream">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16 animate-fade-up">
-          <h2 className="text-4xl font-semibold text-glass-dark mb-4 font-playfair">{t[language].sectionTitle}</h2>
+          <h2 className="text-4xl font-semibold text-glass-dark mb-4 font-playfair">{t.sectionTitle}</h2>
           <p className="text-xl text-glass-muted">
-            {t[language].subtitle}
+            {t.subtitle}
           </p>
         </div>
 
@@ -61,7 +61,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({ isVoiceActive = false }) => {
                       className="flex items-center space-x-2 text-glass-copper hover:text-glass-amber transition-colors font-medium"
                       title="Opens in new tab (voice assistant active)"
                     >
-                      <span>{t[language].readMore}</span>
+                      <span>{t.readMore}</span>
                       <ExternalLink size={16} className="transition-transform group-hover:translate-x-1" />
                     </a>
                   ) : (
@@ -69,7 +69,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({ isVoiceActive = false }) => {
                       to={`/blog/${post.slug}`}
                       className="flex items-center space-x-2 text-glass-copper hover:text-glass-amber transition-colors font-medium"
                     >
-                      <span>{t[language].readMore}</span>
+                      <span>{t.readMore}</span>
                       <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
                     </Link>
                   )}
