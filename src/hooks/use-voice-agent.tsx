@@ -30,6 +30,7 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const isStartingRef = useRef(false);
   const lastAgentIdRef = useRef<string | null>(null);
+  const conversationRef = useRef<ReturnType<typeof useConversation> | null>(null);
 
   // Debug: Log when useConversation is called
   useEffect(() => {
@@ -66,6 +67,11 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
     },
   });
 
+  // Keep a stable reference to the latest conversation object.
+  useEffect(() => {
+    conversationRef.current = conversation;
+  }, [conversation]);
+
   // Duration counter effect - counts UP instead of down
   useEffect(() => {
     if (isTimerActive) {
@@ -81,19 +87,20 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
     };
   }, [isTimerActive]);
 
-  // Cleanup effect when component unmounts
+  // Cleanup only on real component unmount.
   useEffect(() => {
     return () => {
       console.log('[VoiceAgent] Component unmounting, cleaning up...');
       if (timerRef.current) {
         clearInterval(timerRef.current);
       }
-      if (conversation.status === 'connected') {
+      const currentConversation = conversationRef.current;
+      if (currentConversation?.status === 'connected' || currentConversation?.status === 'connecting') {
         console.log('[VoiceAgent] Ending session on component unmount');
-        conversation.endSession().catch(console.error);
+        currentConversation.endSession().catch(console.error);
       }
     };
-  }, [conversation]);
+  }, []);
 
   // Ensure we cleanly reset a running session when the selected agent changes (e.g., DE -> EN).
   useEffect(() => {
