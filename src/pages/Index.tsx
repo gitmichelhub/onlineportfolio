@@ -12,7 +12,7 @@ import { useLanguage } from '@/hooks/use-language';
 const Index = () => {
   const { language } = useLanguage();
   const [currentSection, setCurrentSection] = useState('voice');
-  const { state, startConversation, stopConversation, forceStopConversation, testConnection, isActive, error, callDuration, isTimerActive } = useVoiceAgent({
+  const { state, startConversation, stopConversation, forceStopConversation, testConnection, isActive, error, info, callDuration, isTimerActive } = useVoiceAgent({
     agentId: getElevenLabsAgentId(language),
   });
 
@@ -44,6 +44,7 @@ const Index = () => {
         onSectionChange={setCurrentSection}
         voiceStatusState={state}
         voiceStatusError={error}
+        voiceStatusInfo={info}
         onVoiceStatusStop={stopConversation}
         onVoiceStatusForceStop={forceStopConversation}
         callDuration={callDuration}

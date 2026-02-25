@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { Mic, MicOff } from 'lucide-react';
 
 interface VoiceAgentState {
+  isConnecting: boolean;
   isConnected: boolean;
   isListening: boolean;
   isSpeaking: boolean;

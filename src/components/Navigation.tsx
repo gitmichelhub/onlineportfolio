@@ -7,19 +7,21 @@ interface NavigationProps {
   currentSection: string;
   onSectionChange: (section: string) => void;
   voiceStatusState: {
+    isConnecting: boolean;
     isConnected: boolean;
     isListening: boolean;
     isSpeaking: boolean;
     isProcessing: boolean;
   };
   voiceStatusError: string | null;
+  voiceStatusInfo?: string | null;
   onVoiceStatusStop: () => Promise<void>;
   onVoiceStatusForceStop?: () => Promise<void>;
   callDuration?: number | null;
   isTimerActive?: boolean;
 }
 
-const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange, voiceStatusState, voiceStatusError, onVoiceStatusStop, onVoiceStatusForceStop, callDuration, isTimerActive }) => {
+const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange, voiceStatusState, voiceStatusError, voiceStatusInfo, onVoiceStatusStop, onVoiceStatusForceStop, callDuration, isTimerActive }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { language, setLanguage } = useLanguage();
@@ -133,6 +135,7 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
               <VoiceStatus 
                 state={voiceStatusState} 
                 error={voiceStatusError} 
+                info={voiceStatusInfo}
                 onStop={handleVoiceStop}
                 callDuration={callDuration}
                 isTimerActive={isTimerActive}
@@ -218,6 +221,7 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
                 <VoiceStatus 
                   state={voiceStatusState} 
                   error={voiceStatusError} 
+                  info={voiceStatusInfo}
                   onStop={handleVoiceStop}
                   callDuration={callDuration}
                   isTimerActive={isTimerActive}

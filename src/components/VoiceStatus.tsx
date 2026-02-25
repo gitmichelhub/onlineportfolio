@@ -1,24 +1,26 @@
 import React from 'react';
-import { Mic, Volume2, Loader2, Wifi, WifiOff, AlertCircle, Clock, X } from 'lucide-react';
+import { Mic, Volume2, Loader2, Wifi, WifiOff, AlertCircle, Clock, X, CheckCircle2 } from 'lucide-react';
 
 interface VoiceStatusProps {
   state: {
+    isConnecting: boolean;
     isConnected: boolean;
     isListening: boolean;
     isSpeaking: boolean;
     isProcessing: boolean;
   };
   error: string | null;
+  info?: string | null;
   onStop?: () => void;
   callDuration?: number | null;
   isTimerActive?: boolean;
 }
 
-const VoiceStatus: React.FC<VoiceStatusProps> = ({ state, error, onStop, callDuration, isTimerActive }) => {
-  const isActive = state.isConnected || state.isListening || state.isSpeaking || state.isProcessing;
+const VoiceStatus: React.FC<VoiceStatusProps> = ({ state, error, info, onStop, callDuration, isTimerActive }) => {
+  const isActive = state.isConnecting || state.isConnected || state.isListening || state.isSpeaking || state.isProcessing;
 
   // Don't render anything if not active
-  if (!isActive && !error) {
+  if (!isActive && !error && !info) {
     return null;
   }
 
@@ -38,6 +40,15 @@ const VoiceStatus: React.FC<VoiceStatusProps> = ({ state, error, onStop, callDur
         borderColor: 'border-red-200'
       };
     }
+    if (state.isConnecting) {
+      return {
+        icon: <Loader2 size={16} className="text-glass-teal animate-spin" />,
+        text: 'Connecting...',
+        color: 'text-glass-teal',
+        bgColor: 'bg-teal-100',
+        borderColor: 'border-teal-200'
+      };
+    }
     if (state.isProcessing) {
       return {
         icon: <Loader2 size={16} className="text-glass-teal animate-spin" />,
@@ -45,6 +56,15 @@ const VoiceStatus: React.FC<VoiceStatusProps> = ({ state, error, onStop, callDur
         color: 'text-glass-teal',
         bgColor: 'bg-teal-100',
         borderColor: 'border-teal-200'
+      };
+    }
+    if (info) {
+      return {
+        icon: <CheckCircle2 size={16} className="text-emerald-600" />,
+        text: info,
+        color: 'text-emerald-600',
+        bgColor: 'bg-emerald-100',
+        borderColor: 'border-emerald-200'
       };
     }
     if (state.isSpeaking) {

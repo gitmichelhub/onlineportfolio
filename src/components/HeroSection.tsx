@@ -5,6 +5,7 @@ import { useLanguage } from "@/hooks/use-language";
 
 interface HeroSectionProps {
   state: {
+    isConnecting: boolean;
     isConnected: boolean;
     isListening: boolean;
     isSpeaking: boolean;
