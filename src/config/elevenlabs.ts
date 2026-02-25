@@ -89,7 +89,8 @@ export const getElevenLabsAgentId = (language: 'en' | 'de'): string => {
 function getEnvVar(key: string): string | undefined {
   try {
     // Try to access Vite environment variables
-    return (import.meta as any).env?.[key];
+    const env = (import.meta as ImportMeta & { env?: Record<string, string | undefined> }).env;
+    return env?.[key];
   } catch {
     // Fallback for environments where import.meta.env is not available
     return undefined;

@@ -23,7 +23,14 @@ export default tseslint.config(
         "warn",
         { allowConstantExport: true },
       ],
+      "@typescript-eslint/no-unused-expressions": "off",
       "@typescript-eslint/no-unused-vars": "off",
     },
-  }
+  },
+  {
+    files: ["src/components/ui/**/*.{ts,tsx}", "src/hooks/use-language.tsx"],
+    rules: {
+      "react-refresh/only-export-components": "off",
+    },
+  },
 );

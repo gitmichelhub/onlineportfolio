@@ -5,6 +5,7 @@ import { useLanguage } from "@/hooks/use-language";
 const ContactSection: React.FC = () => {
   const { language } = useLanguage();
   const [copied, setCopied] = useState(false);
+  const copiedTimeoutRef = React.useRef<number | null>(null);
 
   const t = {
     en: {
@@ -27,7 +28,10 @@ const ContactSection: React.FC = () => {
     try {
       await navigator.clipboard.writeText(email);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      if (copiedTimeoutRef.current) {
+        window.clearTimeout(copiedTimeoutRef.current);
+      }
+      copiedTimeoutRef.current = window.setTimeout(() => setCopied(false), 2000);
     } catch (error) {
       // Fallback for older browsers
       const textArea = document.createElement('textarea');
@@ -37,9 +41,20 @@ const ContactSection: React.FC = () => {
       document.execCommand('copy');
       document.body.removeChild(textArea);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      if (copiedTimeoutRef.current) {
+        window.clearTimeout(copiedTimeoutRef.current);
+      }
+      copiedTimeoutRef.current = window.setTimeout(() => setCopied(false), 2000);
     }
   };
+
+  React.useEffect(() => {
+    return () => {
+      if (copiedTimeoutRef.current) {
+        window.clearTimeout(copiedTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <section id="contact" className="min-h-screen py-20 bg-white/50">

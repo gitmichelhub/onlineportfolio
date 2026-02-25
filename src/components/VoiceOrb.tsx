@@ -24,6 +24,7 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
   const [isClicked, setIsClicked] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const clickTimeoutRef = React.useRef<number | null>(null);
 
   const STICKY_THRESHOLD = 100;
 
@@ -43,6 +44,9 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
     window.addEventListener('resize', handleResize);
     
     return () => {
+      if (clickTimeoutRef.current) {
+        window.clearTimeout(clickTimeoutRef.current);
+      }
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
     };
@@ -50,7 +54,10 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
 
   const handleClick = () => {
     setIsClicked(true);
-    setTimeout(() => setIsClicked(false), 600);
+    if (clickTimeoutRef.current) {
+      window.clearTimeout(clickTimeoutRef.current);
+    }
+    clickTimeoutRef.current = window.setTimeout(() => setIsClicked(false), 600);
     onToggle();
   };
 
@@ -88,7 +95,7 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
   const isListening = state.isListening;
   const isSpeaking = state.isSpeaking;
   const isConnected = state.isConnected;
-  const isActive = isListening || isSpeaking || isProcessing;
+  const isActive = state.isConnecting || isListening || isSpeaking || isProcessing;
 
   const getButtonClasses = () => {
     let baseClasses = `${getOrbSize()} rounded-full glass flex items-center justify-center transition-all duration-300 ease-out group relative overflow-hidden`;

@@ -37,13 +37,17 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
 
   // Debug: Log when useConversation is called
   useEffect(() => {
-    console.log('[VoiceAgent] useVoiceAgent hook called');
-    console.log('[VoiceAgent] agentId:', options.agentId);
+    if (import.meta.env.DEV) {
+      console.log('[VoiceAgent] useVoiceAgent hook called');
+      console.log('[VoiceAgent] agentId:', options.agentId);
+    }
   }, [options.agentId]);
 
   const conversation = useConversation({
     onConnect: () => {
-      console.log('[VoiceAgent] Connected to ElevenLabs agent');
+      if (import.meta.env.DEV) {
+        console.log('[VoiceAgent] Connected to ElevenLabs agent');
+      }
       setError(null);
       setInfo(null);
       setIsProcessing(false);
@@ -52,7 +56,9 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
       setIsTimerActive(true);
     },
     onDisconnect: (details) => {
-      console.log('[VoiceAgent] Disconnected from ElevenLabs agent', details);
+      if (import.meta.env.DEV) {
+        console.log('[VoiceAgent] Disconnected from ElevenLabs agent', details);
+      }
       setError(null);
       setIsProcessing(false);
       // Stop the timer when disconnected
@@ -64,7 +70,9 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
       }
     },
     onMessage: (props) => {
-      console.log('[VoiceAgent] Message received:', props);
+      if (import.meta.env.DEV) {
+        console.log('[VoiceAgent] Message received:', props);
+      }
     },
     onError: (message, context) => {
       console.error('[VoiceAgent] ElevenLabs conversation error:', message, context);
@@ -99,13 +107,17 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
   // Cleanup only on real component unmount.
   useEffect(() => {
     return () => {
-      console.log('[VoiceAgent] Component unmounting, cleaning up...');
+      if (import.meta.env.DEV) {
+        console.log('[VoiceAgent] Component unmounting, cleaning up...');
+      }
       if (timerRef.current) {
         clearInterval(timerRef.current);
       }
       const currentConversation = conversationRef.current;
       if (currentConversation?.status === 'connected' || currentConversation?.status === 'connecting') {
-        console.log('[VoiceAgent] Ending session on component unmount');
+        if (import.meta.env.DEV) {
+          console.log('[VoiceAgent] Ending session on component unmount');
+        }
         currentConversation.endSession().catch(console.error);
       }
     };
@@ -134,7 +146,9 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
   }, [options.agentId, conversation]);
 
   const startConversation = useCallback(async () => {
-    console.log('[VoiceAgent] startConversation called');
+    if (import.meta.env.DEV) {
+      console.log('[VoiceAgent] startConversation called');
+    }
     
     try {
       if (isStartingRef.current) {
@@ -164,7 +178,9 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
         agentId: options.agentId,
         connectionType: 'webrtc',
       });
-      console.log('[VoiceAgent] Conversation session started with ID:', sessionId);
+      if (import.meta.env.DEV) {
+        console.log('[VoiceAgent] Conversation session started with ID:', sessionId);
+      }
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to start conversation';
       console.error('[VoiceAgent] Failed to start conversation:', err);
@@ -179,7 +195,9 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
   }, [conversation, options.agentId]);
 
   const stopConversation = useCallback(async () => {
-    console.log('[VoiceAgent] stopConversation called');
+    if (import.meta.env.DEV) {
+      console.log('[VoiceAgent] stopConversation called');
+    }
     try {
       setIsTimerActive(false);
       setCallDuration(null);
@@ -188,7 +206,9 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
       setIsProcessing(false);
       
       await conversation.endSession();
-      console.log('[VoiceAgent] Conversation stopped successfully');
+      if (import.meta.env.DEV) {
+        console.log('[VoiceAgent] Conversation stopped successfully');
+      }
     } catch (err) {
       console.error('[VoiceAgent] Failed to stop conversation:', err);
       setError(null);
@@ -199,7 +219,9 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
   }, [conversation]);
 
   const forceStopConversation = useCallback(async () => {
-    console.log('[VoiceAgent] forceStopConversation called');
+    if (import.meta.env.DEV) {
+      console.log('[VoiceAgent] forceStopConversation called');
+    }
     
     setError(null);
     setInfo(null);
@@ -222,7 +244,9 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
         timeoutPromise
       ]);
       
-      console.log('[VoiceAgent] Conversation force stopped successfully');
+      if (import.meta.env.DEV) {
+        console.log('[VoiceAgent] Conversation force stopped successfully');
+      }
     } catch (err) {
       console.error('[VoiceAgent] Force stop conversation error:', err);
     }

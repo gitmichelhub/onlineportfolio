@@ -22,7 +22,6 @@ interface NavigationProps {
 }
 
 const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange, voiceStatusState, voiceStatusError, voiceStatusInfo, onVoiceStatusStop, onVoiceStatusForceStop, callDuration, isTimerActive }) => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { language, setLanguage } = useLanguage();
 
@@ -37,14 +36,6 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
     { id: 'blog', label: navLabels[language].blog },
     { id: 'contact', label: navLabels[language].contact },
   ];
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   // Close mobile menu when window is resized to desktop
   useEffect(() => {
