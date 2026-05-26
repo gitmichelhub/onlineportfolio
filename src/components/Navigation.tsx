@@ -29,6 +29,10 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
     en: { voice: "Voice AI", projects: "Projects", blog: "Blog", contact: "Contact" },
     de: { voice: "Sprach KI", projects: "Projekte", blog: "Blog", contact: "Kontakt" }
   };
+  const mobileLabels = {
+    en: { navigation: "Navigation", language: "Language", voice: "Voice AI" },
+    de: { navigation: "Navigation", language: "Sprache", voice: "Sprach KI" }
+  };
 
   const navItems = [
     { id: 'voice', label: navLabels[language].voice },
@@ -160,7 +164,7 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
           >
             {/* Navigation Items */}
             <div className="space-y-3 mb-6">
-              <h3 className="text-sm font-semibold text-glass-muted mb-3 backdrop-blur-sm">Navigation</h3>
+              <h3 className="text-sm font-semibold text-glass-muted mb-3 backdrop-blur-sm">{mobileLabels[language].navigation}</h3>
               {navItems.map((item) => (
                 <button
                   key={item.id}
@@ -178,7 +182,7 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
 
             {/* Language Switcher */}
             <div className="space-y-3 mb-6">
-              <h3 className="text-sm font-semibold text-glass-muted mb-3 backdrop-blur-sm">Language</h3>
+              <h3 className="text-sm font-semibold text-glass-muted mb-3 backdrop-blur-sm">{mobileLabels[language].language}</h3>
               <div className="flex gap-2">
                 <button
                   className={`flex-1 px-4 py-3 rounded-2xl text-sm font-semibold transition-all duration-300 ${
@@ -207,7 +211,7 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
 
             {/* Voice Status */}
             <div className="space-y-3">
-              <h3 className="text-sm font-semibold text-glass-muted mb-3 backdrop-blur-sm">Voice AI</h3>
+              <h3 className="text-sm font-semibold text-glass-muted mb-3 backdrop-blur-sm">{mobileLabels[language].voice}</h3>
               <div className="flex justify-center">
                 <VoiceStatus 
                   state={voiceStatusState} 

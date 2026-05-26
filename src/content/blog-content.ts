@@ -25,9 +25,9 @@ export const BLOG_SECTION_CONTENT: Record<Language, BlogSectionCopy> = {
       {
         title: "The Future of AI-Powered Voice Interfaces",
         excerpt: "Exploring how conversational AI is reshaping user interactions and what developers need to know about implementing voice-first experiences.",
-        date: "Dec 15, 2024",
-        readTime: "5 min read",
-        category: "AI",
+        date: "Jul 17, 2025",
+        readTime: "3 min read",
+        category: "Voice AI",
         slug: "ai-voice-interfaces"
       },
       {
@@ -50,15 +50,15 @@ export const BLOG_SECTION_CONTENT: Record<Language, BlogSectionCopy> = {
   },
   de: {
     sectionTitle: "Aktuelle Gedanken",
-    subtitle: "Einblicke in mein Leben,Technologie, Entwicklung und die Zukunft digitaler Erlebnisse.",
+    subtitle: "Einblicke in mein Leben, Technologie, Entwicklung und die Zukunft digitaler Erlebnisse.",
     readMore: "Mehr lesen",
     posts: [
       {
-        title: "Die Zukunft KI-gestützter Sprachschnittstellen",
+        title: "Die Zukunft KI-gestützter Sprachassistenten",
         excerpt: "Wie Conversational AI die Nutzerinteraktion verändert und was Entwickler über Voice-First-Erlebnisse wissen sollten.",
-        date: "15. Dez 2024",
-        readTime: "5 Min. Lesezeit",
-        category: "KI",
+        date: "17. Jul 2025",
+        readTime: "3 Min. Lesezeit",
+        category: "Sprach KI",
         slug: "ai-voice-interfaces"
       },
       {

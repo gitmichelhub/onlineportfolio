@@ -19,4 +19,23 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          "react-vendor": ["react", "react-dom", "react-router-dom"],
+          "query-vendor": ["@tanstack/react-query"],
+          "voice-vendor": ["@elevenlabs/react"],
+          "timeline-vendor": ["react-vertical-timeline-component"],
+          "ui-vendor": [
+            "@radix-ui/react-dialog",
+            "@radix-ui/react-slot",
+            "@radix-ui/react-toast",
+            "@radix-ui/react-tooltip",
+            "lucide-react",
+          ],
+        },
+      },
+    },
+  },
 }));
