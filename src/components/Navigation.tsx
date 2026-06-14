@@ -29,6 +29,10 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
     en: { voice: "Voice AI", projects: "Projects", blog: "Blog", contact: "Contact" },
     de: { voice: "Sprach KI", projects: "Projekte", blog: "Blog", contact: "Kontakt" }
   };
+  const mobileLabels = {
+    en: { navigation: "Navigation", language: "Language", voice: "Voice AI" },
+    de: { navigation: "Navigation", language: "Sprache", voice: "Sprach KI" }
+  };
 
   const navItems = [
     { id: 'voice', label: navLabels[language].voice },
@@ -81,8 +85,7 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
               <div className="flex gap-4 items-center">
                 {/* Nav Items Pill */}
                 <div
-                  className="glass rounded-full flex items-center px-3 py-2 shadow-md liquid-glass"
-                  style={{ filter: "url(#liquid-glass-filter)" }}
+                  className="glass liquid-glass-soft rounded-full flex items-center px-3 py-2 shadow-md"
                 >
                   {navItems.map((item) => (
                     <button
@@ -100,8 +103,7 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
                 </div>
                 {/* Language Pill */}
                 <div
-                  className="glass rounded-full flex items-center px-3 py-2 shadow-md liquid-glass"
-                  style={{ filter: "url(#liquid-glass-filter)" }}
+                  className="glass liquid-glass-soft rounded-full flex items-center px-3 py-2 shadow-md"
                 >
                   <button
                     className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${language === 'en' ? 'bg-white/80 text-glass-copper shadow-sm' : 'text-glass-dark/70 hover:text-glass-copper'}`}
@@ -151,16 +153,15 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
       {isMobileMenuOpen && (
         <div className="lg:hidden fixed inset-0 z-40 bg-glass-dark/20 backdrop-blur-md" onClick={() => setIsMobileMenuOpen(false)}>
           <div 
-            className="absolute top-20 left-4 right-4 bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/80 p-6 max-w-sm mx-auto liquid-glass"
+            className="glass absolute top-20 left-4 right-4 rounded-3xl p-6 max-w-sm mx-auto"
             style={{ 
-              filter: "url(#liquid-glass-filter)",
               boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.8)"
             }}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Navigation Items */}
             <div className="space-y-3 mb-6">
-              <h3 className="text-sm font-semibold text-glass-muted mb-3 backdrop-blur-sm">Navigation</h3>
+              <h3 className="text-sm font-semibold text-glass-muted mb-3">{mobileLabels[language].navigation}</h3>
               {navItems.map((item) => (
                 <button
                   key={item.id}
@@ -178,7 +179,7 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
 
             {/* Language Switcher */}
             <div className="space-y-3 mb-6">
-              <h3 className="text-sm font-semibold text-glass-muted mb-3 backdrop-blur-sm">Language</h3>
+              <h3 className="text-sm font-semibold text-glass-muted mb-3">{mobileLabels[language].language}</h3>
               <div className="flex gap-2">
                 <button
                   className={`flex-1 px-4 py-3 rounded-2xl text-sm font-semibold transition-all duration-300 ${
@@ -207,7 +208,7 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
 
             {/* Voice Status */}
             <div className="space-y-3">
-              <h3 className="text-sm font-semibold text-glass-muted mb-3 backdrop-blur-sm">Voice AI</h3>
+              <h3 className="text-sm font-semibold text-glass-muted mb-3">{mobileLabels[language].voice}</h3>
               <div className="flex justify-center">
                 <VoiceStatus 
                   state={voiceStatusState} 

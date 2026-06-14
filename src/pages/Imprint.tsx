@@ -70,7 +70,7 @@ const Imprint: React.FC = () => {
         </Link>
 
         {/* Main Content */}
-        <div className="glass rounded-2xl p-8">
+        <div className="glass liquid-glass rounded-2xl p-8">
           <h1 className="text-4xl font-bold text-glass-dark mb-8 font-playfair">{t.title}</h1>
           
           <div className="space-y-8">

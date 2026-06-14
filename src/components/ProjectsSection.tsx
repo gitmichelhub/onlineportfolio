@@ -41,7 +41,7 @@ const ProjectsSection: React.FC = () => {
           {projects.map((project, index) => (
             <div
               key={index}
-              className="glass rounded-2xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-xl animate-fade-up group"
+              className="glass liquid-glass rounded-2xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-xl animate-fade-up group"
               style={{ animationDelay: `${0.2 + index * 0.1}s` }}
             >
               <h3 className="text-xl font-semibold text-glass-dark mb-3 font-playfair">{project.title}</h3>

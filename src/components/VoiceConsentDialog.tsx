@@ -9,7 +9,8 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/hooks/use-language';
-import { Shield, Mic } from 'lucide-react';
+import { AlertCircle, Shield, Mic } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface VoiceConsentDialogProps {
   open: boolean;
@@ -87,14 +88,19 @@ const VoiceConsentDialog: React.FC<VoiceConsentDialogProps> = ({
 
           {/* Warning */}
           <div className="p-3 rounded-lg bg-amber-50/50 border border-amber-200/50">
-            <p className="text-sm text-amber-800">
-              ⚠️ {t.warningText}
+            <p className="text-sm text-amber-800 flex gap-2">
+              <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+              <span>{t.warningText}</span>
             </p>
           </div>
 
           {/* Provider Info */}
           <p className="text-xs text-glass-muted text-center">
             {t.providerInfo}
+            {' '}
+            <Link to="/imprint" className="text-glass-copper hover:text-glass-amber underline underline-offset-2">
+              {t.privacyLink}
+            </Link>
           </p>
         </div>
 

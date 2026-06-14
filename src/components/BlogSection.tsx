@@ -27,7 +27,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({ isVoiceActive = false }) => {
           {posts.map((post, index) => (
             <article 
               key={index}
-              className="glass rounded-2xl p-8 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl animate-fade-up group cursor-pointer"
+              className="glass liquid-glass rounded-2xl p-8 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl animate-fade-up group cursor-pointer"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="flex flex-col space-y-4">

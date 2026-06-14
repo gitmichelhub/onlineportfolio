@@ -68,7 +68,7 @@ const ContactSection: React.FC = () => {
 
         <div className="flex justify-center">
           <div className="animate-fade-up" style={{ animationDelay: '0.2s' }}>
-            <div className="glass rounded-2xl p-8">
+            <div className="glass liquid-glass rounded-2xl p-8">
               <div className="text-center">
                 {/* Email icon */}
                 <div className="mb-6">

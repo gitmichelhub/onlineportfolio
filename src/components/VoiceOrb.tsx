@@ -98,7 +98,7 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
   const isActive = state.isConnecting || isListening || isSpeaking || isProcessing;
 
   const getButtonClasses = () => {
-    let baseClasses = `${getOrbSize()} rounded-full glass flex items-center justify-center transition-all duration-300 ease-out group relative overflow-hidden`;
+    let baseClasses = `${getOrbSize()} rounded-full glass liquid-glass flex items-center justify-center transition-all duration-300 ease-out group relative overflow-hidden`;
     
     if (isActive) {
       baseClasses += ' backdrop-blur-xl border border-white/80 bg-white/70 shadow-lg';

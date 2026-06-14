@@ -25,16 +25,16 @@ export const BLOG_SECTION_CONTENT: Record<Language, BlogSectionCopy> = {
       {
         title: "The Future of AI-Powered Voice Interfaces",
         excerpt: "Exploring how conversational AI is reshaping user interactions and what developers need to know about implementing voice-first experiences.",
-        date: "Dec 15, 2024",
-        readTime: "5 min read",
-        category: "AI",
+        date: "Jul 17, 2025",
+        readTime: "3 min read",
+        category: "Voice AI",
         slug: "ai-voice-interfaces"
       },
       {
         title: "Vibe Coding: Riding the Autonomy Slider From Keystrokes to Agents",
-        excerpt: "Exploring the evolution of AI-assisted development and the autonomy slider concept that's reshaping how we write code.",
+        excerpt: "From inline autocomplete to long-horizon agents like Fable—and why Fable being pulled from US-government use just turned agentic coding into a question of European digital sovereignty.",
         date: "Jul 15, 2025",
-        readTime: "6 min read",
+        readTime: "8 min read",
         category: "Development",
         slug: "scalable-react-applications"
       },
@@ -50,22 +50,22 @@ export const BLOG_SECTION_CONTENT: Record<Language, BlogSectionCopy> = {
   },
   de: {
     sectionTitle: "Aktuelle Gedanken",
-    subtitle: "Einblicke in mein Leben,Technologie, Entwicklung und die Zukunft digitaler Erlebnisse.",
+    subtitle: "Einblicke in mein Leben, Technologie, Entwicklung und die Zukunft digitaler Erlebnisse.",
     readMore: "Mehr lesen",
     posts: [
       {
-        title: "Die Zukunft KI-gestützter Sprachschnittstellen",
+        title: "Die Zukunft KI-gestützter Sprachassistenten",
         excerpt: "Wie Conversational AI die Nutzerinteraktion verändert und was Entwickler über Voice-First-Erlebnisse wissen sollten.",
-        date: "15. Dez 2024",
-        readTime: "5 Min. Lesezeit",
-        category: "KI",
+        date: "17. Jul 2025",
+        readTime: "3 Min. Lesezeit",
+        category: "Sprach KI",
         slug: "ai-voice-interfaces"
       },
       {
         title: "Vibe Coding: Auf dem Autonomy Slider von Tastatureingaben zu Agenten",
-        excerpt: "Die Evolution KI-gestützter Entwicklung und das Autonomy Slider Konzept, das die Art, wie wir Code schreiben, verändert.",
+        excerpt: "Von Inline-Autovervollständigung zu Long-Horizon-Agenten wie Fable – und warum Fables Rückzug aus US-Regierungsdeployments Agentic Coding zur Frage europäischer digitaler Souveränität macht.",
         date: "15. Jul 2025",
-        readTime: "6 Min. Lesezeit",
+        readTime: "8 Min. Lesezeit",
         category: "Entwicklung",
         slug: "scalable-react-applications"
       },

@@ -106,7 +106,7 @@ const VoiceStatus: React.FC<VoiceStatusProps> = ({ state, error, info, onStop, c
   const status = getStatusInfo();
 
   return (
-    <div className="glass rounded-full px-4 py-2 flex items-center space-x-3">
+    <div className="glass liquid-glass rounded-full px-4 py-2 flex items-center space-x-3">
       {/* Status indicator */}
       <div className={`flex items-center space-x-2 px-2 py-1 rounded-full ${status.bgColor} border ${status.borderColor}`}>
         {status.icon}

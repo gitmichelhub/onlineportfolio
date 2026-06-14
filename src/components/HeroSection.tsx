@@ -64,17 +64,19 @@ const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversati
     en: {
       headline: "Talk to my AI",
       subtitle: "Ask \"me\" anything about my experience, my work, or my life.",
-      info: "Click the voice button to start an interactive conversation. I'm here to help with your questions regarding technology, product development, and more."
+      info: "Click the voice button to start an interactive conversation. I'm here to help with your questions regarding technology, product development, and more.",
+      prompts: ["Current projects", "Consulting experience", "AI and product work"]
     },
     de: {
       headline: "Sprich mit meiner AI",
       subtitle: "Frag \"mich\" alles über meine Erfahrung, meine Arbeit oder mein Leben.",
-      info: "Klicke auf den Sprachbutton, um ein interaktives Gespräch zu starten. Ich helfe dir gerne bei Fragen zu Technologie, Produktentwicklung und mehr."
+      info: "Klicke auf den Sprachbutton, um ein interaktives Gespräch zu starten. Ich helfe dir gerne bei Fragen zu Technologie, Produktentwicklung und mehr.",
+      prompts: ["Aktuelle Projekte", "Consulting-Erfahrung", "KI und Produktarbeit"]
     }
   };
 
   return (
-    <section id="voice" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <section id="voice" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-24 pb-16">
       {/* Floating background shapes */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="floating-shape absolute top-20 left-20 w-64 h-64 rounded-full animate-float" 
@@ -92,7 +94,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversati
       <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-transparent to-white/20" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-[minmax(0,1.05fr)_minmax(280px,0.75fr)] gap-10 xl:gap-16 items-center">
           {/* Left side - Text content */}
           <div className="text-center lg:text-left animate-fade-up">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-glass-dark mb-6 leading-tight font-playfair">
@@ -106,10 +108,20 @@ const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversati
                 {t[language].info}
               </p>
             </div>
+            <div className="mt-8 flex flex-wrap justify-center lg:justify-start gap-3">
+              {t[language].prompts.map((prompt) => (
+                <span
+                  key={prompt}
+                  className="rounded-full border border-glass-copper/20 bg-white/60 px-4 py-2 text-sm font-medium text-glass-copper shadow-sm backdrop-blur-xl"
+                >
+                  {prompt}
+                </span>
+              ))}
+            </div>
           </div>
 
           {/* Right side - Voice Orb (centered for all screen sizes) */}
-          <div className="flex justify-center lg:justify-end animate-fade-up" style={{ animationDelay: '0.2s' }}>
+          <div className="flex justify-center animate-fade-up" style={{ animationDelay: '0.2s' }}>
             <VoiceOrb 
               size="large" 
               state={state}
