@@ -43,7 +43,7 @@ const BlogPost1: React.FC = () => {
         </ul>
 
         <p class="mb-6 text-lg leading-relaxed text-glass-dark/70">
-          In short, conversational AI is shifting from "cool demo" (like my online portfoliovoice agent) to <em class="text-glass-copper">infrastructure</em>. 2025 gave us scalable platforms, richer voices, and programmatic hooks; 2026 will be about stitching those pieces into genuinely seamless, multimodal, and human-centric experiences. For builders, the playbook is clear: design for context, respect user privacy, and prototype <em>with</em> real voices early—because next year's baseline will make today's launch look static.
+          In short, conversational AI is shifting from "cool demo" (like the voice agent on this very portfolio) to <em class="text-glass-copper">infrastructure</em>. 2025 gave us scalable platforms, richer voices, and programmatic hooks; 2026 is proving to be the year those pieces snap together into genuinely seamless, multimodal, and human-centric experiences. For builders, the playbook is clear: design for context, respect user privacy, and prototype <em>with</em> real voices early—because next year's baseline will make today's launch look static.
         </p>
       `
     },
@@ -104,7 +104,7 @@ const BlogPost1: React.FC = () => {
         </Link>
 
         {/* Main Content */}
-        <div className="glass rounded-2xl p-8">
+        <div className="glass liquid-glass rounded-2xl p-8">
           {/* Header */}
           <div className="mb-8">
             <div className="flex items-center space-x-4 text-sm text-glass-muted mb-4">

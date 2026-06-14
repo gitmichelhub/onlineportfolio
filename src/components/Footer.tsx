@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
   };
   return (
     <footer className="bg-white/50 px-4 pb-8">
-      <div className="glass rounded-2xl px-6 py-3 opacity-90 max-w-4xl mx-auto">
+      <div className="glass liquid-glass rounded-2xl px-6 py-3 opacity-90 max-w-4xl mx-auto">
         <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-sm text-glass-muted text-center">
           <span>{t[language].built}</span>
           <span className="hidden sm:inline text-glass-copper/50">•</span>

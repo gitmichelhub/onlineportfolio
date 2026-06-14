@@ -67,7 +67,7 @@ export const BLOG_POST_2_CONTENT = {
       <ol class="list-decimal list-inside mb-6 text-lg leading-relaxed space-y-2 text-glass-dark/70">
         <li><strong class="text-glass-dark">Off</strong>—No AI involved.</li>
         <li><strong class="text-glass-dark">Hints</strong>—Inline autocomplete only (Cursor Tab).</li>
-        <li><strong class="text-glass-dark">Macro</strong>—On-demand multi-file edits (Curser command + K).</li>
+        <li><strong class="text-glass-dark">Macro</strong>—On-demand multi-file edits (Cursor ⌘ + K).</li>
         <li><strong class="text-glass-dark">Guarded agent</strong>—Proposed diffs, human approval (Cursor command + L).</li>
         <li><strong class="text-glass-dark">Trusted agent</strong>—Applies patch, sends summary (Cursor command + I).</li>
         <li><strong class="text-glass-dark">(Future)Fully autonomous</strong>—Continuous plan → code → test → deploy loop.</li>
@@ -116,7 +116,25 @@ export const BLOG_POST_2_CONTENT = {
         <li><strong class="text-glass-dark">Spec-driven everything</strong> → Tools like AWS Kiro start from a business spec, not a code file.</li>
       </ul>
 
-      <h2 class="text-2xl font-semibold text-glass-dark mb-4 mt-8 font-playfair">7. Am I a Vibe Coder? Yes, and no</h2>
+      <h2 class="text-2xl font-semibold text-glass-dark mb-4 mt-8 font-playfair">7. The Long-Horizon Agents Have Arrived — and Geopolitics Came With Them</h2>
+      <p class="mb-6 text-lg leading-relaxed text-glass-dark/70">
+        The biggest shift since I first wrote this piece isn't a smarter autocomplete — it's <strong class="text-glass-dark">duration</strong>. The newest frontier models don't just finish a function; they hold a goal for hours. <strong class="text-glass-copper">Fable</strong>, the model built explicitly for long, autonomous coding sessions, can pick up a vague ticket, branch, write the code, run the tests, read the failures, and keep going until the suite is green — a genuine push toward slider level 6.
+      </p>
+      <p class="mb-6 text-lg leading-relaxed text-glass-dark/70">
+        And then the ground moved. Fable was <strong class="text-glass-dark">pulled from US-government deployments</strong>, and overnight a capability question turned into a sovereignty question. If the most capable autonomous coder on the market can be switched off by an export decision or a procurement ban, then "which model?" stops being a pure engineering choice and becomes strategic infrastructure — the same conversation Europe is already having about cloud, chips, and energy.
+      </p>
+      <p class="mb-6 text-lg leading-relaxed text-glass-dark/70"><strong class="text-glass-dark">Why this matters for European agentic coding:</strong></p>
+      <ul class="list-disc list-inside mb-6 text-lg leading-relaxed space-y-2 text-glass-dark/70">
+        <li><strong class="text-glass-dark">Dependency risk is real now, not theoretical.</strong> A delivery pipeline that runs on a single foreign model is one policy change away from going dark.</li>
+        <li><strong class="text-glass-dark">Sovereign and open-weight models move up the agenda.</strong> Expect EU teams—and Mistral-class providers—to pitch "agentic coding you can actually keep": self-hostable, auditable, GDPR-native.</li>
+        <li><strong class="text-glass-dark">Compliance becomes a feature, not a footnote.</strong> For German enterprises already cautious about autonomy, data residency and a model that can't vanish mid-project may outweigh a few benchmark points.</li>
+        <li><strong class="text-glass-dark">Portability is the new hedge.</strong> Keep the agent layer model-agnostic so you can swap the brain without rebuilding the body.</li>
+      </ul>
+      <p class="mb-6 text-lg leading-relaxed text-glass-dark/70">
+        My take: the autonomy slider just grew a second axis. It's no longer only <em>"how much do I let the agent do?"</em> but also <em>"whose agent, running where, and can someone take it away?"</em> For European builders that isn't a reason to slow down—it's a reason to architect for independence from day one.
+      </p>
+
+      <h2 class="text-2xl font-semibold text-glass-dark mb-4 mt-8 font-playfair">8. Am I a Vibe Coder? Yes, and no</h2>
       <p class="mb-6 text-lg leading-relaxed text-glass-dark/70">
         <strong class="text-glass-dark">Side projects</strong> → Absolutely. Fastest way to learn the boundaries of the new tools.
       </p>
@@ -130,7 +148,7 @@ export const BLOG_POST_2_CONTENT = {
         My sweet spot (in my private projects) is at <strong class="text-glass-copper">level 3</strong>: The agent proposes a patch, I skim the diff, run tests and merge. This keeps me in flow while saving hours on routine refactorings.
       </p>
 
-      <h2 class="text-2xl font-semibold text-glass-dark mb-4 mt-8 font-playfair">8. Further Reading</h2>
+      <h2 class="text-2xl font-semibold text-glass-dark mb-4 mt-8 font-playfair">9. Further Reading</h2>
       <ul class="list-disc list-inside mb-6 text-lg leading-relaxed space-y-2 text-glass-dark/70">
         <li><a href="https://www.youtube.com/results?search_query=Andrej+Karpathy+Software+3.0+keynote" target="_blank" rel="noopener noreferrer" class="text-glass-copper hover:text-glass-amber underline">Karpathy – "Software 3.0" keynote (June 17 2025)</a></li>
         <li><a href="https://www.latent.space/p/agents?utm_source=publication-search" target="_blank" rel="noopener noreferrer" class="text-glass-copper hover:text-glass-amber underline">Latent Space – Agents </a></li>
@@ -155,7 +173,25 @@ export const BLOG_POST_2_CONTENT = {
         Die Geschichte der Software lässt sich als Aufstieg auf der Abstraktionsleiter darstellen: <strong class="text-glass-dark">Binär → Assembler → C → Python → englische Prompts → Agenten</strong>. Jede Stufe tauscht mechanische Details gegen kreative Hebelwirkung ein. Vibe Coding befindet sich auf der vorletzten Stufe: Du gibst deine Absicht in natürlicher Sprache an, das KI‑System erledigt das Tippen.
       </p>
 
-      <h2 class="text-2xl font-semibold text-glass-dark mb-4 mt-8 font-playfair">7. Bin ich ein Vibe Coder? Ja, und nein</h2>
+      <h2 class="text-2xl font-semibold text-glass-dark mb-4 mt-8 font-playfair">7. Die Long-Horizon-Agenten sind da – und mit ihnen die Geopolitik</h2>
+      <p class="mb-6 text-lg leading-relaxed text-glass-dark/70">
+        Die größte Veränderung seit der ersten Fassung dieses Artikels ist keine klügere Autovervollständigung, sondern <strong class="text-glass-dark">Ausdauer</strong>. Die neuesten Frontier-Modelle beenden nicht nur eine Funktion – sie halten ein Ziel über Stunden. <strong class="text-glass-copper">Fable</strong>, das Modell, das explizit für lange, autonome Coding-Sessions gebaut wurde, nimmt ein vages Ticket, legt einen Branch an, schreibt den Code, lässt die Tests laufen, liest die Fehler und macht weiter, bis die Suite grün ist – ein echter Schritt Richtung Slider-Stufe 6.
+      </p>
+      <p class="mb-6 text-lg leading-relaxed text-glass-dark/70">
+        Und dann verschob sich der Boden. Fable wurde <strong class="text-glass-dark">aus US-Regierungsdeployments zurückgezogen</strong>, und über Nacht wurde aus einer Fähigkeitsfrage eine Souveränitätsfrage. Wenn der fähigste autonome Programmierer am Markt per Exportentscheidung oder Beschaffungsverbot abgeschaltet werden kann, ist „welches Modell?" keine reine Engineering-Entscheidung mehr – es wird zu strategischer Infrastruktur, dieselbe Debatte, die Europa längst über Cloud, Chips und Energie führt.
+      </p>
+      <p class="mb-6 text-lg leading-relaxed text-glass-dark/70"><strong class="text-glass-dark">Warum das für europäisches Agentic Coding zählt:</strong></p>
+      <ul class="list-disc list-inside mb-6 text-lg leading-relaxed space-y-2 text-glass-dark/70">
+        <li><strong class="text-glass-dark">Abhängigkeitsrisiko ist jetzt real, nicht theoretisch.</strong> Eine Delivery-Pipeline auf einem einzigen ausländischen Modell ist nur eine Richtlinienänderung vom Stillstand entfernt.</li>
+        <li><strong class="text-glass-dark">Souveräne und Open-Weight-Modelle rücken nach vorne.</strong> Europäische Teams – und Anbieter der Mistral-Klasse – werden „Agentic Coding zum Behalten" anbieten: selbst hostbar, auditierbar, DSGVO-nativ.</li>
+        <li><strong class="text-glass-dark">Compliance wird zum Feature, nicht zur Fußnote.</strong> Für deutsche Unternehmen, die ohnehin vorsichtig mit Autonomie sind, zählen Datenresidenz und ein Modell, das einem nicht mitten im Projekt verloren geht, oft mehr als ein paar Benchmark-Punkte.</li>
+        <li><strong class="text-glass-dark">Portabilität ist die neue Absicherung.</strong> Halte die Agenten-Schicht modellagnostisch – so lässt sich das Gehirn tauschen, ohne den Körper neu zu bauen.</li>
+      </ul>
+      <p class="mb-6 text-lg leading-relaxed text-glass-dark/70">
+        Mein Fazit: Der Autonomie-Schieberegler hat eine zweite Achse bekommen. Es geht nicht mehr nur um <em>„wie viel lasse ich den Agenten machen?"</em>, sondern auch um <em>„wessen Agent, wo laufend, und kann ihn mir jemand wegnehmen?"</em> Für europäische Entwickler:innen ist das kein Grund zu bremsen – sondern einer, von Tag eins an auf Unabhängigkeit zu bauen.
+      </p>
+
+      <h2 class="text-2xl font-semibold text-glass-dark mb-4 mt-8 font-playfair">8. Bin ich ein Vibe Coder? Ja, und nein</h2>
       <p class="mb-6 text-lg leading-relaxed text-glass-dark/70"><strong class="text-glass-dark">Nebenprojekte</strong> → Unbedingt. Schnellster Weg, die Grenzen der neuen Tools kennenzulernen.</p>
       <p class="mb-6 text-lg leading-relaxed text-glass-dark/70"><strong class="text-glass-dark">Kundenprojekte</strong> → Starte auf Stufe 2, ergänze Unit‑Tests und steigere die Autonomie nur, wenn es das Risiko erlaubt.</p>
       <p class="mb-6 text-lg leading-relaxed text-glass-dark/70">

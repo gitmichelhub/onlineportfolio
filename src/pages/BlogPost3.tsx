@@ -80,7 +80,7 @@ const BlogPost3: React.FC = () => {
         </Link>
 
         {/* Main Content */}
-        <div className="glass rounded-2xl p-8">
+        <div className="glass liquid-glass rounded-2xl p-8">
           {/* Header */}
           <div className="mb-8">
             <div className="flex items-center space-x-4 text-sm text-glass-muted mb-4">
