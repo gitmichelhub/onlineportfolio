@@ -1,5 +1,8 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { useConversation } from '@elevenlabs/react';
+import type { TranscriptEntry } from '@/lib/voice-types';
+
+export type { TranscriptEntry };
 
 interface UseVoiceAgentOptions {
   agentId: string;
@@ -22,6 +25,7 @@ interface UseVoiceAgentReturn {
   info: string | null;
   callDuration: number | null;
   isTimerActive: boolean;
+  transcript: TranscriptEntry[];
 }
 
 export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentReturn => {
@@ -30,6 +34,7 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
   const [isProcessing, setIsProcessing] = useState(false);
   const [callDuration, setCallDuration] = useState<number | null>(null);
   const [isTimerActive, setIsTimerActive] = useState(false);
+  const [transcript, setTranscript] = useState<TranscriptEntry[]>([]);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const isStartingRef = useRef(false);
   const lastAgentIdRef = useRef<string | null>(null);
@@ -72,6 +77,12 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
     onMessage: (props) => {
       if (import.meta.env.DEV) {
         console.log('[VoiceAgent] Message received:', props);
+      }
+      if (props?.message) {
+        setTranscript((prev) => [
+          ...prev,
+          { source: props.source === 'user' ? 'user' : 'ai', text: props.message },
+        ]);
       }
     },
     onError: (message, context) => {
@@ -165,6 +176,7 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
       setIsProcessing(true);
       setCallDuration(null);
       setIsTimerActive(false);
+      setTranscript([]);
 
       if (conversation.status === 'connected' || conversation.status === 'connecting') {
         await conversation.endSession();
@@ -278,5 +290,6 @@ export const useVoiceAgent = (options: UseVoiceAgentOptions): UseVoiceAgentRetur
     info,
     callDuration,
     isTimerActive,
+    transcript,
   };
 };

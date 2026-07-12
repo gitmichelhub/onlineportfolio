@@ -66,9 +66,9 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
       return 'w-10 h-10';
     }
     if (isMobile) {
-      return size === 'large' ? 'w-16 h-16' : 'w-14 h-14';
+      return size === 'large' ? 'w-20 h-20' : 'w-14 h-14';
     }
-    return size === 'large' ? 'w-20 h-20' : 'w-16 h-16';
+    return size === 'large' ? 'w-24 h-24' : 'w-16 h-16';
   };
 
   const getIconSize = () => {
@@ -76,9 +76,9 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
       return 20;
     }
     if (isMobile) {
-      return size === 'large' ? 28 : 24;
+      return size === 'large' ? 32 : 24;
     }
-    return size === 'large' ? 32 : 24;
+    return size === 'large' ? 38 : 24;
   };
 
   const getPositionClasses = () => {
@@ -159,6 +159,14 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
 
   const voiceOrbElement = (
     <div className={getPositionClasses()}>
+      <div className="relative flex items-center justify-center">
+        {/* Ambient halo — only in the hero position, not the sticky mini-orb */}
+        {!isSticky && size === 'large' && (
+          <>
+            <div className="orb-glow" aria-hidden="true" />
+            <div className="orb-halo" aria-hidden="true" />
+          </>
+        )}
       <button
         onClick={handleClick}
         disabled={isProcessing}
@@ -191,6 +199,7 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
           />
         )}
       </button>
+      </div>
     </div>
   );
 

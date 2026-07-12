@@ -23,6 +23,22 @@ export const BLOG_SECTION_CONTENT: Record<Language, BlogSectionCopy> = {
     readMore: "Read more",
     posts: [
       {
+        title: "97.9% at OpenAI, 65% at Anthropic: What the Labs' Own Numbers Say About Agentic Work",
+        excerpt: "OpenAI says nearly every employee now works through Codex; Anthropic says Claude Tag writes 65% of its product team's code. What the labs' own adoption data means for everyone else.",
+        date: "Jul 3, 2026",
+        readTime: "4 min read",
+        category: "AI at Work",
+        slug: "agentic-work-adoption"
+      },
+      {
+        title: "Your Second Brain Is a Folder of Markdown: Karpathy's LLM Wiki and Garry Tan's gstack",
+        excerpt: "A gist and a folder of prompts are quietly redefining how developers work with agents. Why plain markdown — Karpathy's compounding wiki and Garry Tan's 23-skill gstack — is the new abstraction layer.",
+        date: "Jul 3, 2026",
+        readTime: "5 min read",
+        category: "AI Tooling",
+        slug: "markdown-llm-wiki-gstack"
+      },
+      {
         title: "The Future of AI-Powered Voice Interfaces",
         excerpt: "Exploring how conversational AI is reshaping user interactions and what developers need to know about implementing voice-first experiences.",
         date: "Jul 17, 2025",
@@ -53,6 +69,22 @@ export const BLOG_SECTION_CONTENT: Record<Language, BlogSectionCopy> = {
     subtitle: "Einblicke in mein Leben, Technologie, Entwicklung und die Zukunft digitaler Erlebnisse.",
     readMore: "Mehr lesen",
     posts: [
+      {
+        title: "97,9 % bei OpenAI, 65 % bei Anthropic: Was die Zahlen der Labs über Agentic Work verraten",
+        excerpt: "OpenAI berichtet, dass fast alle Mitarbeitenden über Codex arbeiten; bei Anthropic schreibt Claude Tag 65 % des Produktteam-Codes. Was die Adoptionsdaten der Labs für alle anderen bedeuten.",
+        date: "3. Jul 2026",
+        readTime: "4 Min. Lesezeit",
+        category: "AI at Work",
+        slug: "agentic-work-adoption"
+      },
+      {
+        title: "Dein zweites Gehirn ist ein Ordner voller Markdown: Karpathys LLM-Wiki und Garry Tans gstack",
+        excerpt: "Ein Gist und ein Ordner voller Prompts definieren gerade neu, wie Entwickler mit Agenten arbeiten. Warum reines Markdown — Karpathys Wiki und Garry Tans gstack — die neue Abstraktionsschicht ist.",
+        date: "3. Jul 2026",
+        readTime: "5 Min. Lesezeit",
+        category: "AI Tooling",
+        slug: "markdown-llm-wiki-gstack"
+      },
       {
         title: "Die Zukunft KI-gestützter Sprachassistenten",
         excerpt: "Wie Conversational AI die Nutzerinteraktion verändert und was Entwickler über Voice-First-Erlebnisse wissen sollten.",

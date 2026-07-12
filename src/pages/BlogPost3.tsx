@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLanguage } from "@/hooks/use-language";
+import { usePageMeta } from "@/hooks/use-page-meta";
 import { ArrowLeft, Calendar, Clock, Tag } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -66,6 +67,8 @@ const BlogPost3: React.FC = () => {
   };
 
   const t = content[language];
+
+  usePageMeta(`${t.title} — Michel Werner`, t.subtitle);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-glass-light via-white to-glass-cream py-20 px-4">

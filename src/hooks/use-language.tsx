@@ -28,6 +28,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   });
 
   React.useEffect(() => {
+    document.documentElement.lang = language;
     try {
       localStorage.setItem('language', language);
     } catch {

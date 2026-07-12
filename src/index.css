@@ -1,5 +1,6 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+/* Fonts (Playfair Display + DM Sans) are loaded via <link> in index.html so they
+   don't block CSS parsing the way an @import would. */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -197,6 +198,77 @@
     filter: blur(60px);
   }
 
+  /* Stronger ambient blob for flat sections — gives the glass cards a
+     contrasting backdrop to refract (the effect is invisible over plain white) */
+  .floating-shape-strong {
+    background: linear-gradient(135deg, rgba(185, 120, 70, 0.16), rgba(20, 184, 166, 0.12));
+    filter: blur(70px);
+  }
+
+  /* Voice orb ensemble: breathing glow + slowly rotating chromatic halo ring */
+  .orb-glow {
+    position: absolute;
+    inset: -2.5rem;
+    border-radius: 9999px;
+    background: radial-gradient(circle, rgba(185, 120, 70, 0.20), rgba(20, 184, 166, 0.10) 55%, transparent 72%);
+    filter: blur(12px);
+    animation: pulse-glow 4.5s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .orb-halo {
+    position: absolute;
+    inset: -1.4rem;
+    border-radius: 9999px;
+    padding: 2px;
+    background: conic-gradient(
+      from 0deg,
+      rgba(185, 120, 70, 0.55),
+      rgba(20, 184, 166, 0.42) 28%,
+      rgba(255, 255, 255, 0.08) 52%,
+      rgba(210, 150, 80, 0.48) 78%,
+      rgba(185, 120, 70, 0.55)
+    );
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    -webkit-mask-composite: xor;
+    animation: halo-spin 16s linear infinite;
+    pointer-events: none;
+  }
+
+  @keyframes halo-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* CV timeline: glass spine, dates, and icon ring (overrides the library CSS) */
+  .vertical-timeline.vertical-timeline--two-columns::before,
+  .vertical-timeline::before {
+    width: 2px;
+    background: linear-gradient(
+      180deg,
+      transparent,
+      rgba(185, 120, 70, 0.35) 8%,
+      rgba(20, 184, 166, 0.28) 55%,
+      rgba(185, 120, 70, 0.2) 90%,
+      transparent
+    ) !important;
+  }
+
+  .vertical-timeline-element-date {
+    color: rgb(115 115 125);
+    font-weight: 500;
+    opacity: 1 !important;
+  }
+
+  .vertical-timeline-element-icon {
+    box-shadow:
+      0 0 0 4px rgba(255, 255, 255, 0.85),
+      0 8px 20px rgba(185, 120, 70, 0.35) !important;
+  }
+
   /* Voice Orb Animations */
   @keyframes pulse-glow {
     0%, 100% {
@@ -271,6 +343,11 @@
   @media (prefers-reduced-motion: reduce) {
     .glass::after {
       transition: none;
+      animation: none;
+    }
+
+    .orb-halo,
+    .orb-glow {
       animation: none;
     }
   }

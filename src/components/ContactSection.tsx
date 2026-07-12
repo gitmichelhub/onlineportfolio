@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Copy, Check, Mail } from 'lucide-react';
+import { Copy, Check, Mail, Github, Linkedin } from 'lucide-react';
 import { useLanguage } from "@/hooks/use-language";
 
 const ContactSection: React.FC = () => {
@@ -57,8 +57,14 @@ const ContactSection: React.FC = () => {
   }, []);
 
   return (
-    <section id="contact" className="min-h-screen py-20 bg-white/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="min-h-screen py-20 bg-white/50 relative overflow-hidden">
+      {/* Ambient backdrop — gives the glass card something to refract */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <div className="floating-shape-strong absolute top-1/4 left-[15%] w-80 h-80 rounded-full" />
+        <div className="floating-shape-strong absolute bottom-1/4 right-[15%] w-96 h-96 rounded-full" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center mb-16 animate-fade-up">
           <h2 className="text-4xl font-semibold text-glass-dark mb-4 font-playfair">{t[language].sectionTitle}</h2>
           <p className="text-xl text-glass-muted">
@@ -103,6 +109,28 @@ const ContactSection: React.FC = () => {
                     </>
                   )}
                 </button>
+
+                {/* Social links */}
+                <div className="mt-6 flex items-center justify-center gap-4">
+                  <a
+                    href="https://github.com/gitmichelhub"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="GitHub"
+                    className="w-11 h-11 rounded-full bg-glass-copper/10 flex items-center justify-center text-glass-copper transition-all duration-200 hover:scale-110 hover:bg-glass-copper hover:text-white"
+                  >
+                    <Github size={20} />
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/michel-werner-9a9878160/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                    className="w-11 h-11 rounded-full bg-glass-copper/10 flex items-center justify-center text-glass-copper transition-all duration-200 hover:scale-110 hover:bg-glass-copper hover:text-white"
+                  >
+                    <Linkedin size={20} />
+                  </a>
+                </div>
               </div>
             </div>
           </div>

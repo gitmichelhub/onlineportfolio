@@ -14,8 +14,14 @@ const BlogSection: React.FC<BlogSectionProps> = ({ isVoiceActive = false }) => {
   const posts = t.posts;
 
   return (
-    <section id="blog" className="min-h-screen py-20 bg-gradient-to-br from-glass-light via-white to-glass-cream">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="blog" className="min-h-screen py-20 bg-gradient-to-br from-glass-light via-white to-glass-cream relative overflow-hidden">
+      {/* Ambient backdrop — gives the glass cards something to refract */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <div className="floating-shape-strong absolute top-16 -right-24 w-96 h-96 rounded-full" />
+        <div className="floating-shape-strong absolute bottom-1/4 -left-24 w-80 h-80 rounded-full" />
+      </div>
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center mb-16 animate-fade-up">
           <h2 className="text-4xl font-semibold text-glass-dark mb-4 font-playfair">{t.sectionTitle}</h2>
           <p className="text-xl text-glass-muted">
