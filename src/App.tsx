@@ -100,8 +100,8 @@ const LiquidGlassFilters = () => (
         <feBlend in="rg" in2="chanB" mode="screen" />
       </filter>
 
-      {/* Softer variant for small surfaces (nav pills, badges) so the page
-          content reading through them stays comfortable */}
+      {/* Softer variant for reading surfaces, where subtle bending can remain
+          visible without making longer copy visually restless. */}
       <filter
         id="liquid-refraction-soft"
         x="-25%"

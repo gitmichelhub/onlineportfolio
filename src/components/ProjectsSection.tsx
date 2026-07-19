@@ -23,12 +23,12 @@ const ProjectsSection: React.FC = () => {
   const getTagColor = language === 'de' ? getTagColorDE : getTagColorEN;
 
   return (
-    <section id="projects" className="min-h-screen py-20 bg-white/50 relative overflow-hidden">
+    <section id="projects" className="min-h-screen py-20 bg-gradient-to-br from-glass-light/70 via-white/60 to-glass-cream/80 relative overflow-hidden">
       {/* Ambient backdrop — gives the glass cards something to refract */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-        <div className="floating-shape-strong absolute -top-24 right-[8%] w-96 h-96 rounded-full" />
-        <div className="floating-shape absolute top-1/2 -left-20 w-80 h-80 rounded-full" />
-        <div className="floating-shape-strong absolute bottom-24 left-[35%] w-72 h-72 rounded-full" />
+      <div className="section-geometry geometry-projects" aria-hidden="true">
+        <div className="ambient-band-copper absolute -top-28 right-[4%] w-[30rem] h-[30rem] rounded-full" />
+        <div className="ambient-band-teal absolute top-[38%] -left-28 w-96 h-96 rounded-full" />
+        <div className="ambient-band-copper absolute bottom-12 left-[32%] w-80 h-80 rounded-full" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -48,7 +48,7 @@ const ProjectsSection: React.FC = () => {
           {projects.map((project, index) => (
             <div
               key={index}
-              className="glass liquid-glass rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl animate-fade-up group"
+              className="glass glass-content liquid-glass-soft rounded-content p-6 h-full flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl animate-fade-up group"
               style={{ animationDelay: `${0.2 + index * 0.1}s` }}
             >
               <h3 className="text-xl font-semibold text-glass-dark mb-3 font-playfair">{project.title}</h3>
@@ -67,47 +67,49 @@ const ProjectsSection: React.FC = () => {
                 </CollapsibleTrigger>
                 <CollapsibleContent className="overflow-hidden transition-all duration-300 ease-in-out">
                   <div className="bg-glass-cream/50 rounded-lg p-4 mb-4 border border-glass-cream">
-                    <div className="text-glass-dark/70 leading-relaxed whitespace-pre-line">
+                    <div className="text-glass-dark/80 leading-relaxed whitespace-pre-line">
                       {project.detailedDescription}
                     </div>
                   </div>
                 </CollapsibleContent>
               </Collapsible>
 
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.technologies.map((tech, techIndex) => (
-                  <span
-                    key={techIndex}
-                    className="px-3 py-1 bg-glass-copper/10 text-glass-copper text-sm rounded-full border border-glass-copper/20"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
+              <div className="mt-auto">
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.technologies.map((tech, techIndex) => (
+                    <span
+                      key={techIndex}
+                      className="glass-tag px-3 py-1 text-sm font-medium rounded-full"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
 
-              <div className="flex space-x-4">
-                {project.link && (
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center space-x-2 text-glass-copper hover:text-glass-amber transition-colors"
-                  >
-                    <ExternalLink size={16} />
-                    <span className="text-sm font-medium">View Live</span>
-                  </a>
-                )}
-                {project.github && (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center space-x-2 text-glass-muted hover:text-glass-dark transition-colors"
-                  >
-                    <Github size={16} />
-                    <span className="text-sm font-medium">Source</span>
-                  </a>
-                )}
+                <div className="flex space-x-4">
+                  {project.link && (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center space-x-2 text-glass-copper hover:text-glass-amber transition-colors"
+                    >
+                      <ExternalLink size={16} />
+                      <span className="text-sm font-medium">View Live</span>
+                    </a>
+                  )}
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center space-x-2 text-glass-muted hover:text-glass-dark transition-colors"
+                    >
+                      <Github size={16} />
+                      <span className="text-sm font-medium">Source</span>
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
           ))}
@@ -148,11 +150,11 @@ const ProjectsSection: React.FC = () => {
                       style={{ animationDelay: `${index * 0.1}s` }}
                       contentStyle={{
                         background:
-                          'linear-gradient(135deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 50%, rgba(255, 255, 255, 0.55))',
+                          'linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.62) 50%, rgba(255, 255, 255, 0.74))',
                         backdropFilter: 'blur(18px) saturate(1.5)',
                         WebkitBackdropFilter: 'blur(18px) saturate(1.5)',
                         border: '1px solid rgba(255, 255, 255, 0.75)',
-                        borderRadius: '20px',
+                        borderRadius: '14px',
                         boxShadow:
                           '0 16px 40px rgba(35, 35, 45, 0.09), 0 4px 12px rgba(185, 120, 70, 0.07), inset 0 1px 1px rgba(255, 255, 255, 0.9)'
                       }}

@@ -24,7 +24,7 @@ const NotFound = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-glass-light via-white to-glass-cream px-4">
-      <div className="glass liquid-glass rounded-2xl p-10 text-center max-w-md">
+      <div className="glass glass-content liquid-glass-soft rounded-content p-10 text-center max-w-md">
         <h1 className="text-6xl font-semibold text-gradient-warm mb-4 font-playfair">404</h1>
         <p className="text-xl text-glass-muted mb-8">{t[language].message}</p>
         <Link

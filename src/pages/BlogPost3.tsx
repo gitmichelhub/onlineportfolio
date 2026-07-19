@@ -3,6 +3,7 @@ import { useLanguage } from "@/hooks/use-language";
 import { usePageMeta } from "@/hooks/use-page-meta";
 import { ArrowLeft, Calendar, Clock, Tag } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import ArticleBackdrop from '@/components/ArticleBackdrop';
 
 const BlogPost3: React.FC = () => {
   const { language } = useLanguage();
@@ -16,27 +17,27 @@ const BlogPost3: React.FC = () => {
       category: "Leadership",
       back: "Back to Blog",
       content: `
-        <p class="mb-6 text-lg leading-relaxed text-glass-dark/70">
+        <p class="mb-6 text-lg leading-relaxed text-glass-dark/80">
           Growing up with the Baltic Sea practically at my doorstep, water and wide-open horizons set an early benchmark for my quality of life. Today, those shorelines have transformed into train tracks and Autobahn lanes between Braunschweig and Stuttgart. Yet the essence remains unchanged: space, movement, and fresh air keep my thinking clear and sharp.
         </p>
 
         <h2 class="text-2xl font-semibold text-glass-dark mb-4 mt-8 font-playfair">Why Stuttgart Keeps Pulling Me Back</h2>
-        <p class="mb-6 text-lg leading-relaxed text-glass-dark/70">
+        <p class="mb-6 text-lg leading-relaxed text-glass-dark/80">
           Most of my teams—and the innovative prototypes we passionately develop—are located around Stuttgart. Being onsite sparks spontaneous conversations, dynamic whiteboard sessions, and boosts team morale.
         </p>
 
         <h2 class="text-2xl font-semibold text-glass-dark mb-4 mt-8 font-playfair">Finding the Sweet Spot with Remote Work</h2>
-        <p class="mb-6 text-lg leading-relaxed text-glass-dark/70">
+        <p class="mb-6 text-lg leading-relaxed text-glass-dark/80">
           However, remote setups still have their moments, especially once the vision-to-task pipeline is crystal clear. Well-prepared backlogs and sharp task definitions allow team members to tap into their peak productivity rhythms.
         </p>
 
         <h2 class="text-2xl font-semibold text-glass-dark mb-4 mt-8 font-playfair">Espresso Rituals and Productivity</h2>
-        <p class="mb-6 text-lg leading-relaxed text-glass-dark/70">
+        <p class="mb-6 text-lg leading-relaxed text-glass-dark/80">
           Every sprint review is punctuated by my espresso ritual (18 grams in, 38 grams out, 27 seconds precisely—yes, details matter). Beyond the caffeine boost, this ritual helps center my focus.
         </p>
 
         <h2 class="text-2xl font-semibold text-glass-dark mb-4 mt-8 font-playfair">Putting it all Together</h2>
-        <p class="mb-6 text-lg leading-relaxed text-glass-dark/70">
+        <p class="mb-6 text-lg leading-relaxed text-glass-dark/80">
           Combining a coastal upbringing, collaborative onsite energy, structured remote workflows, sunlight therapy, meticulous espresso rituals, and disciplined workouts forms the foundation that keeps my professional life balanced and thriving.
         </p>
       `
@@ -49,17 +50,17 @@ const BlogPost3: React.FC = () => {
       category: "Leadership",
       back: "Zurück zum Blog",
       content: `
-        <p class="mb-6 text-lg leading-relaxed text-glass-dark/70">
+        <p class="mb-6 text-lg leading-relaxed text-glass-dark/80">
           Aufgewachsen an der Ostsee verbinde ich meine frühesten Erinnerungen mit salziger Luft und endlosen Horizonten. Heute hat sich die Kulisse verändert—Züge und Autobahnen verbinden meine jetzigen Lebensmittelpunkte Braunschweig und Stuttgart.
         </p>
 
         <h2 class="text-2xl font-semibold text-glass-dark mb-4 mt-8 font-playfair">Warum Stuttgart? Weil Teams gemeinsam wachsen</h2>
-        <p class="mb-6 text-lg leading-relaxed text-glass-dark/70">
+        <p class="mb-6 text-lg leading-relaxed text-glass-dark/80">
           Der Großteil meiner Beratungsprojekte konzentriert sich rund um Stuttgart. Der Funke springt vor Ort über: spontane Design-Diskussionen, schnell gefüllte Whiteboards und sichtbare Motivation.
         </p>
 
         <h2 class="text-2xl font-semibold text-glass-dark mb-4 mt-8 font-playfair">Alles in einem Paket</h2>
-        <p class="mb-6 text-lg leading-relaxed text-glass-dark/70">
+        <p class="mb-6 text-lg leading-relaxed text-glass-dark/80">
           Diese Mischung—meine Küstenwurzeln, dynamische Teamumgebungen, effektive Remote-Strategien, sonnenreiche Gewohnheiten, präzise Kaffeerituale und diszipliniertes Krafttraining—bildet das ideale Rezept.
         </p>
       `
@@ -71,19 +72,20 @@ const BlogPost3: React.FC = () => {
   usePageMeta(`${t.title} — Michel Werner`, t.subtitle);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-glass-light via-white to-glass-cream py-20 px-4">
-      <div className="max-w-4xl mx-auto">
+    <div className="relative overflow-hidden min-h-screen bg-gradient-to-br from-glass-light via-white to-glass-cream py-20 px-4">
+      <ArticleBackdrop />
+      <div className="max-w-4xl mx-auto relative">
         {/* Back Button */}
         <Link 
           to="/#blog" 
-          className="inline-flex items-center space-x-2 text-glass-muted hover:text-glass-copper transition-colors mb-8"
+          className="glass liquid-glass-soft rounded-full inline-flex items-center space-x-2 px-4 py-2 text-sm font-medium text-glass-dark/80 hover:text-glass-copper transition-all duration-200 hover:scale-105 mb-8"
         >
           <ArrowLeft size={20} />
           <span>{t.back}</span>
         </Link>
 
         {/* Main Content */}
-        <div className="glass liquid-glass rounded-2xl p-8">
+        <div className="glass glass-content rounded-content p-8">
           {/* Header */}
           <div className="mb-8">
             <div className="flex items-center space-x-4 text-sm text-glass-muted mb-4">

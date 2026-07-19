@@ -70,12 +70,13 @@ export default {
 					amber: 'rgb(210 150 80 / <alpha-value>)',
 					teal: 'rgb(20 184 166 / <alpha-value>)',
 					dark: 'rgb(35 35 45 / <alpha-value>)',
-					muted: 'rgb(115 115 125 / <alpha-value>)',
+					muted: 'rgb(96 96 106 / <alpha-value>)',
 					light: 'rgb(252 251 248 / <alpha-value>)',
 					cream: 'rgb(245 243 240 / <alpha-value>)'
 				}
 			},
 			borderRadius: {
+				content: '0.875rem',
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'

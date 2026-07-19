@@ -2,6 +2,7 @@ import React from 'react';
 import { useLanguage } from "@/hooks/use-language";
 import { ArrowLeft, Calendar, Clock, Tag } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import ArticleBackdrop from '@/components/ArticleBackdrop';
 import { BLOG_POST_2_CONTENT } from '@/content/blog-post2-content';
 import { usePageMeta } from '@/hooks/use-page-meta';
 
@@ -13,19 +14,20 @@ const BlogPost2: React.FC = () => {
   usePageMeta(`${t.title} — Michel Werner`, t.subtitle);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-glass-light via-white to-glass-cream py-20 px-4">
-      <div className="max-w-4xl mx-auto">
+    <div className="relative overflow-hidden min-h-screen bg-gradient-to-br from-glass-light via-white to-glass-cream py-20 px-4">
+      <ArticleBackdrop />
+      <div className="max-w-4xl mx-auto relative">
         {/* Back Button */}
         <Link 
           to="/#blog" 
-          className="inline-flex items-center space-x-2 text-glass-muted hover:text-glass-copper transition-colors mb-8"
+          className="glass liquid-glass-soft rounded-full inline-flex items-center space-x-2 px-4 py-2 text-sm font-medium text-glass-dark/80 hover:text-glass-copper transition-all duration-200 hover:scale-105 mb-8"
         >
           <ArrowLeft size={20} />
           <span>{t.back}</span>
         </Link>
 
         {/* Main Content */}
-        <div className="glass liquid-glass rounded-2xl p-8">
+        <div className="glass glass-content rounded-content p-8">
           {/* Header */}
           <div className="mb-8">
             <div className="flex items-center space-x-4 text-sm text-glass-muted mb-4">

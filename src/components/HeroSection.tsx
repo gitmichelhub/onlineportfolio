@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { ChevronDown } from 'lucide-react';
 import VoiceOrb from './VoiceOrb';
 import VoiceConsentDialog from './VoiceConsentDialog';
 import { useLanguage } from "@/hooks/use-language";
@@ -35,6 +36,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversati
     }
   });
   const transcriptRef = useRef<HTMLDivElement | null>(null);
+  const [hasScrolled, setHasScrolled] = useState(false);
 
   useEffect(() => {
     const el = transcriptRef.current;
@@ -42,6 +44,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversati
       el.scrollTop = el.scrollHeight;
     }
   }, [transcript]);
+
+  useEffect(() => {
+    const onScroll = () => setHasScrolled(window.scrollY > 80);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const beginConversation = async () => {
     if (!hasConsented) {
@@ -100,6 +109,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversati
       info: "Click the voice button to start an interactive conversation. I'm here to help with your questions regarding technology, product development, and more.",
       prompts: ["Current projects", "Consulting experience", "AI and product work"],
       promptHint: "Start a voice conversation about",
+      scrollCue: "Scroll to projects",
       you: "You",
       agent: "AI"
     },
@@ -111,6 +121,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversati
       info: "Klicke auf den Sprachbutton, um ein interaktives Gespräch zu starten. Ich helfe dir gerne bei Fragen zu Technologie, Produktentwicklung und mehr.",
       prompts: ["Aktuelle Projekte", "Consulting-Erfahrung", "KI und Produktarbeit"],
       promptHint: "Starte ein Sprachgespräch über",
+      scrollCue: "Zu den Projekten scrollen",
       you: "Du",
       agent: "KI"
     }
@@ -119,7 +130,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversati
   return (
     <section id="voice" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-24 pb-16">
       {/* Floating background shapes */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="section-geometry geometry-hero" aria-hidden="true">
         <div className="floating-shape absolute top-20 left-20 w-64 h-64 rounded-full animate-float"
              style={{ animationDelay: '0s', transform: 'rotate(20deg)' }} />
         <div className="floating-shape absolute bottom-20 right-20 w-48 h-48 rounded-full animate-float"
@@ -154,16 +165,26 @@ const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversati
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-glass-dark mb-6 leading-tight font-playfair">
             <span className="text-gradient-warm">{t[language].headline}</span>
           </h1>
-          <p className="text-xl sm:text-2xl text-glass-dark/60 leading-relaxed max-w-xl mx-auto">
+          <p className="text-xl sm:text-2xl text-glass-dark/75 leading-relaxed max-w-xl mx-auto">
             {t[language].subtitle}
           </p>
         </div>
 
         {/* Voice Orb — the centerpiece */}
         <div
-          className="flex justify-center my-14 sm:my-16 animate-fade-up"
+          className="relative flex justify-center my-14 sm:my-16 animate-fade-up"
           style={{ animationDelay: '0.2s' }}
         >
+          <svg
+            className={`sound-field ${isActive ? 'sound-field-active' : ''}`}
+            viewBox="0 0 360 360"
+            aria-hidden="true"
+          >
+            <circle className="sound-field-ring" cx="180" cy="180" r="64" stroke="rgba(185, 120, 70, 0.42)" strokeWidth="1.2" />
+            <circle className="sound-field-ring" cx="180" cy="180" r="92" stroke="rgba(20, 184, 166, 0.32)" strokeWidth="1" strokeDasharray="3 8" />
+            <circle className="sound-field-ring" cx="180" cy="180" r="123" stroke="rgba(185, 120, 70, 0.27)" strokeWidth="1" strokeDasharray="1 10" />
+            <circle className="sound-field-ring" cx="180" cy="180" r="156" stroke="rgba(20, 184, 166, 0.22)" strokeWidth="0.9" />
+          </svg>
           <VoiceOrb
             size="large"
             state={state}
@@ -182,7 +203,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversati
               type="button"
               onClick={handlePromptClick}
               aria-label={`${t[language].promptHint} ${prompt}`}
-              className="glass liquid-glass-soft rounded-full px-4 py-2 text-sm font-medium text-glass-copper transition-all duration-200 hover:scale-105 hover:shadow-md active:scale-95"
+              className="glass liquid-glass rounded-full px-4 py-2 text-sm font-semibold text-[#8f552f] transition-all duration-200 hover:scale-105 hover:shadow-md active:scale-95"
             >
               {prompt}
             </button>
@@ -203,7 +224,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversati
             <div
               ref={transcriptRef}
               aria-live="polite"
-              className="glass liquid-glass-soft rounded-2xl p-5 max-w-2xl mx-auto max-h-72 overflow-y-auto text-left space-y-3"
+              className="glass glass-content liquid-glass-soft rounded-content p-5 max-w-2xl mx-auto max-h-72 overflow-y-auto text-left space-y-3"
             >
               {transcript.map((entry, index) => (
                 <div key={index} className="text-sm leading-relaxed">
@@ -216,6 +237,22 @@ const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversati
             </div>
           </div>
         )}
+      </div>
+
+      {/* Scroll cue — gives the quiet band at the bottom of the viewport a
+          purpose and points first-time visitors at the work below */}
+      <div
+        className={`scroll-cue absolute bottom-8 left-1/2 z-10 transition-opacity duration-500 ${
+          hasScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'
+        }`}
+      >
+        <a
+          href="#projects"
+          aria-label={t[language].scrollCue}
+          className="glass liquid-glass-soft rounded-full flex h-11 w-11 items-center justify-center text-glass-copper transition-transform duration-200 hover:scale-110"
+        >
+          <ChevronDown size={20} />
+        </a>
       </div>
 
       {/* Voice Consent Dialog */}
