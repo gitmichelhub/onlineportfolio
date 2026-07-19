@@ -12,6 +12,8 @@ const Imprint = lazy(() => import("./pages/Imprint"));
 const BlogPost1 = lazy(() => import("./pages/BlogPost1"));
 const BlogPost2 = lazy(() => import("./pages/BlogPost2"));
 const BlogPost3 = lazy(() => import("./pages/BlogPost3"));
+const BlogPost4 = lazy(() => import("./pages/BlogPost4"));
+const BlogPost5 = lazy(() => import("./pages/BlogPost5"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 /**
@@ -98,8 +100,8 @@ const LiquidGlassFilters = () => (
         <feBlend in="rg" in2="chanB" mode="screen" />
       </filter>
 
-      {/* Softer variant for small surfaces (nav pills, badges) so the page
-          content reading through them stays comfortable */}
+      {/* Softer variant for reading surfaces, where subtle bending can remain
+          visible without making longer copy visually restless. */}
       <filter
         id="liquid-refraction-soft"
         x="-25%"
@@ -149,6 +151,8 @@ const App = () => (
               <Route path="/blog/ai-voice-interfaces" element={<BlogPost1 />} />
               <Route path="/blog/scalable-react-applications" element={<BlogPost2 />} />
               <Route path="/blog/connected-cars-iot" element={<BlogPost3 />} />
+              <Route path="/blog/markdown-llm-wiki-gstack" element={<BlogPost4 />} />
+              <Route path="/blog/agentic-work-adoption" element={<BlogPost5 />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

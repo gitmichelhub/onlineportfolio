@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Copy, Check, Mail } from 'lucide-react';
+import { Copy, Check, Mail, Github, Linkedin } from 'lucide-react';
 import { useLanguage } from "@/hooks/use-language";
 
 const ContactSection: React.FC = () => {
@@ -57,26 +57,31 @@ const ContactSection: React.FC = () => {
   }, []);
 
   return (
-    <section id="contact" className="min-h-screen py-20 bg-white/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16 animate-fade-up">
+    <section id="contact" className="py-16 md:py-20 bg-gradient-to-br from-white/65 via-glass-light/60 to-glass-cream/70 relative overflow-hidden">
+      {/* Ambient backdrop — gives the glass card something to refract */}
+      <div className="section-geometry geometry-contact" aria-hidden="true">
+        <div className="floating-shape-strong absolute top-1/4 left-[15%] w-80 h-80 rounded-full" />
+        <div className="floating-shape-strong absolute bottom-1/4 right-[15%] w-96 h-96 rounded-full" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div className="text-center mb-12 animate-fade-up">
           <h2 className="text-4xl font-semibold text-glass-dark mb-4 font-playfair">{t[language].sectionTitle}</h2>
-          <p className="text-xl text-glass-muted">
+          <p className="text-xl text-glass-muted max-w-3xl mx-auto">
             {t[language].subtitle}
           </p>
         </div>
 
         <div className="flex justify-center">
-          <div className="animate-fade-up" style={{ animationDelay: '0.2s' }}>
-            <div className="glass liquid-glass rounded-2xl p-8">
+          <div className="w-full max-w-md animate-fade-up" style={{ animationDelay: '0.2s' }}>
+            <div className="glass glass-content liquid-glass-soft rounded-content p-8">
               <div className="text-center">
                 {/* Email icon */}
                 <div className="mb-6">
-                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-glass-copper/10 flex items-center justify-center">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-glass-copper/15 border border-glass-copper/25 flex items-center justify-center">
                     <Mail size={28} className="text-glass-copper" />
                   </div>
-                  <p className="text-glass-dark font-medium text-lg mb-1">{email}</p>
-                  <p className="text-glass-muted text-sm">{t[language].subtitle.split('?')[0]}?</p>
+                  <p className="text-glass-dark font-medium text-lg">{email}</p>
                 </div>
                 
                 {/* Copy button with inline feedback */}
@@ -103,6 +108,30 @@ const ContactSection: React.FC = () => {
                     </>
                   )}
                 </button>
+
+                {/* Social links */}
+                <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+                  <a
+                    href="https://github.com/gitmichelhub"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="GitHub"
+                    className="glass liquid-glass min-h-11 rounded-full px-5 py-3 inline-flex items-center justify-center gap-2 text-[#8f552f] font-medium transition-all duration-200 motion-safe:hover:-translate-y-0.5 hover:bg-glass-copper hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-glass-copper/45 focus-visible:ring-offset-2"
+                  >
+                    <Github size={18} />
+                    <span>GitHub</span>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/michel-werner-9a9878160/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                    className="glass liquid-glass min-h-11 rounded-full px-5 py-3 inline-flex items-center justify-center gap-2 text-[#8f552f] font-medium transition-all duration-200 motion-safe:hover:-translate-y-0.5 hover:bg-glass-copper hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-glass-copper/45 focus-visible:ring-offset-2"
+                  >
+                    <Linkedin size={18} />
+                    <span>LinkedIn</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>

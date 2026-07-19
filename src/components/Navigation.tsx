@@ -85,7 +85,7 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
               <div className="flex gap-4 items-center">
                 {/* Nav Items Pill */}
                 <div
-                  className="glass liquid-glass-soft rounded-full flex items-center px-3 py-2 shadow-md"
+                  className="glass liquid-glass rounded-full flex items-center px-3 py-2 shadow-md"
                 >
                   {navItems.map((item) => (
                     <button
@@ -94,7 +94,7 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
                       className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
                         currentSection === item.id
                           ? 'bg-white/80 text-glass-copper shadow-sm'
-                          : 'text-glass-dark/70 hover:text-glass-copper hover:bg-white/50'
+                          : 'text-glass-dark/80 hover:text-glass-copper hover:bg-white/50'
                       }`}
                     >
                       {item.label}
@@ -103,17 +103,17 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
                 </div>
                 {/* Language Pill */}
                 <div
-                  className="glass liquid-glass-soft rounded-full flex items-center px-3 py-2 shadow-md"
+                  className="glass liquid-glass rounded-full flex items-center px-3 py-2 shadow-md"
                 >
                   <button
-                    className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${language === 'en' ? 'bg-white/80 text-glass-copper shadow-sm' : 'text-glass-dark/70 hover:text-glass-copper'}`}
+                    className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${language === 'en' ? 'bg-white/80 text-glass-copper shadow-sm' : 'text-glass-dark/80 hover:text-glass-copper'}`}
                     onClick={() => setLanguage('en')}
                     aria-pressed={language === 'en'}
                   >
                     EN
                   </button>
                   <button
-                    className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${language === 'de' ? 'bg-white/80 text-glass-copper shadow-sm' : 'text-glass-dark/70 hover:text-glass-copper'}`}
+                    className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${language === 'de' ? 'bg-white/80 text-glass-copper shadow-sm' : 'text-glass-dark/80 hover:text-glass-copper'}`}
                     onClick={() => setLanguage('de')}
                     aria-pressed={language === 'de'}
                   >
@@ -140,7 +140,7 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
           <div className="lg:hidden absolute right-4 top-2">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-3 text-glass-dark/70 hover:text-glass-copper transition-colors touch-manipulation rounded-full hover:bg-white/50 backdrop-blur-sm"
+              className="glass liquid-glass p-3 text-glass-dark/80 hover:text-glass-copper transition-colors touch-manipulation rounded-full hover:bg-white/60"
               aria-label="Toggle mobile menu"
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -153,7 +153,7 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
       {isMobileMenuOpen && (
         <div className="lg:hidden fixed inset-0 z-40 bg-glass-dark/20 backdrop-blur-md" onClick={() => setIsMobileMenuOpen(false)}>
           <div 
-            className="glass absolute top-20 left-4 right-4 rounded-3xl p-6 max-w-sm mx-auto"
+            className="glass liquid-glass absolute top-20 left-4 right-4 rounded-content p-6 max-w-sm mx-auto"
             style={{ 
               boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.8)"
             }}
@@ -166,9 +166,9 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
                 <button
                   key={item.id}
                   onClick={() => handleNavClick(item.id)}
-                  className={`w-full text-left px-4 py-3 text-base font-medium rounded-2xl transition-all duration-300 ${
+                  className={`w-full text-left px-4 py-3 text-base font-medium rounded-full transition-all duration-300 ${
                     currentSection === item.id
-                      ? 'bg-glass-copper/10 text-glass-copper shadow-sm border border-glass-copper/20'
+                      ? 'bg-glass-copper/15 text-[#8f552f] shadow-sm border border-glass-copper/30'
                       : 'text-glass-dark/80 hover:text-glass-copper hover:bg-glass-copper/5 border border-transparent hover:border-glass-copper/10'
                   }`}
                 >
@@ -182,9 +182,9 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
               <h3 className="text-sm font-semibold text-glass-muted mb-3">{mobileLabels[language].language}</h3>
               <div className="flex gap-2">
                 <button
-                  className={`flex-1 px-4 py-3 rounded-2xl text-sm font-semibold transition-all duration-300 ${
-                    language === 'en' 
-                      ? 'bg-glass-copper/10 text-glass-copper shadow-sm border border-glass-copper/20' 
+                  className={`flex-1 px-4 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
+                    language === 'en'
+                      ? 'bg-glass-copper/15 text-[#8f552f] shadow-sm border border-glass-copper/30'
                       : 'bg-glass-cream text-glass-dark/80 hover:text-glass-copper hover:bg-glass-copper/5 border border-transparent hover:border-glass-copper/10'
                   }`}
                   onClick={() => setLanguage('en')}
@@ -193,9 +193,9 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
                   English
                 </button>
                 <button
-                  className={`flex-1 px-4 py-3 rounded-2xl text-sm font-semibold transition-all duration-300 ${
-                    language === 'de' 
-                      ? 'bg-glass-copper/10 text-glass-copper shadow-sm border border-glass-copper/20' 
+                  className={`flex-1 px-4 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
+                    language === 'de'
+                      ? 'bg-glass-copper/15 text-[#8f552f] shadow-sm border border-glass-copper/30'
                       : 'bg-glass-cream text-glass-dark/80 hover:text-glass-copper hover:bg-glass-copper/5 border border-transparent hover:border-glass-copper/10'
                   }`}
                   onClick={() => setLanguage('de')}

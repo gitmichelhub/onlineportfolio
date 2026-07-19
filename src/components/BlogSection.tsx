@@ -14,8 +14,14 @@ const BlogSection: React.FC<BlogSectionProps> = ({ isVoiceActive = false }) => {
   const posts = t.posts;
 
   return (
-    <section id="blog" className="min-h-screen py-20 bg-gradient-to-br from-glass-light via-white to-glass-cream">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="blog" className="min-h-screen py-20 bg-gradient-to-br from-glass-light via-white to-glass-cream relative overflow-hidden">
+      {/* Ambient backdrop — gives the glass cards something to refract */}
+      <div className="section-geometry geometry-blog" aria-hidden="true">
+        <div className="floating-shape-strong absolute top-16 -right-24 w-96 h-96 rounded-full" />
+        <div className="floating-shape-strong absolute bottom-1/4 -left-24 w-80 h-80 rounded-full" />
+      </div>
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center mb-16 animate-fade-up">
           <h2 className="text-4xl font-semibold text-glass-dark mb-4 font-playfair">{t.sectionTitle}</h2>
           <p className="text-xl text-glass-muted">
@@ -27,12 +33,12 @@ const BlogSection: React.FC<BlogSectionProps> = ({ isVoiceActive = false }) => {
           {posts.map((post, index) => (
             <article 
               key={index}
-              className="glass liquid-glass rounded-2xl p-8 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl animate-fade-up group cursor-pointer"
+              className="glass glass-content liquid-glass-soft rounded-content p-8 transition-all duration-300 hover:scale-[1.015] hover:shadow-xl animate-fade-up group cursor-pointer"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="flex flex-col space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="px-3 py-1 bg-glass-copper/10 text-glass-copper text-sm rounded-full font-medium border border-glass-copper/20">
+                  <span className="glass-tag px-3 py-1 text-sm rounded-full font-semibold">
                     {post.category}
                   </span>
                   <div className="flex items-center space-x-4 text-sm text-glass-muted">

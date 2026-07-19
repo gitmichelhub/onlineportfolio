@@ -23,8 +23,15 @@ const ProjectsSection: React.FC = () => {
   const getTagColor = language === 'de' ? getTagColorDE : getTagColorEN;
 
   return (
-    <section id="projects" className="min-h-screen py-20 bg-white/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="projects" className="min-h-screen py-20 bg-gradient-to-br from-glass-light/70 via-white/60 to-glass-cream/80 relative overflow-hidden">
+      {/* Ambient backdrop — gives the glass cards something to refract */}
+      <div className="section-geometry geometry-projects" aria-hidden="true">
+        <div className="ambient-band-copper absolute -top-28 right-[4%] w-[30rem] h-[30rem] rounded-full" />
+        <div className="ambient-band-teal absolute top-[38%] -left-28 w-96 h-96 rounded-full" />
+        <div className="ambient-band-copper absolute bottom-12 left-[32%] w-80 h-80 rounded-full" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center mb-16 animate-fade-up">
           <h2 className="text-4xl font-semibold text-glass-dark mb-4 font-playfair">
             {language === 'de' ? 'Ausgewählte Projekte' : 'Featured Projects'}
@@ -41,7 +48,7 @@ const ProjectsSection: React.FC = () => {
           {projects.map((project, index) => (
             <div
               key={index}
-              className="glass liquid-glass rounded-2xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-xl animate-fade-up group"
+              className="glass glass-content liquid-glass-soft rounded-content p-6 h-full flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl animate-fade-up group"
               style={{ animationDelay: `${0.2 + index * 0.1}s` }}
             >
               <h3 className="text-xl font-semibold text-glass-dark mb-3 font-playfair">{project.title}</h3>
@@ -60,43 +67,49 @@ const ProjectsSection: React.FC = () => {
                 </CollapsibleTrigger>
                 <CollapsibleContent className="overflow-hidden transition-all duration-300 ease-in-out">
                   <div className="bg-glass-cream/50 rounded-lg p-4 mb-4 border border-glass-cream">
-                    <div className="text-glass-dark/70 leading-relaxed whitespace-pre-line">
+                    <div className="text-glass-dark/80 leading-relaxed whitespace-pre-line">
                       {project.detailedDescription}
                     </div>
                   </div>
                 </CollapsibleContent>
               </Collapsible>
 
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.technologies.map((tech, techIndex) => (
-                  <span
-                    key={techIndex}
-                    className="px-3 py-1 bg-glass-copper/10 text-glass-copper text-sm rounded-full border border-glass-copper/20"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
+              <div className="mt-auto">
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.technologies.map((tech, techIndex) => (
+                    <span
+                      key={techIndex}
+                      className="glass-tag px-3 py-1 text-sm font-medium rounded-full"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
 
-              <div className="flex space-x-4">
-                {project.link && (
-                  <a
-                    href={project.link}
-                    className="flex items-center space-x-2 text-glass-copper hover:text-glass-amber transition-colors"
-                  >
-                    <ExternalLink size={16} />
-                    <span className="text-sm font-medium">View Live</span>
-                  </a>
-                )}
-                {project.github && (
-                  <a
-                    href={project.github}
-                    className="flex items-center space-x-2 text-glass-muted hover:text-glass-dark transition-colors"
-                  >
-                    <Github size={16} />
-                    <span className="text-sm font-medium">Source</span>
-                  </a>
-                )}
+                <div className="flex space-x-4">
+                  {project.link && (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center space-x-2 text-glass-copper hover:text-glass-amber transition-colors"
+                    >
+                      <ExternalLink size={16} />
+                      <span className="text-sm font-medium">View Live</span>
+                    </a>
+                  )}
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center space-x-2 text-glass-muted hover:text-glass-dark transition-colors"
+                    >
+                      <Github size={16} />
+                      <span className="text-sm font-medium">Source</span>
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
           ))}
@@ -106,7 +119,7 @@ const ProjectsSection: React.FC = () => {
           <Collapsible open={isCVOpen} onOpenChange={setIsCVOpen}>
             <CollapsibleTrigger asChild>
               <button
-                className="inline-flex items-center space-x-2 bg-glass-copper text-white px-6 py-3 rounded-full font-medium transition-all duration-200 hover:scale-105 hover:bg-glass-amber hover:shadow-lg"
+                className="inline-flex items-center space-x-2 bg-gradient-to-r from-glass-copper to-glass-amber text-white px-6 py-3 rounded-full font-medium shadow-md shadow-glass-copper/20 transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-glass-copper/30"
                 aria-expanded={isCVOpen}
                 aria-controls="cv"
               >
@@ -116,7 +129,14 @@ const ProjectsSection: React.FC = () => {
             </CollapsibleTrigger>
 
             <CollapsibleContent className="overflow-hidden transition-all duration-500 ease-in-out">
-              <div id="cv" className="mt-12">
+              <div id="cv" className="mt-12 relative">
+                {/* Ambient blobs along the timeline so the glass cards refract */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+                  <div className="floating-shape-strong absolute top-[12%] -left-10 w-72 h-72 rounded-full" />
+                  <div className="floating-shape-strong absolute top-[42%] right-0 w-80 h-80 rounded-full" />
+                  <div className="floating-shape-strong absolute top-[72%] left-[10%] w-72 h-72 rounded-full" />
+                </div>
+
                 <div className="text-center mb-8">
                   <h3 className="text-2xl font-semibold text-glass-dark mb-2 font-playfair">{language === 'de' ? "Karriereverlauf" : "Career Timeline"}</h3>
                   <p className="text-glass-muted">{language === 'de' ? "Meine Reise durch Technologie und Innovation" : "My journey through technology and innovation"}</p>
@@ -129,16 +149,19 @@ const ProjectsSection: React.FC = () => {
                       className="vertical-timeline-element--work animate-fade-up"
                       style={{ animationDelay: `${index * 0.1}s` }}
                       contentStyle={{
-                        background: 'rgba(255, 255, 255, 0.7)',
-                        backdropFilter: 'blur(20px)',
-                        border: '1px solid rgba(255, 255, 255, 0.8)',
-                        borderRadius: '16px',
-                        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.06)'
+                        background:
+                          'linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.62) 50%, rgba(255, 255, 255, 0.74))',
+                        backdropFilter: 'blur(18px) saturate(1.5)',
+                        WebkitBackdropFilter: 'blur(18px) saturate(1.5)',
+                        border: '1px solid rgba(255, 255, 255, 0.75)',
+                        borderRadius: '14px',
+                        boxShadow:
+                          '0 16px 40px rgba(35, 35, 45, 0.09), 0 4px 12px rgba(185, 120, 70, 0.07), inset 0 1px 1px rgba(255, 255, 255, 0.9)'
                       }}
-                      contentArrowStyle={{ borderRight: '7px solid rgba(255, 255, 255, 0.7)' }}
+                      contentArrowStyle={{ borderRight: '7px solid rgba(255, 255, 255, 0.65)' }}
                       date={item.date}
                       iconStyle={{
-                        background: '#B97846',
+                        background: 'linear-gradient(135deg, #B97846, #D29650)',
                         color: '#fff',
                         display: 'flex',
                         alignItems: 'center',
