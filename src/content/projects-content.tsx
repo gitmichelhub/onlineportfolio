@@ -193,12 +193,12 @@ export const timelineDataEN = [
 ];
 export const getTagColorEN = (tag: string) => {
   switch (tag) {
-    case 'FTE': return 'bg-emerald-100 text-emerald-700 border border-emerald-200';
-    case 'Part-time': return 'bg-teal-100 text-teal-700 border border-teal-200';
-    case 'Edu': return 'bg-amber-100 text-amber-700 border border-amber-200';
-    case 'Hobby': return 'bg-orange-100 text-orange-700 border border-orange-200';
-    case 'Cert': return 'bg-cyan-100 text-cyan-700 border border-cyan-200';
-    default: return 'bg-gray-100 text-gray-700 border border-gray-200';
+    case 'FTE': return 'bg-emerald-200/70 text-emerald-900 border border-emerald-300';
+    case 'Part-time': return 'bg-teal-200/70 text-teal-900 border border-teal-300';
+    case 'Edu': return 'bg-amber-200/70 text-amber-900 border border-amber-300';
+    case 'Hobby': return 'bg-orange-200/70 text-orange-900 border border-orange-300';
+    case 'Cert': return 'bg-cyan-200/70 text-cyan-900 border border-cyan-300';
+    default: return 'bg-gray-200/70 text-gray-800 border border-gray-300';
   }
 };
 
@@ -393,11 +393,11 @@ export const timelineDataDE = [
 ];
 export const getTagColorDE = (tag: string) => {
   switch (tag) {
-    case 'FTE': return 'bg-emerald-100 text-emerald-700 border border-emerald-200';
-    case 'Teilzeit': return 'bg-teal-100 text-teal-700 border border-teal-200';
-    case 'Edu': return 'bg-amber-100 text-amber-700 border border-amber-200';
-    case 'Hobby': return 'bg-orange-100 text-orange-700 border border-orange-200';
-    case 'Zertifikat': return 'bg-cyan-100 text-cyan-700 border border-cyan-200';
-    default: return 'bg-gray-100 text-gray-700 border border-gray-200';
+    case 'FTE': return 'bg-emerald-200/70 text-emerald-900 border border-emerald-300';
+    case 'Teilzeit': return 'bg-teal-200/70 text-teal-900 border border-teal-300';
+    case 'Edu': return 'bg-amber-200/70 text-amber-900 border border-amber-300';
+    case 'Hobby': return 'bg-orange-200/70 text-orange-900 border border-orange-300';
+    case 'Zertifikat': return 'bg-cyan-200/70 text-cyan-900 border border-cyan-300';
+    default: return 'bg-gray-200/70 text-gray-800 border border-gray-300';
   }
 };

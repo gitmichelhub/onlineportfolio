@@ -160,14 +160,14 @@ const ProjectsSection: React.FC = () => {
                       }}
                       contentArrowStyle={{ borderRight: '7px solid rgba(255, 255, 255, 0.65)' }}
                       date={item.date}
-                      iconStyle={{
-                        background: 'linear-gradient(135deg, #B97846, #D29650)',
-                        color: '#fff',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                      }}
-                      icon={item.icon}
+                      iconStyle={{ background: 'transparent', boxShadow: 'none' }}
+                      icon={
+                        <span
+                          className={`timeline-bead ${
+                            ['Cert', 'Edu', 'Zertifikat'].includes(item.tag) ? 'timeline-bead-teal' : ''
+                          }`}
+                        />
+                      }
                     >
                       <h3 className="text-lg font-semibold text-glass-dark mb-2 font-playfair">{item.title}</h3>
                       <p className="text-glass-muted mb-3 leading-relaxed">{item.summary}</p>

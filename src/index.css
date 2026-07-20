@@ -190,6 +190,39 @@
     color: rgb(126 73 38);
   }
 
+  .glass-tag-teal {
+    background: rgba(20, 184, 166, 0.14);
+    border: 1px solid rgba(20, 184, 166, 0.32);
+    color: rgb(15 118 110);
+  }
+
+  .glass-tag-amber {
+    background: rgba(210, 150, 80, 0.16);
+    border: 1px solid rgba(210, 150, 80, 0.4);
+    color: rgb(146 88 32);
+  }
+
+  .timeline-bead {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    margin: -8px 0 0 -8px;
+    border-radius: 9999px;
+    background: radial-gradient(circle at 35% 30%, #d29650, #b97846 72%);
+    box-shadow:
+      0 0 0 3px rgba(255, 255, 255, 0.92),
+      0 2px 10px rgba(185, 120, 70, 0.4);
+  }
+
+  .timeline-bead-teal {
+    background: radial-gradient(circle at 35% 30%, #2dd4bf, #0f9488 72%);
+    box-shadow:
+      0 0 0 3px rgba(255, 255, 255, 0.92),
+      0 2px 10px rgba(20, 184, 166, 0.35);
+  }
+
   /*
    * Liquid glass: refract the backdrop through an SVG displacement map so the
    * content behind genuinely bends, while the element's own text stays sharp.
@@ -524,4 +557,17 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+}
+
+/* CV timeline library overrides. These selectors only exist at
+   react-vertical-timeline runtime, so they must live OUTSIDE @layer —
+   Tailwind purges layered rules whose classes never appear in source. */
+.vertical-timeline-element-content {
+  text-align: left;
+}
+
+.vertical-timeline-element-date {
+  color: rgb(143 85 47);
+  font-weight: 600;
+  opacity: 1 !important;
 }
