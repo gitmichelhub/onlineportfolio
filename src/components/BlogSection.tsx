@@ -8,6 +8,16 @@ interface BlogSectionProps {
   isVoiceActive?: boolean;
 }
 
+// Category chip tone per post (keyed by slug, which is stable across languages)
+// so the list doesn't read as a wall of identical copper chips.
+const CATEGORY_TONE: Record<string, string> = {
+  'agentic-work-adoption': 'glass-tag',
+  'markdown-llm-wiki-gstack': 'glass-tag-amber',
+  'ai-voice-interfaces': 'glass-tag-teal',
+  'scalable-react-applications': 'glass-tag',
+  'connected-cars-iot': 'glass-tag-teal',
+};
+
 const BlogSection: React.FC<BlogSectionProps> = ({ isVoiceActive = false }) => {
   const { language } = useLanguage();
   const t = BLOG_SECTION_CONTENT[language];
@@ -21,7 +31,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({ isVoiceActive = false }) => {
         <div className="floating-shape-strong absolute bottom-1/4 -left-24 w-80 h-80 rounded-full" />
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center mb-16 animate-fade-up">
           <h2 className="text-4xl font-semibold text-glass-dark mb-4 font-playfair">{t.sectionTitle}</h2>
           <p className="text-xl text-glass-muted">
@@ -29,16 +39,16 @@ const BlogSection: React.FC<BlogSectionProps> = ({ isVoiceActive = false }) => {
           </p>
         </div>
 
-        <div className="space-y-8">
+        <div className="grid gap-8 lg:grid-cols-2">
           {posts.map((post, index) => (
-            <article 
+            <article
               key={index}
               className="glass glass-content liquid-glass-soft rounded-content p-8 transition-all duration-300 hover:scale-[1.015] hover:shadow-xl animate-fade-up group cursor-pointer"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="flex flex-col space-y-4">
+              <div className="flex h-full flex-col gap-4">
                 <div className="flex items-center justify-between">
-                  <span className="glass-tag px-3 py-1 text-sm rounded-full font-semibold">
+                  <span className={`${CATEGORY_TONE[post.slug] ?? 'glass-tag'} px-3 py-1 text-sm rounded-full font-semibold`}>
                     {post.category}
                   </span>
                   <div className="flex items-center space-x-4 text-sm text-glass-muted">
@@ -58,7 +68,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({ isVoiceActive = false }) => {
                   {post.excerpt}
                 </p>
 
-                <div className="flex items-center justify-between pt-4">
+                <div className="mt-auto flex items-center justify-between pt-2">
                   {isVoiceActive ? (
                     <a 
                       href={`/blog/${post.slug}`}
