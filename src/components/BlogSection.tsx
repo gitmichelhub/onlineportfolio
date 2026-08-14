@@ -11,6 +11,8 @@ interface BlogSectionProps {
 // Category chip tone per post (keyed by slug, which is stable across languages)
 // so the list doesn't read as a wall of identical copper chips.
 const CATEGORY_TONE: Record<string, string> = {
+  'agent-intrusion-huggingface': 'glass-tag-amber',
+  'ai-task-crossover': 'glass-tag-teal',
   'agentic-work-adoption': 'glass-tag',
   'markdown-llm-wiki-gstack': 'glass-tag-amber',
   'ai-voice-interfaces': 'glass-tag-teal',

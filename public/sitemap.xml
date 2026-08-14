@@ -6,6 +6,16 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://michel.chat/blog/agent-intrusion-huggingface</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://michel.chat/blog/ai-task-crossover</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://michel.chat/blog/agentic-work-adoption</loc>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>

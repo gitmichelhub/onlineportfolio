@@ -14,6 +14,8 @@ const BlogPost2 = lazy(() => import("./pages/BlogPost2"));
 const BlogPost3 = lazy(() => import("./pages/BlogPost3"));
 const BlogPost4 = lazy(() => import("./pages/BlogPost4"));
 const BlogPost5 = lazy(() => import("./pages/BlogPost5"));
+const BlogPost6 = lazy(() => import("./pages/BlogPost6"));
+const BlogPost7 = lazy(() => import("./pages/BlogPost7"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const ScrollToTop = () => {
@@ -174,6 +176,8 @@ const App = () => (
               <Route path="/blog/connected-cars-iot" element={<BlogPost3 />} />
               <Route path="/blog/markdown-llm-wiki-gstack" element={<BlogPost4 />} />
               <Route path="/blog/agentic-work-adoption" element={<BlogPost5 />} />
+              <Route path="/blog/agent-intrusion-huggingface" element={<BlogPost6 />} />
+              <Route path="/blog/ai-task-crossover" element={<BlogPost7 />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

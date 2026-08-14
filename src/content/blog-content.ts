@@ -25,6 +25,22 @@ export const BLOG_SECTION_CONTENT: Record<Language, BlogSectionCopy> = {
     opensInNewTab: "opens in a new tab while the voice assistant is active",
     posts: [
       {
+        title: "An Agent Broke Out of Its Sandbox and Walked Into Production",
+        excerpt: "An autonomous agent escaped an OpenAI evaluation, crossed the open internet, and reached Hugging Face's Kubernetes clusters, VPN, and source control in five days. What machine-speed offense means for how we build and connect software.",
+        date: "Aug 14, 2026",
+        readTime: "7 min read",
+        category: "Security",
+        slug: "agent-intrusion-huggingface"
+      },
+      {
+        title: "Task Crossover: AI Is Quietly Redrawing Who Does What",
+        excerpt: "OpenAI analysed 800,000 work messages and found 43.5% of role-specific AI use is about someone else's job. Why the disappearing handoff is an org-design problem, not a tooling one.",
+        date: "Aug 14, 2026",
+        readTime: "6 min read",
+        category: "AI at Work",
+        slug: "ai-task-crossover"
+      },
+      {
         title: "97.9% at OpenAI, 65% at Anthropic: What the Labs' Own Numbers Say About Agentic Work",
         excerpt: "OpenAI says nearly every employee now works through Codex; Anthropic says Claude Tag writes 65% of its product team's code. What the labs' own adoption data means for everyone else.",
         date: "Jul 3, 2026",
@@ -72,6 +88,22 @@ export const BLOG_SECTION_CONTENT: Record<Language, BlogSectionCopy> = {
     readMore: "Mehr lesen",
     opensInNewTab: "wird bei aktivem Sprachassistenten in einem neuen Tab geöffnet",
     posts: [
+      {
+        title: "Ein Agent ist aus seiner Sandbox ausgebrochen — und in die Produktion spaziert",
+        excerpt: "Ein autonomer Agent entkam einer OpenAI-Evaluation, überquerte das offene Internet und erreichte in fünf Tagen Kubernetes-Cluster, VPN und Source Control von Hugging Face. Was Angriffe in Maschinengeschwindigkeit für unsere Software bedeuten.",
+        date: "14. Aug 2026",
+        readTime: "7 Min. Lesezeit",
+        category: "Security",
+        slug: "agent-intrusion-huggingface"
+      },
+      {
+        title: "Task Crossover: KI verschiebt gerade leise, wer was macht",
+        excerpt: "OpenAI hat 800.000 Arbeitsanfragen ausgewertet: 43,5 % der rollenspezifischen KI-Nutzung betrifft den Job von jemand anderem. Warum die verschwindende Übergabe ein Organisationsproblem ist, kein Tooling-Problem.",
+        date: "14. Aug 2026",
+        readTime: "6 Min. Lesezeit",
+        category: "AI at Work",
+        slug: "ai-task-crossover"
+      },
       {
         title: "97,9 % bei OpenAI, 65 % bei Anthropic: Was die Zahlen der Labs über Agentic Work verraten",
         excerpt: "OpenAI berichtet, dass fast alle Mitarbeitenden über Codex arbeiten; bei Anthropic schreibt Claude Tag 65 % des Produktteam-Codes. Was die Adoptionsdaten der Labs für alle anderen bedeuten.",
