@@ -71,6 +71,11 @@
     scroll-behavior: smooth;
   }
 
+  :focus-visible {
+    outline: 3px solid rgb(143 85 47);
+    outline-offset: 3px;
+  }
+
   @media (max-width: 767px) {
     body {
       background-attachment: scroll;
@@ -150,17 +155,26 @@
     -webkit-mask-composite: xor;
   }
 
-  /* Specular highlight + a slow travelling sheen that gives the surface life */
+  /* Static specular highlight shared by every glass surface. */
   .glass::after {
+    background:
+      radial-gradient(72% 54% at 20% -4%, rgba(255, 255, 255, 0.85), transparent 58%),
+      linear-gradient(90deg, rgba(185, 120, 70, 0.08), transparent 32%, rgba(20, 184, 166, 0.045));
+    background-size: 100% 100%, 100% 100%;
+    background-position: 0 0, 0 0;
+    opacity: 0.7;
+    transition: opacity 400ms ease;
+  }
+
+  /* Travelling sheen is opt-in for the small number of hero/nav surfaces. */
+  .glass-sheen::after {
     background:
       radial-gradient(72% 54% at 20% -4%, rgba(255, 255, 255, 0.85), transparent 58%),
       linear-gradient(115deg, transparent 0 30%, rgba(255, 255, 255, 0.5) 44%, transparent 56%),
       linear-gradient(90deg, rgba(185, 120, 70, 0.08), transparent 32%, rgba(20, 184, 166, 0.045));
     background-size: 100% 100%, 220% 220%, 100% 100%;
     background-position: 0 0, 0% 0%, 0 0;
-    opacity: 0.7;
     mix-blend-mode: screen;
-    transition: opacity 400ms ease;
     animation: glass-sheen 14s ease-in-out infinite;
   }
 
@@ -266,18 +280,18 @@
   /* Stronger ambient blob for flat sections — gives the glass cards a
      contrasting backdrop to refract (the effect is invisible over plain white) */
   .floating-shape-strong {
-    background: linear-gradient(135deg, rgba(185, 120, 70, 0.16), rgba(20, 184, 166, 0.12));
-    filter: blur(70px);
+    background: linear-gradient(135deg, rgba(185, 120, 70, 0.22), rgba(20, 184, 166, 0.17));
+    filter: blur(64px);
   }
 
   .ambient-band-copper {
-    background: radial-gradient(circle, rgba(185, 120, 70, 0.24), rgba(210, 150, 80, 0.1) 48%, transparent 72%);
-    filter: blur(58px);
+    background: radial-gradient(circle, rgba(185, 120, 70, 0.3), rgba(210, 150, 80, 0.13) 48%, transparent 72%);
+    filter: blur(54px);
   }
 
   .ambient-band-teal {
-    background: radial-gradient(circle, rgba(20, 184, 166, 0.18), rgba(20, 184, 166, 0.07) 48%, transparent 72%);
-    filter: blur(62px);
+    background: radial-gradient(circle, rgba(20, 184, 166, 0.23), rgba(20, 184, 166, 0.09) 48%, transparent 72%);
+    filter: blur(58px);
   }
 
   /* Static, section-specific cartographic detail gives the displacement maps
@@ -297,24 +311,25 @@
 
   .geometry-projects {
     background:
-      repeating-radial-gradient(ellipse at 94% 22%, transparent 0 34px, rgba(20, 184, 166, 0.05) 35px 36px, transparent 37px 62px),
-      repeating-radial-gradient(ellipse at 4% 72%, transparent 0 45px, rgba(185, 120, 70, 0.048) 46px 47px, transparent 48px 78px),
-      repeating-linear-gradient(90deg, transparent 0 79px, rgba(35, 35, 45, 0.04) 80px),
-      repeating-linear-gradient(0deg, transparent 0 79px, rgba(20, 184, 166, 0.032) 80px),
-      linear-gradient(118deg, transparent 18%, rgba(185, 120, 70, 0.12) 43%, transparent 68%);
+      repeating-radial-gradient(ellipse at 94% 22%, transparent 0 34px, rgba(20, 184, 166, 0.075) 35px 36px, transparent 37px 62px),
+      repeating-radial-gradient(ellipse at 4% 72%, transparent 0 45px, rgba(185, 120, 70, 0.07) 46px 47px, transparent 48px 78px),
+      repeating-linear-gradient(90deg, transparent 0 79px, rgba(35, 35, 45, 0.05) 80px),
+      repeating-linear-gradient(0deg, transparent 0 79px, rgba(20, 184, 166, 0.045) 80px),
+      linear-gradient(118deg, transparent 18%, rgba(185, 120, 70, 0.16) 43%, transparent 68%);
   }
 
   .geometry-blog {
     background:
-      repeating-radial-gradient(ellipse at 92% 18%, transparent 0 31px, rgba(20, 184, 166, 0.055) 32px 33px, transparent 34px 56px),
-      repeating-radial-gradient(ellipse at 5% 78%, transparent 0 42px, rgba(185, 120, 70, 0.05) 43px 44px, transparent 45px 72px);
+      repeating-radial-gradient(ellipse at 92% 18%, transparent 0 31px, rgba(20, 184, 166, 0.08) 32px 33px, transparent 34px 56px),
+      repeating-radial-gradient(ellipse at 5% 78%, transparent 0 42px, rgba(185, 120, 70, 0.075) 43px 44px, transparent 45px 72px),
+      linear-gradient(124deg, transparent 22%, rgba(20, 184, 166, 0.09) 46%, transparent 68%);
   }
 
   .geometry-contact {
     background:
-      repeating-radial-gradient(ellipse at 88% 25%, transparent 0 38px, rgba(20, 184, 166, 0.045) 39px 40px, transparent 41px 68px),
-      repeating-linear-gradient(135deg, transparent 0 64px, rgba(185, 120, 70, 0.052) 65px, transparent 66px 112px),
-      radial-gradient(ellipse at 50% 55%, rgba(20, 184, 166, 0.09), transparent 42%);
+      repeating-radial-gradient(ellipse at 88% 25%, transparent 0 38px, rgba(20, 184, 166, 0.07) 39px 40px, transparent 41px 68px),
+      repeating-linear-gradient(135deg, transparent 0 64px, rgba(185, 120, 70, 0.075) 65px, transparent 66px 112px),
+      radial-gradient(ellipse at 50% 55%, rgba(20, 184, 166, 0.13), transparent 42%);
   }
 
   /* Long-form tables: on narrow screens give columns room and let the
@@ -512,17 +527,38 @@
     }
   }
 
+  /*
+   * Reduced motion. The decorative loops here are the vestibular risk: three
+   * large `.animate-float` blobs translate 20px and rotate 180° continuously,
+   * and smooth scrolling hijacks every in-page jump. Entrance animations are
+   * killed rather than shortened — `fade-up` ends at opacity 1 with no base
+   * opacity, so `animation: none` simply reveals the element immediately.
+   * Deliberately kept: `timer-warning` and the processing pulse, which convey
+   * state through opacity/shadow rather than movement.
+   */
   @media (prefers-reduced-motion: reduce) {
-    .glass::after {
-      transition: none;
-      animation: none;
+    html {
+      scroll-behavior: auto;
     }
 
+    .glass-sheen::after {
+      transition: none;
+      animation: none !important;
+    }
+
+    /* !important because the .animate-* utilities are declared further down
+       this same file, and a media query adds no specificity — without it the
+       later declarations simply win and the animations keep running. */
     .orb-halo,
     .orb-glow,
     .sound-field-ring,
-    .scroll-cue {
-      animation: none;
+    .scroll-cue,
+    .animate-float,
+    .animate-fade-up,
+    .animate-ripple,
+    .animate-pulse-glow,
+    .animate-soft-glow {
+      animation: none !important;
     }
   }
 

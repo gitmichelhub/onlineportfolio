@@ -4,6 +4,7 @@ import { usePageMeta } from "@/hooks/use-page-meta";
 import { ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ArticleBackdrop from '@/components/ArticleBackdrop';
+import SubpageHeader from '@/components/SubpageHeader';
 
 const Imprint: React.FC = () => {
   const { language } = useLanguage();
@@ -65,6 +66,7 @@ const Imprint: React.FC = () => {
     <div className="relative overflow-hidden min-h-screen bg-gradient-to-br from-glass-light via-white to-glass-cream py-20 px-4">
       <ArticleBackdrop />
       <div className="max-w-4xl mx-auto relative">
+        <SubpageHeader />
         {/* Back Button */}
         <Link 
           to="/" 

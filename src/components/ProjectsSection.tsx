@@ -21,6 +21,10 @@ const ProjectsSection: React.FC = () => {
   const projects = language === 'de' ? projectsDE : projectsEN;
   const timelineData = language === 'de' ? timelineDataDE : timelineDataEN;
   const getTagColor = language === 'de' ? getTagColorDE : getTagColorEN;
+  const t = {
+    en: { viewLive: 'View live', source: 'Source' },
+    de: { viewLive: 'Live ansehen', source: 'Quellcode' },
+  };
 
   return (
     <section id="projects" className="min-h-screen py-20 bg-gradient-to-br from-glass-light/70 via-white/60 to-glass-cream/80 relative overflow-hidden">
@@ -29,6 +33,7 @@ const ProjectsSection: React.FC = () => {
         <div className="ambient-band-copper absolute -top-28 right-[4%] w-[30rem] h-[30rem] rounded-full" />
         <div className="ambient-band-teal absolute top-[38%] -left-28 w-96 h-96 rounded-full" />
         <div className="ambient-band-copper absolute bottom-12 left-[32%] w-80 h-80 rounded-full" />
+        <div className="floating-shape-strong absolute top-[62%] right-[8%] w-96 h-96 rounded-full" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -52,7 +57,7 @@ const ProjectsSection: React.FC = () => {
               style={{ animationDelay: `${0.2 + index * 0.1}s` }}
             >
               <h3 className="text-xl font-semibold text-glass-dark mb-3 font-playfair">{project.title}</h3>
-              <p className="text-glass-muted mb-4 leading-relaxed">{project.description}</p>
+              <p className="text-glass-muted mb-4 leading-relaxed md:min-h-24">{project.description}</p>
 
               <Collapsible
                 open={openDetails === index}
@@ -74,7 +79,7 @@ const ProjectsSection: React.FC = () => {
                 </CollapsibleContent>
               </Collapsible>
 
-              <div className="mt-auto">
+              <div className="mt-auto border-t border-glass-copper/15 pt-4">
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.technologies.map((tech, techIndex) => (
                     <span
@@ -95,7 +100,7 @@ const ProjectsSection: React.FC = () => {
                       className="flex items-center space-x-2 text-glass-copper hover:text-glass-amber transition-colors"
                     >
                       <ExternalLink size={16} />
-                      <span className="text-sm font-medium">View Live</span>
+                      <span className="text-sm font-medium">{t[language].viewLive}</span>
                     </a>
                   )}
                   {project.github && (
@@ -106,7 +111,7 @@ const ProjectsSection: React.FC = () => {
                       className="flex items-center space-x-2 text-glass-muted hover:text-glass-dark transition-colors"
                     >
                       <Github size={16} />
-                      <span className="text-sm font-medium">Source</span>
+                      <span className="text-sm font-medium">{t[language].source}</span>
                     </a>
                   )}
                 </div>

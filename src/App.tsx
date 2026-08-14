@@ -2,8 +2,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { lazy, Suspense, useEffect } from "react";
 import Index from "./pages/Index";
 import { LanguageProvider } from "@/hooks/use-language";
 
@@ -15,6 +15,26 @@ const BlogPost3 = lazy(() => import("./pages/BlogPost3"));
 const BlogPost4 = lazy(() => import("./pages/BlogPost4"));
 const BlogPost5 = lazy(() => import("./pages/BlogPost5"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+
+const ScrollToTop = () => {
+  const { pathname, hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      const frame = window.requestAnimationFrame(() => {
+        document.getElementById(hash.slice(1))?.scrollIntoView();
+      });
+      return () => window.cancelAnimationFrame(frame);
+    }
+
+    const previousScrollBehavior = document.documentElement.style.scrollBehavior;
+    document.documentElement.style.scrollBehavior = 'auto';
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    document.documentElement.style.scrollBehavior = previousScrollBehavior;
+  }, [pathname, hash]);
+
+  return null;
+};
 
 /**
  * Liquid-glass refraction filters.
@@ -144,6 +164,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ScrollToTop />
           <Suspense fallback={<PageFallback />}>
             <Routes>
               <Route path="/" element={<Index />} />

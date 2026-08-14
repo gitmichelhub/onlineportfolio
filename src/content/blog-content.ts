@@ -13,6 +13,7 @@ export interface BlogSectionCopy {
   sectionTitle: string;
   subtitle: string;
   readMore: string;
+  opensInNewTab: string;
   posts: BlogPostPreview[];
 }
 
@@ -21,6 +22,7 @@ export const BLOG_SECTION_CONTENT: Record<Language, BlogSectionCopy> = {
     sectionTitle: "Latest Thoughts",
     subtitle: "Insights on my life, technology, development, and the future of digital experiences.",
     readMore: "Read more",
+    opensInNewTab: "opens in a new tab while the voice assistant is active",
     posts: [
       {
         title: "97.9% at OpenAI, 65% at Anthropic: What the Labs' Own Numbers Say About Agentic Work",
@@ -68,6 +70,7 @@ export const BLOG_SECTION_CONTENT: Record<Language, BlogSectionCopy> = {
     sectionTitle: "Aktuelle Gedanken",
     subtitle: "Einblicke in mein Leben, Technologie, Entwicklung und die Zukunft digitaler Erlebnisse.",
     readMore: "Mehr lesen",
+    opensInNewTab: "wird bei aktivem Sprachassistenten in einem neuen Tab geöffnet",
     posts: [
       {
         title: "97,9 % bei OpenAI, 65 % bei Anthropic: Was die Zahlen der Labs über Agentic Work verraten",

@@ -45,24 +45,32 @@ const Index = () => {
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['voice', 'projects', 'blog', 'contact'];
-      const scrollPosition = window.scrollY + 100;
+    const sectionIds = ['voice', 'projects', 'blog', 'contact'];
+    const visibleSections = new Set<string>();
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((section): section is HTMLElement => section !== null);
 
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setCurrentSection(section);
-            break;
-          }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          visibleSections.add(entry.target.id);
+        } else {
+          visibleSections.delete(entry.target.id);
         }
-      }
-    };
+      });
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+      const activeSection = sectionIds.find((id) => visibleSections.has(id));
+      if (activeSection) {
+        setCurrentSection(activeSection);
+      }
+    }, {
+      rootMargin: '-80px 0px -70% 0px',
+      threshold: 0,
+    });
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
   }, []);
 
   return (

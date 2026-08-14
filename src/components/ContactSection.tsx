@@ -60,8 +60,9 @@ const ContactSection: React.FC = () => {
     <section id="contact" className="py-16 md:py-20 bg-gradient-to-br from-white/65 via-glass-light/60 to-glass-cream/70 relative overflow-hidden">
       {/* Ambient backdrop — gives the glass card something to refract */}
       <div className="section-geometry geometry-contact" aria-hidden="true">
-        <div className="floating-shape-strong absolute top-1/4 left-[15%] w-80 h-80 rounded-full" />
-        <div className="floating-shape-strong absolute bottom-1/4 right-[15%] w-96 h-96 rounded-full" />
+        <div className="ambient-band-copper absolute top-[8%] left-[8%] w-96 h-96 rounded-full" />
+        <div className="ambient-band-teal absolute bottom-[4%] right-[10%] w-[28rem] h-[28rem] rounded-full" />
+        <div className="floating-shape-strong absolute top-[42%] left-[44%] w-72 h-72 rounded-full" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -116,7 +117,7 @@ const ContactSection: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="GitHub"
-                    className="glass liquid-glass min-h-11 rounded-full px-5 py-3 inline-flex items-center justify-center gap-2 text-[#8f552f] font-medium transition-all duration-200 motion-safe:hover:-translate-y-0.5 hover:bg-glass-copper hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-glass-copper/45 focus-visible:ring-offset-2"
+                    className="glass liquid-glass min-h-11 rounded-full px-5 py-3 inline-flex items-center justify-center gap-2 text-[#8f552f] font-medium transition-all duration-200 motion-safe:hover:-translate-y-0.5 hover:bg-glass-copper hover:text-white"
                   >
                     <Github size={18} />
                     <span>GitHub</span>
@@ -126,7 +127,7 @@ const ContactSection: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="LinkedIn"
-                    className="glass liquid-glass min-h-11 rounded-full px-5 py-3 inline-flex items-center justify-center gap-2 text-[#8f552f] font-medium transition-all duration-200 motion-safe:hover:-translate-y-0.5 hover:bg-glass-copper hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-glass-copper/45 focus-visible:ring-offset-2"
+                    className="glass liquid-glass min-h-11 rounded-full px-5 py-3 inline-flex items-center justify-center gap-2 text-[#8f552f] font-medium transition-all duration-200 motion-safe:hover:-translate-y-0.5 hover:bg-glass-copper hover:text-white"
                   >
                     <Linkedin size={18} />
                     <span>LinkedIn</span>
