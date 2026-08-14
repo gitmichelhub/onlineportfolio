@@ -81,6 +81,15 @@ export default {
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
 			},
+			/*
+			 * Only the Radix accordion animations live here. `fade-up`,
+			 * `pulse-glow`, `ripple` and `float` used to be declared in this file
+			 * AND in index.css with different values — same @keyframes names, so
+			 * whichever stylesheet loaded last silently redefined the other
+			 * globally (e.g. `.orb-glow` asks for a 0.3→0.6 opacity breath and was
+			 * at the mercy of this file's 0.8→1 version). index.css is now the
+			 * single source for the bespoke glass animations; keep it that way.
+			 */
 			keyframes: {
 				'accordion-down': {
 					from: { height: '0' },
@@ -89,53 +98,11 @@ export default {
 				'accordion-up': {
 					from: { height: 'var(--radix-accordion-content-height)' },
 					to: { height: '0' }
-				},
-				'fade-up': {
-					'0%': {
-						opacity: '0',
-						transform: 'translateY(20px)'
-					},
-					'100%': {
-						opacity: '1',
-						transform: 'translateY(0)'
-					}
-				},
-				'pulse-glow': {
-					'0%, 100%': {
-						transform: 'scale(1)',
-						opacity: '0.8'
-					},
-					'50%': {
-						transform: 'scale(1.05)',
-						opacity: '1'
-					}
-				},
-				'ripple': {
-					'0%': {
-						transform: 'scale(0)',
-						opacity: '1'
-					},
-					'100%': {
-						transform: 'scale(2)',
-						opacity: '0'
-					}
-				},
-				'float': {
-					'0%, 100%': {
-						transform: 'translateY(0px) rotate(0deg)'
-					},
-					'50%': {
-						transform: 'translateY(-20px) rotate(180deg)'
-					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out',
-				'fade-up': 'fade-up 0.6s ease-out',
-				'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
-				'ripple': 'ripple 0.6s ease-out',
-				'float': 'float 6s ease-in-out infinite'
+				'accordion-up': 'accordion-up 0.2s ease-out'
 			},
 			fontFamily: {
 				'playfair': ['Playfair Display', 'serif'],

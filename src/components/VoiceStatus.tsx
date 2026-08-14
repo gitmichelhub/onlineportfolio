@@ -1,5 +1,6 @@
 import React from 'react';
 import { Mic, Volume2, Loader2, Wifi, WifiOff, AlertCircle, Clock, X, CheckCircle2 } from 'lucide-react';
+import { useLanguage } from '@/hooks/use-language';
 
 interface VoiceStatusProps {
   state: {
@@ -17,7 +18,31 @@ interface VoiceStatusProps {
 }
 
 const VoiceStatus: React.FC<VoiceStatusProps> = ({ state, error, info, onStop, callDuration, isTimerActive }) => {
+  const { language } = useLanguage();
   const isActive = state.isConnecting || state.isConnected || state.isListening || state.isSpeaking || state.isProcessing;
+
+  const t = {
+    en: {
+      error: 'Error',
+      connecting: 'Connecting…',
+      processing: 'Processing',
+      speaking: 'Speaking',
+      listening: 'Listening',
+      connected: 'Connected',
+      disconnected: 'Disconnected',
+      stop: 'Stop voice chat',
+    },
+    de: {
+      error: 'Fehler',
+      connecting: 'Verbindung…',
+      processing: 'Verarbeitung',
+      speaking: 'Spricht',
+      listening: 'Hört zu',
+      connected: 'Verbunden',
+      disconnected: 'Getrennt',
+      stop: 'Sprachchat beenden',
+    },
+  };
 
   // Don't render anything if not active
   if (!isActive && !error && !info) {
@@ -34,7 +59,7 @@ const VoiceStatus: React.FC<VoiceStatusProps> = ({ state, error, info, onStop, c
     if (error) {
       return {
         icon: <AlertCircle size={16} className="text-red-500" />,
-        text: 'Error',
+        text: t[language].error,
         color: 'text-red-500',
         bgColor: 'bg-red-100',
         borderColor: 'border-red-200'
@@ -43,7 +68,7 @@ const VoiceStatus: React.FC<VoiceStatusProps> = ({ state, error, info, onStop, c
     if (state.isConnecting) {
       return {
         icon: <Loader2 size={16} className="text-glass-teal animate-spin" />,
-        text: 'Connecting...',
+        text: t[language].connecting,
         color: 'text-glass-teal',
         bgColor: 'bg-teal-100',
         borderColor: 'border-teal-200'
@@ -52,7 +77,7 @@ const VoiceStatus: React.FC<VoiceStatusProps> = ({ state, error, info, onStop, c
     if (state.isProcessing) {
       return {
         icon: <Loader2 size={16} className="text-glass-teal animate-spin" />,
-        text: 'Processing',
+        text: t[language].processing,
         color: 'text-glass-teal',
         bgColor: 'bg-teal-100',
         borderColor: 'border-teal-200'
@@ -70,7 +95,7 @@ const VoiceStatus: React.FC<VoiceStatusProps> = ({ state, error, info, onStop, c
     if (state.isSpeaking) {
       return {
         icon: <Volume2 size={16} className="text-glass-copper" />,
-        text: 'Speaking',
+        text: t[language].speaking,
         color: 'text-glass-copper',
         bgColor: 'bg-amber-100',
         borderColor: 'border-amber-200'
@@ -79,7 +104,7 @@ const VoiceStatus: React.FC<VoiceStatusProps> = ({ state, error, info, onStop, c
     if (state.isListening) {
       return {
         icon: <Mic size={16} className="text-emerald-500" />,
-        text: 'Listening',
+        text: t[language].listening,
         color: 'text-emerald-500',
         bgColor: 'bg-emerald-100',
         borderColor: 'border-emerald-200'
@@ -88,7 +113,7 @@ const VoiceStatus: React.FC<VoiceStatusProps> = ({ state, error, info, onStop, c
     if (state.isConnected) {
       return {
         icon: <Wifi size={16} className="text-glass-copper" />,
-        text: 'Connected',
+        text: t[language].connected,
         color: 'text-glass-copper',
         bgColor: 'bg-amber-100',
         borderColor: 'border-amber-200'
@@ -96,7 +121,7 @@ const VoiceStatus: React.FC<VoiceStatusProps> = ({ state, error, info, onStop, c
     }
     return {
       icon: <WifiOff size={16} className="text-glass-muted" />,
-      text: 'Disconnected',
+      text: t[language].disconnected,
       color: 'text-glass-muted',
       bgColor: 'bg-gray-100',
       borderColor: 'border-gray-200'
@@ -106,7 +131,7 @@ const VoiceStatus: React.FC<VoiceStatusProps> = ({ state, error, info, onStop, c
   const status = getStatusInfo();
 
   return (
-    <div className="glass liquid-glass rounded-full px-4 py-2 flex items-center space-x-3">
+    <div className="glass glass-sheen liquid-glass rounded-full px-4 py-2 flex items-center space-x-3">
       {/* Status indicator */}
       <div className={`flex items-center space-x-2 px-2 py-1 rounded-full ${status.bgColor} border ${status.borderColor}`}>
         {status.icon}
@@ -130,7 +155,8 @@ const VoiceStatus: React.FC<VoiceStatusProps> = ({ state, error, info, onStop, c
         <button
           onClick={onStop}
           className="p-1.5 rounded-full bg-glass-cream hover:bg-red-100 text-glass-muted hover:text-red-500 transition-all duration-200 border border-glass-cream hover:border-red-200"
-          title="Stop voice chat"
+          title={t[language].stop}
+          aria-label={t[language].stop}
         >
           <X size={14} />
         </button>

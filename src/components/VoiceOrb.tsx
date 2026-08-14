@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Mic, MicOff } from 'lucide-react';
+import { useLanguage } from '@/hooks/use-language';
 
 interface VoiceAgentState {
   isConnecting: boolean;
@@ -25,6 +26,12 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
   const [isSticky, setIsSticky] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const clickTimeoutRef = React.useRef<number | null>(null);
+  const { language } = useLanguage();
+
+  const t = {
+    en: { start: 'Start voice chat', stop: 'Stop voice chat' },
+    de: { start: 'Sprachchat starten', stop: 'Sprachchat beenden' },
+  };
 
   const STICKY_THRESHOLD = 100;
 
@@ -39,8 +46,9 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
     };
 
     handleResize();
+    handleScroll();
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', handleResize);
     
     return () => {
@@ -66,9 +74,9 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
       return 'w-10 h-10';
     }
     if (isMobile) {
-      return size === 'large' ? 'w-20 h-20' : 'w-14 h-14';
+      return size === 'large' ? 'w-24 h-24' : 'w-14 h-14';
     }
-    return size === 'large' ? 'w-24 h-24' : 'w-16 h-16';
+    return size === 'large' ? 'w-28 h-28' : 'w-16 h-16';
   };
 
   const getIconSize = () => {
@@ -76,9 +84,9 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
       return 20;
     }
     if (isMobile) {
-      return size === 'large' ? 32 : 24;
+      return size === 'large' ? 38 : 24;
     }
-    return size === 'large' ? 38 : 24;
+    return size === 'large' ? 44 : 24;
   };
 
   const getPositionClasses = () => {
@@ -98,12 +106,12 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
   const isActive = state.isConnecting || isListening || isSpeaking || isProcessing;
 
   const getButtonClasses = () => {
-    let baseClasses = `${getOrbSize()} rounded-full glass liquid-glass flex items-center justify-center transition-all duration-300 ease-out group relative overflow-hidden`;
+    let baseClasses = `${getOrbSize()} rounded-full glass glass-sheen liquid-glass flex items-center justify-center transition-all duration-300 ease-out group relative overflow-hidden`;
     
     if (isActive) {
-      baseClasses += ' backdrop-blur-xl border border-white/80 bg-white/70 shadow-lg';
+      baseClasses += ' backdrop-blur-xl border border-glass-copper/35 bg-white/75 shadow-lg';
     } else {
-      baseClasses += ' backdrop-blur-xl border border-white/80 bg-white/60 hover:scale-105 hover:shadow-xl hover:bg-white/75 active:scale-95';
+      baseClasses += ' backdrop-blur-xl border border-glass-copper/40 bg-white/70 hover:scale-105 hover:shadow-xl hover:bg-white/85 active:scale-95';
     }
     
     if (isMobile) {
@@ -124,12 +132,13 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
     return 'rgba(185, 120, 70, 0.2)';
   };
 
+  // Copper states use the darker #8f552f rather than the lighter brand copper:
+  // on a near-white glass fill the brand tone only clears ~3:1, and the mic
+  // glyph is the one thing on this page that must never look tentative.
   const getIconColor = () => {
-    if (isProcessing) return 'text-glass-teal';
-    if (isListening) return 'text-emerald-500';
-    if (isSpeaking) return 'text-glass-copper';
-    if (isConnected) return 'text-glass-copper';
-    return 'text-glass-copper';
+    if (isProcessing) return 'text-teal-700';
+    if (isListening) return 'text-emerald-600';
+    return 'text-[#8f552f]';
   };
 
   const getBackgroundGradient = () => {
@@ -174,8 +183,7 @@ const VoiceOrb: React.FC<VoiceOrbProps> = ({
         style={{
           boxShadow: `${getGlowIntensity()} ${getGlowColor()}, 0 8px 32px rgba(0, 0, 0, 0.08)`,
         }}
-        role="button"
-        aria-label={isActive ? "Stop voice chat" : "Start voice chat"}
+        aria-label={isActive ? t[language].stop : t[language].start}
       >
         <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${getBackgroundGradient()} opacity-50`} />
         

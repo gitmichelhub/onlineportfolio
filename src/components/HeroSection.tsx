@@ -37,6 +37,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversati
   });
   const transcriptRef = useRef<HTMLDivElement | null>(null);
   const [hasScrolled, setHasScrolled] = useState(false);
+  const [avatarFailed, setAvatarFailed] = useState(false);
+  // No portrait is shipped today, so the monogram below is the real identity mark
+  // rather than a fallback — pointing this at a file in `public/` (e.g.
+  // '/avatar.png') swaps the photo back in, with the monogram covering a 404.
+  // Kept null deliberately: a missing src would 404 on every load and flash.
+  const avatarSrc: string | null = null;
 
   useEffect(() => {
     const el = transcriptRef.current;
@@ -105,11 +111,17 @@ const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversati
       name: "Michel Werner",
       role: "AI Engineer & IT Consultant",
       headline: "Talk to my AI",
-      subtitle: "Ask \"me\" anything about my experience, my work, or my life.",
-      info: "Click the voice button to start an interactive conversation. I'm here to help with your questions regarding technology, product development, and more.",
+      subtitle: "Ask “me” anything about my experience, my work, or my life.",
+      info: "I'm here for questions about technology, product development, and the work behind these projects.",
       prompts: ["Current projects", "Consulting experience", "AI and product work"],
       promptHint: "Start a voice conversation about",
       scrollCue: "Scroll to projects",
+      voiceIdle: "Start the conversation",
+      voiceConnecting: "Connecting…",
+      voiceListening: "Listening…",
+      voiceSpeaking: "Speaking…",
+      voiceProcessing: "Thinking…",
+      voiceActive: "End the conversation",
       you: "You",
       agent: "AI"
     },
@@ -117,14 +129,29 @@ const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversati
       name: "Michel Werner",
       role: "KI-Ingenieur & IT-Berater",
       headline: "Sprich mit meiner AI",
-      subtitle: "Frag \"mich\" alles über meine Erfahrung, meine Arbeit oder mein Leben.",
-      info: "Klicke auf den Sprachbutton, um ein interaktives Gespräch zu starten. Ich helfe dir gerne bei Fragen zu Technologie, Produktentwicklung und mehr.",
+      subtitle: "Frag „mich“ alles über meine Erfahrung, meine Arbeit oder mein Leben.",
+      info: "Ich beantworte gerne Fragen zu Technologie, Produktentwicklung und der Arbeit hinter diesen Projekten.",
       prompts: ["Aktuelle Projekte", "Consulting-Erfahrung", "KI und Produktarbeit"],
       promptHint: "Starte ein Sprachgespräch über",
       scrollCue: "Zu den Projekten scrollen",
+      voiceIdle: "Gespräch starten",
+      voiceConnecting: "Verbindung wird hergestellt…",
+      voiceListening: "Ich höre zu…",
+      voiceSpeaking: "Ich spreche…",
+      voiceProcessing: "Ich denke nach…",
+      voiceActive: "Gespräch beenden",
       you: "Du",
       agent: "KI"
     }
+  };
+
+  const getVoiceLabel = () => {
+    if (state.isConnecting) return t[language].voiceConnecting;
+    if (state.isProcessing) return t[language].voiceProcessing;
+    if (state.isSpeaking) return t[language].voiceSpeaking;
+    if (state.isListening) return t[language].voiceListening;
+    if (isActive) return t[language].voiceActive;
+    return t[language].voiceIdle;
   };
 
   return (
@@ -148,12 +175,21 @@ const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversati
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
         {/* Identity */}
         <div className="flex items-center justify-center gap-3 mb-8 animate-fade-up">
-          <img
-            src="/avatar.png"
-            alt=""
-            className="w-12 h-12 rounded-full border border-white/80 shadow-md object-cover bg-white/60"
-            onError={(e) => { e.currentTarget.style.display = 'none'; }}
-          />
+          {avatarSrc && !avatarFailed ? (
+            <img
+              src={avatarSrc}
+              alt=""
+              className="w-12 h-12 rounded-full border border-white/80 shadow-md object-cover bg-white/60"
+              onError={() => setAvatarFailed(true)}
+            />
+          ) : (
+            <div
+              aria-hidden="true"
+              className="w-12 h-12 shrink-0 rounded-full border border-glass-copper/25 bg-gradient-to-br from-glass-cream via-white/80 to-glass-copper/15 shadow-md flex items-center justify-center text-sm font-bold tracking-wide text-[#8f552f]"
+            >
+              MW
+            </div>
+          )}
           <div className="text-left">
             <p className="font-semibold text-glass-dark leading-tight">{t[language].name}</p>
             <p className="text-sm text-glass-muted leading-tight">{t[language].role}</p>
@@ -172,24 +208,41 @@ const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversati
 
         {/* Voice Orb — the centerpiece */}
         <div
-          className="relative flex justify-center my-14 sm:my-16 animate-fade-up"
+          className="my-14 sm:my-16 animate-fade-up"
           style={{ animationDelay: '0.2s' }}
         >
-          <svg
-            className={`sound-field ${isActive ? 'sound-field-active' : ''}`}
-            viewBox="0 0 360 360"
-            aria-hidden="true"
-          >
-            <circle className="sound-field-ring" cx="180" cy="180" r="64" stroke="rgba(185, 120, 70, 0.42)" strokeWidth="1.2" />
-            <circle className="sound-field-ring" cx="180" cy="180" r="92" stroke="rgba(20, 184, 166, 0.32)" strokeWidth="1" strokeDasharray="3 8" />
-            <circle className="sound-field-ring" cx="180" cy="180" r="123" stroke="rgba(185, 120, 70, 0.27)" strokeWidth="1" strokeDasharray="1 10" />
-            <circle className="sound-field-ring" cx="180" cy="180" r="156" stroke="rgba(20, 184, 166, 0.22)" strokeWidth="0.9" />
-          </svg>
-          <VoiceOrb
-            size="large"
-            state={state}
-            onToggle={handleVoiceToggle}
-          />
+          <div className="relative flex justify-center">
+            <svg
+              className={`sound-field ${isActive ? 'sound-field-active' : ''}`}
+              viewBox="0 0 360 360"
+              aria-hidden="true"
+            >
+              <circle className="sound-field-ring" cx="180" cy="180" r="64" stroke="rgba(185, 120, 70, 0.42)" strokeWidth="1.2" />
+              <circle className="sound-field-ring" cx="180" cy="180" r="92" stroke="rgba(20, 184, 166, 0.32)" strokeWidth="1" strokeDasharray="3 8" />
+              <circle className="sound-field-ring" cx="180" cy="180" r="123" stroke="rgba(185, 120, 70, 0.27)" strokeWidth="1" strokeDasharray="1 10" />
+              <circle className="sound-field-ring" cx="180" cy="180" r="156" stroke="rgba(20, 184, 166, 0.22)" strokeWidth="0.9" />
+            </svg>
+            <VoiceOrb
+              size="large"
+              state={state}
+              onToggle={handleVoiceToggle}
+            />
+          </div>
+          <p aria-live="polite" className="mt-6 text-sm font-semibold text-glass-dark/75">
+            {getVoiceLabel()}
+          </p>
+          {/* Deliberately NOT a .glass surface: .glass-content paints gradient
+              background-images, which sit above background-color and would mute
+              the red into the same cream as every other panel. An error has to
+              read as an error at a glance. */}
+          {error && (
+            <div
+              role="alert"
+              className="mt-4 mx-auto max-w-md rounded-2xl border border-red-300/70 bg-red-50 px-4 py-2.5 text-sm font-medium text-red-700 shadow-sm"
+            >
+              {error}
+            </div>
+          )}
         </div>
 
         {/* Suggested prompts */}
@@ -203,7 +256,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversati
               type="button"
               onClick={handlePromptClick}
               aria-label={`${t[language].promptHint} ${prompt}`}
-              className="glass liquid-glass rounded-full px-4 py-2 text-sm font-semibold text-[#8f552f] transition-all duration-200 hover:scale-105 hover:shadow-md active:scale-95"
+              className="glass glass-sheen liquid-glass rounded-full px-4 py-2 text-sm font-semibold text-[#8f552f] transition-all duration-200 hover:scale-105 hover:shadow-md active:scale-95"
             >
               {prompt}
             </button>
@@ -249,7 +302,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ state, error, startConversati
         <a
           href="#projects"
           aria-label={t[language].scrollCue}
-          className="glass liquid-glass-soft rounded-full flex h-11 w-11 items-center justify-center text-glass-copper transition-transform duration-200 hover:scale-110"
+          className="glass glass-sheen liquid-glass-soft rounded-full flex h-11 w-11 items-center justify-center text-glass-copper transition-transform duration-200 hover:scale-110"
         >
           <ChevronDown size={20} />
         </a>
